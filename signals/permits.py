@@ -53,7 +53,8 @@ EXCLUDE = ["self storage", "self-storage", "mini storage", "mini-storage", "gara
            "trash enclosure", "dumpster", "clarifier", "sludge", "pump station", "apartment",
            "retaining wall", "boat", "pier", "church", "school", "restaurant",
            "storage facility", "climate controlled", "tank farm", "automotive", "auto repair",
-           "car wash", "trash room", "fuel"]
+           "car wash", "trash room", "fuel", "re roof", "re-roof", "reroof", "roof replacement",
+           "home sales", "relinquishment", "etj", "multifamily", "multi-family", "townhome"]
 # Occupancy groups that are never industrial users: R = residential, U = utility/misc,
 # A = assembly, E = educational, I = institutional.
 NON_INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(R|U|A|E|I)-?\d?\s", re.I)
@@ -187,6 +188,8 @@ def build_rec(attrs, fmap, cutoff):
     if cutoff and d and d < cutoff:
         return None
     rec["issue_date"] = d.isoformat() if d else ""
+    if isinstance(rec.get("permit_no"), float) and rec["permit_no"].is_integer():
+        rec["permit_no"] = str(int(rec["permit_no"]))
     rec["value"] = to_num(rec["value"])
     rec["sqft"] = to_num(rec["sqft"])
     return rec
@@ -313,6 +316,13 @@ def discover_layer(service_url, name_pattern):
         return (max(years) if years else 0, l["id"])
     best = max(hits, key=key)
     return f"{service_url.rstrip('/')}/{best['id']}", best["name"], key(best)[0]
+
+
+INDUSTRIAL_HITS = set(STRONG) | {"industrial zoning", "industrial occupancy"}
+
+
+def is_industrial(rec):
+    return any(h.strip() in INDUSTRIAL_HITS for h in (rec.get("signals") or "").split(","))
 
 
 def score_records(records, min_score):

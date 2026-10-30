@@ -80,6 +80,10 @@ def run_arcgis(state, show_all, status):
                 note += f" · types seen: {top}"
             default = config.PERMIT_MIN_SCORE if kind == "permits" else config.PLANNING_MIN_SCORE
             scored = permits.score_records(records, src.get("min_score", default))
+            if kind == "planning":
+                # Size alone (a big mixed-use or retail project) isn't an
+                # industrial signal; planning items need an industrial hit.
+                scored = [r for r in scored if permits.is_industrial(r)]
             new = []
             for r in scored:
                 k = permit_key(county, r)

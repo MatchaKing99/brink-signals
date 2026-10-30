@@ -69,13 +69,16 @@ def rowan(i, num, ptype, work, sqft, days_ago, company):
 ROWAN = [rowan(1, "COM-10-26-1", "Commercial", "New Warehouse", 120000, 3, "Big GC Inc"),
          rowan(2, "COM-10-26-2", "Commercial", "Upfit", 1200, 4, "Small GC"),
          rowan(3, "ELEC-10-26-3", "Electrical", "Conditional Power", 0, 2, "Sparky"),
-         rowan(4, "COM-10-47-4", "Commercial", "New Warehouse", 90000, -7000, "Typo Date")]
+         rowan(4, "COM-10-47-4", "Commercial", "New Warehouse", 90000, -7000, "Typo Date"),
+         rowan(5, "COM-10-26-5", "Commercial", "Re Roof", 30000, 3, "Roofer Co")]
 ROWAN_ZONING = [{"OBJECTID": 1, "CASE_": "Z 07-26", "ZONING": "IND", "COMMENTS": "Rezone for distribution center",
                  "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
                 {"OBJECTID": 2, "CASE_": "Z 07-26", "ZONING": "IND", "COMMENTS": "Rezone for distribution center",
                  "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
                 {"OBJECTID": 3, "CASE_": "Z 08-26", "ZONING": "RS", "COMMENTS": "Single family subdivision",
-                 "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY}]
+                 "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
+                {"OBJECTID": 4, "CASE_": "Z 05-26", "ZONING": "IND", "COMMENTS": "Kannapolis ETJ Relinquishment",
+                 "APPROVAL": "September 21, 2026", "created_date": NOW - 10 * DAY}]
 _meet = (dt.date.today() - dt.timedelta(days=20)).strftime("%B %d, %Y") + " at 6:00"
 IREDELL_HEARINGS = [{"OBJECTID": 1, "Case_": "Case: 2610-1", "Meeting_Time": _meet,
                      "Location_Site": "195 Ostwalt Amity", "Applicant": "Encased Power, LLC",
@@ -261,12 +264,13 @@ class EndToEnd(unittest.TestCase):
         # Rowan: big commercial job, split address joined; small upfit, trades, typo dates dropped.
         self.assertIn("| Rowan | 101 UNITY CHURCH RD | ", d)
         self.assertIn("120000", (self.tmp / "output" / dt.date.today().isoformat() / "permits.csv").read_text())
-        for junk in ("Small GC", "Sparky", "Typo Date", "102 UNITY", "103 UNITY", "104 UNITY"):
+        for junk in ("Small GC", "Sparky", "Typo Date", "Roofer Co", "102 UNITY", "103 UNITY", "104 UNITY"):
             self.assertNotIn(junk, d)
-        self.assertIn("types seen: Commercial 2, Electrical 1", d)
+        self.assertIn("types seen: Commercial 3, Electrical 1", d)
         # Rowan rezonings: industrial case once (not once per parcel); residential dropped.
         self.assertEqual(d.count("Z 07-26"), 1)
         self.assertNotIn("Z 08-26", d)
+        self.assertNotIn("Z 05-26", d)   # administrative boundary change
         # Iredell hearings: recent industrial rezoning in, 2021 hearing out (text dates parsed).
         self.assertIn("Case: 2610-1", d)
         self.assertIn("Encased Power", d)

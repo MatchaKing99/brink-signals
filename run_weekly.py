@@ -107,6 +107,42 @@ def run_inbox(state, show_all, status):
     return out
 
 
+def run_inspections(state, show_all, status):
+    """Commercial jobs from counties that publish inspection results. Reported
+    once when first seen under construction and again when they reach final."""
+    seen = state.setdefault("inspections", {})
+    out = []
+    for src in config.INSPECTION_SOURCES:
+        county = src["county"]
+        label = f"{county} commercial inspections"
+        try:
+            merged = {}
+            for url in src["urls"]:
+                for j in permits.pull_inspections(url, src["days"]):
+                    m = merged.setdefault(j["permit_no"], j)
+                    if m is not j:
+                        m["inspections"] = sorted(set(m["inspections"]) | set(j["inspections"]))
+                        m["latest"] = max(m["latest"], j["latest"])
+                        if j["stage"] == "final":
+                            m["stage"] = "final"
+            new = 0
+            for j in merged.values():
+                k = f"{county}|{j['permit_no']}|{j['stage']}"
+                if show_all or k not in seen:
+                    seen.setdefault(k, TODAY)
+                    j["county"] = county
+                    out.append(j)
+                    new += 1
+            newest = max((j["latest"] for j in merged.values()), default="none")
+            status.append((label, f"🟢 {len(merged)} commercial jobs inspected (newest {newest}), "
+                                  f"{new} new or reached final"))
+        except Exception as e:
+            traceback.print_exc()
+            status.append((label, f"🔴 failed: {str(e)[:120]}"))
+    out.sort(key=lambda j: (j["stage"] == "final", j["latest"]), reverse=True)
+    return out
+
+
 def run_jobs(state, show_all, status):
     try:
         if jobs.provider() == "serpapi":
@@ -157,6 +193,16 @@ def write_permits_csv(path, rows):
                         r["status"], r["score"], r["signals"], "New"])
 
 
+def write_inspections_csv(path, rows):
+    with open(path, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Permit #", "County", "Address", "Parcel", "Stage", "Latest inspection",
+                    "Inspections", "Status"])
+        for j in rows:
+            w.writerow([j["permit_no"], j["county"], j["address"], j["parcel"], j["stage"],
+                        j["latest"], " / ".join(j["inspections"]), "New"])
+
+
 def write_jobs_csv(path, rows):
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
@@ -172,9 +218,9 @@ def _money(v):
     return f"${v:,.0f}" if v else "—"
 
 
-def digest(permit_rows, planning_rows, job_rows, status):
+def digest(permit_rows, planning_rows, job_rows, status, inspection_rows=()):
     L = [f"# Brink Signals — week of {TODAY}", ""]
-    n = len(permit_rows) + len(planning_rows) + len(job_rows)
+    n = len(permit_rows) + len(planning_rows) + len(job_rows) + len(inspection_rows)
     L.append(f"**{n} new signals.** Earliest-stage first: hiring → planning → permits.\n")
 
     L.append("## 🔥 Hiring clusters (12–18 months ahead of a move)")
@@ -215,6 +261,19 @@ def digest(permit_rows, planning_rows, job_rows, status):
     else:
         L.append("_None new this week._\n")
 
+    L.append("## 🔨 Commercial inspections (Union)")
+    if inspection_rows:
+        L.append("| Stage | County | Address | Last inspected | What was inspected |")
+        L.append("|---|---|---|---|---|")
+        for j in inspection_rows[:30]:
+            stage = "🏁 **final**" if j["stage"] == "final" else "under construction"
+            L.append(f"| {stage} | {j['county']} | {j['address']} | {j['latest']} | "
+                     f"{', '.join(j['inspections'][:4])} |")
+        L.append("\n*You:* a commercial **final** means someone is about to move in. Who, and "
+                 "what are they leaving? *Partner:* new occupants need racking, forklifts, dock gear.\n")
+    else:
+        L.append("_None new this week._\n")
+
     L.append("## Coverage")
     L.append("| Source | Status |")
     L.append("|---|---|")
@@ -244,12 +303,15 @@ def main():
     else:
         job_rows = run_jobs(state, args.all, status)
 
+    inspection_rows = run_inspections(state, args.all, status)
+
     out = ROOT / "output" / TODAY
     out.mkdir(parents=True, exist_ok=True)
     write_permits_csv(out / "permits.csv", permit_rows)
     write_permits_csv(out / "planning.csv", planning_rows)
     write_jobs_csv(out / "jobs.csv", job_rows)
-    text = digest(permit_rows, planning_rows, job_rows, status)
+    write_inspections_csv(out / "inspections.csv", inspection_rows)
+    text = digest(permit_rows, planning_rows, job_rows, status, inspection_rows)
     (out / "digest.md").write_text(text)
     (ROOT / "output" / "latest-digest.md").write_text(text)
     save_state(state)

@@ -310,3 +310,50 @@ def score_csv(path, days, min_score):
     fmap = resolve_fields(list(rows[0].keys()))
     cutoff = dt.date.today() - dt.timedelta(days=days)
     return score_records(rows_from_file(path, fmap, cutoff), min_score)
+
+
+# ---- inspection results (Union County publishes these, not permits) --------
+
+# Inspection names that only happen on commercial jobs. Union labels them
+# "Comm Building Final", "Fire Final", "Comm Electrical Rough In", ...
+COMMERCIAL_INSPECTION = re.compile(r"^\s*(comm|fire)\b|commercial|sprinkler|fire alarm|hood", re.I)
+# The inspections that mean the building is ready to occupy.
+FINAL = re.compile(r"(building|fire)\b.*\bfinal|final\b.*\b(building|fire)|certificate of occupancy", re.I)
+
+
+def pull_inspections(url, days, date_field="inspection_date"):
+    """Commercial jobs with an inspection in the last `days`, one row per
+    permit: address, stage (under construction / final) and what was inspected."""
+    from esridump.dumper import EsriDumper
+
+    meta = fetch_json(url, {"f": "json"})
+    cutoff = dt.date.today() - dt.timedelta(days=days)
+    where = pick_where(url, meta, {"issue_date": date_field}, cutoff)
+    if where is None:
+        raise RuntimeError(f"{url}: no date filter accepted on {date_field}")
+    dump = EsriDumper(url, extra_query_args={"where": where}, request_geometry=False,
+                      timeout=60, pause_seconds=1, requests_to_pause=20)
+    jobs = {}
+    for feat in dump:
+        a = feat.get("properties") or {}
+        name = (a.get("inspection_name") or "").strip()
+        if not COMMERCIAL_INSPECTION.search(name):
+            continue
+        d = to_date(a.get(date_field))
+        if d is None or d < cutoff:
+            continue
+        pid = str(a.get("permit_id") or a.get("acctno") or a.get("address"))
+        j = jobs.setdefault(pid, {"permit_no": pid, "address": re.sub(r"\s+", " ", a.get("address") or "").strip(),
+                                  "parcel": a.get("parcel"), "inspections": set(), "latest": d,
+                                  "statuses": set()})
+        j["inspections"].add(name)
+        j["statuses"].add(a.get("inspection_status") or "")
+        j["latest"] = max(j["latest"], d)
+    out = []
+    for j in jobs.values():
+        j["stage"] = "final" if any(FINAL.search(n) for n in j["inspections"]) else "under construction"
+        j["inspections"] = sorted(j["inspections"])
+        j["latest"] = j["latest"].isoformat()
+        out.append(j)
+    out.sort(key=lambda j: (j["stage"] == "final", j["latest"]), reverse=True)
+    return out

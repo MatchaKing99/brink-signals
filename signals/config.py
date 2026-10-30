@@ -47,11 +47,23 @@ ARCGIS_SOURCES = [
     },
 ]
 
+# Counties that publish building-inspection results instead of permits. A
+# commercial final inspection means a building is about to be occupied.
+INSPECTION_SOURCES = [
+    # 120 days: the county refreshes this layer in batches; seen.json keeps
+    # each job from being reported more than once per stage.
+    {"county": "Union", "days": 120,
+     "urls": [
+         "https://atlas.unioncountync.gov/server/rest/services/Hosted/Approved_Permits/FeatureServer/0",
+         "https://atlas.unioncountync.gov/server/rest/services/Hosted/Not_Approved_Permits/FeatureServer/6",
+     ]},
+]
+
 # Counties whose permit systems have no open feed. Their weekly exports can be
 # dropped into inbox/ as <county>_<anything>.csv and get scored the same way.
 PORTAL_ONLY = {
     "Gaston":  "Tyler EnerGov Citizen Self Service (see docs/gaston-county.md)",
-    "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately)",
+    "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately); commercial inspections are pulled live",
     "Iredell": "eTRAKiT (Mooresville permits separately at mooresvillepermits.com)",
     "Rowan":   "No public online search found — Salisbury zoning, county building permits",
     "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",

@@ -45,6 +45,20 @@ GASTON = [{"OBJECTID": 1, "NAME": "FAIRVIEW INDUSTRIAL", "DATE": NOW - 400 * DAY
 CABARRUS_2026 = [meck(10, 4, "S2     * STORAGE - LOW HAZARD", "Warehouse upfit with dock levelers", 300000, "I-1")]
 
 
+def insp(i, pid, name, days_ago, addr):
+    return {"objectid": i, "permit_id": pid, "address": addr, "parcel": f"P{pid}",
+            "inspection_name": name, "inspection_status": "Approved",
+            "inspection_date": NOW - days_ago * DAY, "created_date": NOW}
+
+
+UNION_OK = [insp(1, 501, "Comm Building Footing", 20, "100 Industrial Dr  Monroe"),
+            insp(2, 502, "Comm Building Final", 10, "9509 Morgan Mill Rd  Monroe"),
+            insp(3, 502, "Comm Electrical Final", 12, "9509 Morgan Mill Rd  Monroe"),
+            insp(4, 503, "Res Building Framing", 5, "4755 Dusty Ln  Marshville"),
+            insp(5, 504, "Comm Building Final", 300, "Old Job Rd  Monroe")]
+UNION_NOT = [insp(9, 501, "Comm Plumbing Rough In", 8, "100 Industrial Dr  Monroe")]
+
+
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
              ("esriFieldTypeOID" if k.lower() == "objectid" else "esriFieldTypeString")} for k in rows[0]]
@@ -55,6 +69,8 @@ LAYERS = {
     "/gaston/2": (GASTON, "DATE"),
     "/cab/MapServer/33": ([meck(99, 3000, "S1", "old", 1)], "issuedate"),
     "/cab/MapServer/41": (CABARRUS_2026, "issuedate"),
+    "/union/ok/0": (UNION_OK, "inspection_date"),
+    "/union/not/6": (UNION_NOT, "inspection_date"),
     "/stale/MapServer/33": ([meck(98, 3000, "S1", "old", 1)], "issuedate"),
 }
 
@@ -173,6 +189,8 @@ class EndToEnd(unittest.TestCase):
             {"county": "Stale", "kind": "permits", "days": 30,
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
+        config.INSPECTION_SOURCES = [{"county": "Union", "days": 120,
+                                      "urls": [base + "/union/ok/0", base + "/union/not/6"]}]
         jobs.API = base + "/adzuna/{page}"
         os.environ["ADZUNA_APP_ID"] = os.environ["ADZUNA_APP_KEY"] = "test"
 
@@ -207,6 +225,12 @@ class EndToEnd(unittest.TestCase):
         # Planning: industrial yes, subdivision no.
         self.assertIn("FAIRVIEW INDUSTRIAL", d)
         self.assertNotIn("LOWELL WOODS", d)
+        # Union inspections: commercial jobs only, merged across layers, final flagged.
+        self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
+        self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)
+        self.assertIn("Comm Plumbing Rough In", d)        # merged from the second layer
+        self.assertNotIn("Dusty Ln", d)                   # residential
+        self.assertNotIn("Old Job Rd", d)                 # older than the window
         # Jobs: real cluster ranked first with its flags; staffing flagged; singletons dropped.
         self.assertIn("Acme Packaging", d)
         self.assertIn("new facility", d)

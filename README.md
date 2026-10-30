@@ -42,7 +42,7 @@ Tune any of this in `signals/permits.py`. Thresholds live in `signals/config.py`
 
 ## Setup (one time)
 
-1. **SerpApi key (free):** sign up at <https://serpapi.com> (free plan, no card; 250 searches/month). Copy your API key from the dashboard, then in this repo go to **Settings → Secrets and variables → Actions → New repository secret**. Name: `SERPAPI_API_KEY`, value: the key. Everything except the hiring signal runs without it.
+1. **SerpApi key (free):** sign up at <https://serpapi.com> (free plan: 250 searches/month). Copy your API key from the dashboard, then in this repo go to **Settings → Secrets and variables → Actions → New repository secret**. Name: `SERPAPI_API_KEY`, value: the key. Everything except the hiring signal runs without it.
 2. **Email:** make sure GitHub emails you for issues. Settings → Notifications → "Participating, @mentions and custom" → Email. The digest issue is assigned to you, so it lands in your inbox.
 3. **First run:** **Actions → Weekly signals → Run workflow** to run it now instead of waiting for Monday.
 

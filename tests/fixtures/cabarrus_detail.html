@@ -1,0 +1,1078 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="appAca" xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head id="ctl00_Head1"><title>
+        Accela Citizen Access
+</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</link></link></head>
+<body>
+    <div id="iframeBlocker" class="page-overlay-blocker"></div>
+    <DIV style="WIDTH: 0px; HEIGHT: 0px;" id="divctl00_hlSkipToolBar" class=""><a id="ctl00_hlSkipToolBar" accesskey="1" href="#FirstAnchorInACAMainContent" tabIndex="-1" onclick="skipToMainContent();" title="Skip Module Navigation"  class="NotShowLoading"><img alt="Skip Module Navigation" src="/CABARRUS/WebResource.axd?d=_srwWNS1MSJOYH4C35b1oFn7VEYtvNa8YGGRg1sqtrF_faY_-fd0egWACbQyGWVnyPpONGyWOQylydrXXpHjvXdl4T0G4TrJ5TZlCzCCz424pMVoF3uq-ZWyjKkSQo7UFVPfshRXWd-tDgOs0est9E0Mlus1&t=639262789020000000" width='0px' height='0px' style='border-width:0px;'/></a></DIV>
+    <form name="aspnetForm" method="post" action="./CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02802&amp;agencyCode=CABARRUS" id="aspnetForm">
+<input type="hidden" name="ACA_CS_FIELD" id="ACA_CS_FIELD" value="bec1a5f21eaa4a3fb43329d39b0b2a40" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="x" />
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="ED24458A" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+        <div class="aca_wrapper">
+            <div style="width: 80em; margin: 0 auto;">
+<div id="overlayAnnouncement" class="ACA_Announcement_Window_Detail_Overlayer"></div>
+<div id="winAnnouncement" class="ACA_Hide PopUpDlg ACA_Announcement_Window">
+    <div id="announcementWindowHeader" class="ACA_Announcement_Window_Header">
+        <span id="close">
+            <span class="ACA_AlignRightOrLeft CloseImage ACA_FRight" >        
+                <input id="closeWinAnn" onclick="return false;" type="image" src='/CABARRUS/app_themes/Default/assets/closepopup.png' class="ACA_ActionIMG" alt="Close" title="Close"/>
+            </span>
+        </span>
+    </div>
+    <div class="ACA_Announcement_Window_Detail">
+        <div id="winAnnouncementContentTitle" class="ACA_Popup_Title ACA_Announcement_Title_Center"></div> 
+        <div class="ACA_TabRow ACA_Line_Content"></div>
+        <div id="winAnnouncementContentAll" class="ACA_Announcement_Content"></div> 
+    </div>
+</div>
+<!-- Start HeadNavigation Block -->
+<div id="ctl00_HeaderNavigation_hsLine" style="height:2px;clear:both;width:100%;">&nbsp;</div>
+<div id="ctl00_HeaderNavigation_divNavigation" ng-non-bindable="true">
+    <div class="ACA_NaviTitle">
+        <div id="ACARegisterLoginMenu" class="ACA_RegisterLogin ACA_RegisterLogin_FontSize">
+            <table role='presentation' border="0" cellpadding="0" cellspacing="0" summary="">
+                <tr valign="bottom">
+                    <td>
+                        <div id="ctl00_HeaderNavigation_beforeLogin">
+                            <!--Login link-->
+                            <div class="ACA_FRight">
+                                <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                    <tr>
+                                        <td>
+                                            <a href="/CABARRUS/Login.aspx" id="ctl00_HeaderNavigation_btnLogin" onclick="validateSSOLogin(this);">
+                                                <span id="ctl00_HeaderNavigation_lblLogin" class="ACA_Body_Text ACA_Body_Text_FontSize">Login</span>
+                                            </a>
+                                        </td>
+                                        <td class="ACA_TabRow_Line">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Login link-->
+                            <!--Report-->
+                            <div class="ACA_FRight">
+                                <div>
+                                    <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                        <tr id='reportLink'>
+                                            <td class="ACA_TabRow_Line">
+                                                <a href="javascript:void(0);" onclick="showReports();" class="nav_more_arro ACA_Report_Arrow NotShowLoading" title="Report List">
+                                                    <span id="ctl00_HeaderNavigation_lblReports"></span>
+                                                    <span id="ctl00_HeaderNavigation_lblAdminReports" class="ACA_Body_Text ACA_Body_Text_FontSize" style="display:none;"></span>
+                                                    <img alt="Report List" src="/CABARRUS/app_themes/Default/assets/caret_expanded.gif"
+                                                        style="border-width: 0px;" />
+                                                </a>
+                                            </td>
+                                            <td class="ACA_TabRow_Line">
+                                                <span id="ctl00_HeaderNavigation_reportSplit" isneedencode="false">&nbsp; | &nbsp;</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display: none; position: absolute; z-index: 10;'>
+                                    <div id='reportList' class='ACA_Report_Menu ActionMenu_Link' onmouseover="onMouseOver();"
+                                        onmouseout="onMouseOut();">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Report-->
+                            <!--Register link-->
+                            <div class="ACA_FRight">
+                                <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                    <tr>
+                                        <td class="ACA_TabRow_Line">
+                                            <a href="/CABARRUS/CommunityView/account/new" id="ctl00_HeaderNavigation_btnRegister" onclick="validateSSOLogin(this);">
+                                                <span id="ctl00_HeaderNavigation_lblRegister" class="ACA_Body_Text ACA_Body_Text_FontSize">Register for an Account</span>
+                                            </a>
+                                        </td>
+                                        <td class="ACA_TabRow_Line">
+                                            <span id="ctl00_HeaderNavigation_lblSplit2">&nbsp; | &nbsp;</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Register link-->
+                            <!--Announcement-->
+<div class="ACA_FRight">
+    <div>
+        <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+            <tr>
+                <td class="ACA_TabRow_Line">
+                    <span class="ACA_FLeft"><a href="/CABARRUS/Announcement/AnnouncementList.aspx" id="ctl00_HeaderNavigation_ucAnnBeforeLogin_A2">
+                        <span id="ctl00_HeaderNavigation_ucAnnBeforeLogin_lblAnnounementLink" class="ACA_Body_Text ACA_Body_Text_FontSize">Announcements</span></a></span><span
+                                class="ACA_FLeft" id="spanAnnouncementCount" style="display: none"><a href="/CABARRUS/Announcement/AnnouncementList.aspx" id="ctl00_HeaderNavigation_ucAnnBeforeLogin_A3">(<span id="announcementCount"></span>)</a></span>
+                </td>
+                <td valign="top" class="ACA_TabRow_Line">
+                    <div id="divExpandAnnouncement" style="display: block;">
+                        <a id="A4" href="javascript:void(0)" onclick="OpenAnnouncementAuto(); return false;"
+                             class="nav_more_arrow NotShowLoading" title="Announcement List">
+                            <img alt="Announcement List" src="/CABARRUS/app_themes/Default/assets/caret_expanded.gif" /></a>
+                    </div>
+                </td>
+                <td class="ACA_TabRow_Line">
+                    <span id="ctl00_HeaderNavigation_ucAnnBeforeLogin_lblSplitAnnouncement">&nbsp; | &nbsp;</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div id='divAnnouncement' class="ACA_Anouncement_Popup_Window ACA_Report_Menu">
+            <div id="announcementId" class="ACA_Hide">
+            </div>
+            <div id="announcementContentFull" class="ACA_Hide">
+            </div>
+            <div id="announcementContentTitle" class="ACA_Hide">
+            </div>
+            <div id="announcementContentPart" class="ACA_Anouncement_Poupu_Window_Part_Height">
+            </div>
+            <div class="ACA_Anouncement_Poupu_Window_MarkAsRead">
+                <div id="closeMarkAsReadOfAnnouncementBtn" class="ACA_FRight">
+                    <a href="javascript:void(0);" onclick="MarkAsReadOfAnnouncement(); return false;" class="ACA_LinkButton NotShowLoading">
+                        Mark as Read</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+                            </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ACA_BannerAndSearch">
+            <div class="ACA_NavBanner">
+                <span id="ctl00_HeaderNavigation_lblNavBanner" class="ACA_Page_Instruction ACA_Page_Instruction_FontSize"><p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 16px;" align="center"></p>
+    <div style="line-height: 40px;"><font size="5" style="" face="tahoma"><strong style=""></div><div style="border: 2px solid black; box-shadow: 5px 5px 10px 0px black; padding: 5px; color: black">Fraud Alert:</strong> Fake permit emails are circulating. We <b style="">do not</b> request wire payment or ask you to communicate only by email. If you get a suspicious message, do not respond—contact us using the information on this site.</font></div>
+    <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;" align="center">
+        <strong style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">
+            <font size="2">&nbsp;</font>
+        </strong>
+<br>
+        <img src="https://www.cabarruscounty.us/files/assets/public/v/1/images/america-thrives-here-logo-trimmed.jpg" padding="0px;" height="78px;" border="0">&nbsp;
+        <img src="https://www.concordnc.gov/Portals/0/logo.png" style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;" height="78px;" border="0">&nbsp;        
+        <img src="https://www.cabarruscounty.us/files/assets/public/v/1/images/kannapolis-logo.png" height="78px;" border="0">&nbsp;
+        <img src="https://www.cabarruscounty.us//files/assets/public/v/1/images/harrisburg-logo.png" height="78px" border="0">&nbsp; 
+        <img src="https://www.cabarruscounty.us//files/assets/public/v/2/images/chalogo2.png" height="78px" border="0">
+    </p></span>
+            </div>
+<div id="gsContainer" class="gs_container">
+    <table role='presentation' class="gs_top_table" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td id="tdSpace">
+                &nbsp;
+            </td>
+            <td class="gs_border" style="width:16.5em">
+                <p>
+                    <input class="gs_search_box" type="text" autocomplete="off" id="txtSearchCondition" name="txtSearchCondition" title='Search...' 
+                        aria-label='Search...'/>
+                </p>
+            </td>
+            <td style="width:2px">
+            <span>&nbsp;</span>
+            </td>
+            <td class="gs_border gs_nowidth" style="width:18px;text-align:center;vertical-align:middle;">
+                <a id="btnSearch" class="gs_go NotShowLoading" title="Search" href="#">
+                    <img class="gs_go_img" alt="Search" src="/CABARRUS/app_themes/Default/assets/gsearch_disabled.png"/>
+                </a>
+            </td>
+            <td class="gs_border_right gs_nowidth" style='width: 24px;height: 24px; text-align:center;vertical-align:middle;' id="tdSearchHistory">
+                <a id="btnSearchHistory" class="gs_history NotShowLoading" title="Search History" href="#">
+                    <img class="gs_history_img" alt="Search History" src="/CABARRUS/app_themes/Default/assets/Caret_down_sml.gif"/>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="divHistoryList" class="gs_border gs_history_list" style="display:none">
+</div>
+        </div>
+    </div>
+    <div class="nav_bar_container">
+        <div id="ctl00_HeaderNavigation_divMenu">
+            <div id="divNaviMenu">
+                <div id="divMoreTabTemplate" style="display:none;">
+	<div id="__divMoreTemplate">
+                            <table role='presentation' id="span_more_tab" border="0" cellspacing="0" cellpadding="0" summary="See More Tab Item">
+                                <tr>
+                                    <td class="ACA_MoreItemLeft ACA_LeftOff">
+                                    </td>
+                                    <td class="ACA_MoreItemCenter ACA_CenterOff more_tab">
+                                        <a href="#" onfocus="onfocusMore();" onblur="SetBlurOutForMore();" class="NotShowLoading">
+                                            <span id="ctl00_HeaderNavigation___divMoreTemplate_lblMoreTab" module="more" class="more_button font12px">more</span>
+                                        </a>
+                                    </td>
+                                    <td class='ACA_CenterOff' style="width: 15px;">
+                                        <a href="javascript:void(0)" onclick="CheckAndSetNoAsk();" id="moreArrowLink" class="nav_more_arrow NotShowLoading"
+                                            title="more">
+                                            <img alt="more" src="/CABARRUS/app_themes/Default/assets/caret_arrow.gif"
+                                                style="border-width: 0px;" /></a>
+                                    </td>
+                                    <td class="ACA_MoreItemRight ACA_RightOff">
+                                    </td>
+                                </tr>
+                            </table>
+	</div><div id="__divMoreLinkBtnTemplate">
+                            <a href="javascript:void(0)" onfocus="onfocusMoreLink();" class="NotShowLoading" title="more menu, press tab to expand">
+                                <span id="ctl00_HeaderNavigation___divMoreLinkBtnTemplate_lblMoreLinks" class="more_button font12px">more</span>
+                                <img alt="" src="/CABARRUS/app_themes/Default/assets/caret_arrow.gif" />
+                            </a>
+	</div>
+</div><table role='presentation' style='visibility:hidden'><tr><td id='tdTabContainer'></td></tr></table><div id='nav_parent_container' class='ACA_NaviMenu'><span id='tab_item_place_holder' style='visibility:hidden;'></span><span id='more_tab_place_holder'></span><div id='divNavMenu' style='display:none;position:absolute;'></div></div><div id='nav_link_place_holder' class='ACA_SubMenuList' align='center'><b><span id='nav_link_content'><span id='nav_span_links' class='font11px'></span><span id='nav_span_more_link'></span></span><div id='divLinkMenu' class='font11px' style='display:none;'></div></b></div>
+            </div>
+        </div>
+    </div>
+    </div>
+<input type="hidden" name="ctl00$HeaderNavigation$hdnShoppingCartItemNumber" id="ctl00_HeaderNavigation_hdnShoppingCartItemNumber" />
+<input type="hidden" name="ctl00$HeaderNavigation$hdnShowReportLink" id="ctl00_HeaderNavigation_hdnShowReportLink" value="Y" />
+<div id="ctl00_HeaderNavigation_panButton">
+        <a id="ctl00_HeaderNavigation_btnPostForReport" tabindex="-1" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$HeaderNavigation$btnPostForReport&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))" style="display: none"></a>
+</div>
+<!-- End HeadNavigation Block -->
+                <span id="goTOMessage" href="#messageSpan" tabindex="-1"></span>
+                <div class="ACA_Content ACA_Hide">
+                    <!-- The h1 element is only for WCAG2.0 rule 1.1.1 H42 -->
+                    <h1 class="ACA_Hide">Message Bar</h1>
+                    <span id="messageSpan" name="messageSpan"></span>
+                </div>
+                <div>
+                    <a class="skip-link" href="#mainContent" aria-label="Skip to main content"  ></a>
+                    <span id="ErrorList1"></span>
+                    <main id="mainContent" tabindex="-1">
+    <!-- Facebook js reg, & position div-->
+    <div id="fb-root"></div>
+    <div class="ACA_Area_CapDetail">
+        <!--New ui Design Start-->
+        <div id="ctl00_PlaceHolderMain_dvContent" class="ACA_RightItem record-detail">
+	<div class="record-summary">
+		<div class="rec-left">
+			<h1>
+				<span id="ctl00_PlaceHolderMain_per_permitDetail_label_permit">Permits</span>&nbsp;<span id="ctl00_PlaceHolderMain_lblPermitNumber" dir="ltr">BU2026-03307</span>:&nbsp;</h1>
+			<h1>
+				<span id="ctl00_PlaceHolderMain_lblPermitType" class="span-permittype">Building Commercial New</span></h1>
+			<div id="ctl00_PlaceHolderMain_divRecordStatus" class="dv-recordstatus">
+				<h1>
+					<span id="ctl00_PlaceHolderMain_lblRecordStatusTitle">Record Status:</span>&nbsp;<span id="ctl00_PlaceHolderMain_lblRecordStatus">Issued</span></h1>
+			</div>
+		</div>
+		<div class="rec-right">
+			<div class="action-link">
+			</div>
+			<div class="action-link">
+				<a href="#" id="ctl00_PlaceHolderMain_divAddToShoppingCart" onclick="AddToShoppingCart(this)" style="cursor: pointer;" class="add2collectionlink NotShowLoading">
+					</a>
+			</div>
+			<div class="action-link">
+				<a href="#" onclick="addOnlyOneCAP2Collection(this)" style="cursor: pointer;"
+					class="add2collectionlink NotShowLoading">
+					</a>
+			</div>
+		</div>
+		<div id="divForAddCap2Collection" class="ACA_Add2CollectionForm">
+<div id="ctl00_PlaceHolderMain_addForDetailPage_updatePanelAdd">
+<table role='presentation' onkeydown="javascript:EscapePopupWindowBykey_ctl00_PlaceHolderMain_addForDetailPage_btnCancel(event);">
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="padding-bottom:6px;"></td><td style="padding-bottom:6px;"></td></tr>
+    <tr>
+        <td><input value="rdoNewCollection" name="ctl00$PlaceHolderMain$addForDetailPage$collection" type="radio" id="ctl00_PlaceHolderMain_addForDetailPage_rdoNewCollection" class="ACA_Collection_RdoButton ACA_Collection_RdoButton_FontSize" checked="checked" onclick="rdoCollectionClick_ctl00_PlaceHolderMain_addForDetailPage_rdoNewCollection(this);" title="Create a New Collection" /></td>
+        <td><label for="ctl00_PlaceHolderMain_addForDetailPage_rdoNewCollection" id="ctl00_PlaceHolderMain_addForDetailPage_lblNewCollection" class="ACA_Collection_RdoButton font13px">Create a New Collection</label></td> 
+    </tr>
+    <tr>
+        <td id="ctl00_PlaceHolderMain_addForDetailPage_tdEmpty">&nbsp;</td>
+        <td colspan="2"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_addForDetailPage_txtName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_addForDetailPage_txtName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_addForDetailPage_txtName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_addForDetailPage_txtName_label_0'><div class='ACA_Required_Indicator'>*</div></span><label id='ctl00_PlaceHolderMain_addForDetailPage_txtName_label_1' for='ctl00_PlaceHolderMain_addForDetailPage_txtName'>Name:</label><span id='ctl00_PlaceHolderMain_addForDetailPage_txtName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_addForDetailPage_txtName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_addForDetailPage_txtName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$addForDetailPage$txtName" type="text" maxlength="50" id="ctl00_PlaceHolderMain_addForDetailPage_txtName" title="Required" onpropertychange="collectionNameChanged_ctl00_PlaceHolderMain_addForDetailPage_txtName();" oninput="collectionNameChanged_ctl00_PlaceHolderMain_addForDetailPage_txtName();" onblur="AdjustCollectionNameStyle_ctl00_PlaceHolderMain_addForDetailPage();" aria-required="true" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;</td><td style="padding-bottom:6px;"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_label_0'></span><label id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_label_1' for='ctl00_PlaceHolderMain_addForDetailPage_txtDesc'>Description:</label><span id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_addForDetailPage_txtDesc_td' style='width:100%; '><textarea name="ctl00$PlaceHolderMain$addForDetailPage$txtDesc" rows="2" cols="20" id="ctl00_PlaceHolderMain_addForDetailPage_txtDesc">
+</textarea></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div><a href="#" style="cursor:pointer" class="font11px NotShowLoading" onclick="if (typeof(SetNotAskForSPEAR)!='undefined') SetNotAskForSPEAR();DoSpellCheck('https://aca-prod.accela.com:443/CABARRUS', 'ctl00_PlaceHolderMain_addForDetailPage_txtDesc', event);return false;" >spell check</a></div></td></tr></table></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <table role='presentation'>
+                <tr>
+                    <td>
+                        <div class="ACA_LgButton ACA_LgButton_FontSize">
+                            <a onclick="return CloseAddForm_ctl00_PlaceHolderMain_addForDetailPage_btnAdd(this);" id="ctl00_PlaceHolderMain_addForDetailPage_btnAdd" title="Add" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$addForDetailPage$btnAdd&#39;,&#39;&#39;)"><span>Add</span></a>
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div class="ACA_LgButton ACA_LgButton_FontSize">
+                            <a onclick="ExitAddForm_ctl00_PlaceHolderMain_addForDetailPage_btnCancel(this);return false;" id="ctl00_PlaceHolderMain_addForDetailPage_btnCancel" onkeydown="focusCurrentObj(event)" title="Cancel" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$addForDetailPage$btnCancel&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+                        </div>
+                   </td>
+                </tr>
+            </table>
+         </td>
+    </tr>
+</table>
+</div>
+		</div>
+	</div>
+           <div class="record-nav">
+               <ul class="nav-bar">
+                   <li>
+                       <a href="#" onclick="return false;" class="par-menu NotShowLoading" title="Record Info menu, press tab to expand" data-label="aca_CB1_recorddetail_section_label_recordinfo" data-control="">Record Info <span class="rec-downarrow "></span></a>
+                       <ul class="dropdown-menu">
+                           <li><a href="#tab-record_detail" onclick="return false;" title="Permits Details" class="NotShowLoading" data-control="tab-record_detail">Permits Details</a></li>
+                           <li><a href="#tab-processing_status" onclick="return false;" title="Processing Status" class="NotShowLoading" data-control="tab-processing_status">Processing Status</a></li>
+                           <li><a href="#tab-related_records" onclick="return false;" title="Related Permits" class="NotShowLoading" data-control="tab-related_records">Related Permits</a></li>
+                           <li><a href="#tab-attachments" onclick="return false;" title="&lt;font style=&quot;text-align: left;&quot;&gt;Attachments&lt;/font&gt;" class="NotShowLoading" data-control="tab-attachments"><font style="text-align: left;">Attachments</font></a></li>
+                           <li><a href="#tab-inspections" onclick="return false;" title="Inspections" class="NotShowLoading" data-control="tab-inspections">Inspections</a></li>
+                       </ul>
+                   </li>
+                   <li>
+                       <a href="#" onclick="return false;" class="par-menu NotShowLoading" title="Payments menu, press tab to expand" data-label="aca_CB1_recorddetail_section_label_payments" data-control="">Payments <span class="rec-downarrow "></span></a>
+                       <ul class="dropdown-menu">
+                           <li><a href="#tab-fee" onclick="return false;" title="Fees" class="NotShowLoading" data-control="tab-fee">Fees</a></li>
+                       </ul>
+                   </li>
+                   <li>
+                       <a href="#tab-conditions" onclick="return false;" class="par-menu NotShowLoading" title="Conditions menu, press tab to expand" data-label="aca_CB1_recorddetail_section_label_conditions" data-control="tab-conditions">Conditions <span class="rec-downarrow hide-me"></span></a>
+                       <ul class="dropdown-menu">
+                           <li><a href="#tab-conditions" onclick="return false;" title="" class="NotShowLoading" data-control="tab-conditions"></a></li>
+                           <li><a href="#tab-conditions_of_approval" onclick="return false;" title="" class="NotShowLoading" data-control="tab-conditions_of_approval"></a></li>
+                       </ul>
+                   </li>
+                   <li>
+                       <a href="#" onclick="return false;" class="par-menu NotShowLoading" title="More... menu, press tab to expand" data-label="aca_CB1_recorddetail_section_label_more" data-control="">More... <span class="rec-downarrow "></span></a>
+                       <ul class="dropdown-menu">
+                           <li><a href="#tab-custom_component" onclick="return false;" title="Custom Component" class="NotShowLoading" data-control="tab-custom_component">Custom Component</a></li>
+                       </ul>
+                   </li>
+               </ul>
+            </div>
+            <div class="record-main-section">
+                <div class="record-condition-msg-section-alt"></div>
+                <!--Need to fix-->
+                <span id="ctl00_PlaceHolderMain_lblPageInstruction" class="ACA_Page_Instruction ACA_Page_Instruction_FontSize"><p align="center"><font face="arial"><font color="#000080"><font style="background-color: rgb(255, 255, 255);"><strong><font size="2">TRY OUR MOBILE AP&nbsp;</font></strong><font size="2">use your phone browser and&nbsp;log in to</font></font><font size="2"> </font></font><strong><font size="2">&nbsp;</font></strong></font><a href="https://citizenaccess.cabarruscounty.us/AMCA"><font face="arial" size="2"><strong>https://CitizenAccess.CabarrusCounty.us/AMCA</strong></font></a><font face="arial" size="2"><strong>.<br></strong></font><br>&nbsp;<br></p></span>
+                <!--Document Status-->
+                <div id="tab-DocumentStatus" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divDocumentlist">
+<div id="divDocumentStatusList">
+</div>
+                    </div>
+                </div>
+                <!--Conditions-->
+                <div id="tab-conditions" class="record-tab-content">
+<div>
+    <!--condition bar start-->
+    <div class="record-condition-msg">
+    </div>
+    <!--condition bar end-->
+    <!--general condition section start-->         
+    <!--general condition section end-->
+    <!--condition of approval section start-->    
+    <!--condition of approval section end-->
+</div>
+                </div>
+                <!--Assets-->
+                <div id="tab-assets" class="record-tab-content">
+                </div>
+                <!--Record Details-->
+                <div id="tab-record_detail" class="record-tab-content">
+                    <!--Work Location-->
+                    <div id="ctl00_PlaceHolderMain_divWorkLocation">
+                        <div id="ctl00_PlaceHolderMain_shWorkLocation_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shWorkLocation"></span>
+<div id="ctl00_PlaceHolderMain_shWorkLocation_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shWorkLocation_lblSectionTitle" EnableExpand="Y">Work Location</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shWorkLocation_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shWorkLocation$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shWorkLocation$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shWorkLocation_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divWorkLocationInfo">
+                            <div id="divWorkLocationDetail">
+                                <div id="ctl00_PlaceHolderMain_workLocation_updatePanel">
+<div class="div_parent_detail ACA_Break_Wrod">
+    <table id="ctl00_PlaceHolderMain_workLocation_TBPermitDetailTest" role="presentation" style="table-layout:fixed;border-collapse:collapse;" width="404px">
+		<tr class="ACA_FLeft" style="margin-bottom:5px">
+			<td><div>
+				<h1 style='font-size:1.4em;'><span id="ctl00_PlaceHolderMain_workLocation_per_permitDetail_label_address639289702430695416"></span></h1><span class="ACA_SmLabel ACA_SmLabel_FontSize"><table ng-non-bindable='true' role='presentation' id='tbl_worklocation' style='TEMPLATE_STYLE' class='table_child'><tr ><td class='td_child_left font12px'></td><td class='NotBreakWord'><span class='fontbold'> 5542 LIPPARD</span> <Span style = 'color:blue';>*</Span><br/>                </td></tr></table></span>
+			</div></td>
+		</tr>
+	</table>
+</div>
+</div>
+                            </div>
+                            <div id="divWorkLocationMapDetail">
+                            </div>
+                            <div id="ctl00_PlaceHolderMain_sepLineForWorkLocation" style="height:10px;clear:both;width:100%;">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div id="ctl00_PlaceHolderMain_divPermitDetail">
+                        <div id="ctl00_PlaceHolderMain_shPermitDetail_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shPermitDetail"></span>
+<div id="ctl00_PlaceHolderMain_shPermitDetail_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shPermitDetail_lblSectionTitle" EnableExpand="Y">Permits Details</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shPermitDetail_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shPermitDetail$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shPermitDetail$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shPermitDetail_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divPermitDetailInfo" ng-non-bindable="true">
+                            <div id="ctl00_PlaceHolderMain_PermitDetailList1_updatePanel">
+<div class="div_parent_detail">
+    <table id="ctl00_PlaceHolderMain_PermitDetailList1_TBPermitDetailTest" role="presentation" class="table_parent_detail" style="table-layout:fixed;border-collapse:collapse;" width="714px">
+		<tr class="ACA_FLeft" style="margin-bottom:5px">
+			<td class="td_parent_left"><div>
+				<h1 style='font-size:1.4em;'><span id="ctl00_PlaceHolderMain_PermitDetailList1_per_permitDetail_label_applicant639289702431136384">Applicant:</span></h1><span class="ACA_SmLabel ACA_SmLabel_FontSize"><table role='presentation' class='table_child'><tr><td class='td_child_left font12px'></td><td> <div class='ACA_TabRow ACA_FLeft'><span class='contactinfo_firstname'>David </span><span class='contactinfo_lastname'>Bohlmann </span><br/>                <span class='contactinfo_businessname'>LANDMARK BUILDERS OF THE TRIAD, INC</span><br/>                <span class='contactinfo_addressline1'>3520 TRIAD COURT</span><br/>                <span class='contactinfo_region'>WINSTON SALEM, </span><span class='contactinfo_region'>NC, </span><span class='contactinfo_region'>271074571</span><br/>                <span class='contactinfo_email'><table role='presentation' class='ACA_TDAlignLeftOrRightTop' border='0' cellpadding='0' cellspacing='0'><tr><td style='vertical-align:top;'>dmoss@landmarkbuilders.com</td></tr></table></span></div></td></tr></table></span>
+			</div></td>
+			<td class="td_parent_left"><div>
+				<h1 style='font-size:1.4em;'><span id="ctl00_PlaceHolderMain_PermitDetailList1_per_permitDetail_label_license639289702431192932">Licensed Professional:</span></h1><span class="ACA_SmLabel ACA_SmLabel_FontSize"><table role='presentation' id='tbl_licensedps' style='TEMPLATE_STYLE' class='table_child'><tr ><td class='td_child_left'></td><td>LANDMARK BUILDERS OF THE TRIAD, INC<br/>                3520 TRIAD COURT<br/>                WINSTON SALEM, NC, 271074571<br/>                <table role='presentation' class='ACA_TDAlignLeftOrRightTop' border='0' cellpadding='0' cellspacing='0'><tr><td style='vertical-align:top;'>Home Phone:</td><td style='vertical-align:top;'><div class="ACA_PhoneNumberLTR">9197842000</div></td></tr></table>BUILDING  7789<br/>                </td></tr></table></span>
+			</div></td>
+		</tr>
+		<tr class="ACA_FLeft" style="margin-bottom:5px">
+			<td class="td_parent_left"><div>
+				<h1 style='font-size:1.4em;'><span id="ctl00_PlaceHolderMain_PermitDetailList1_per_permitDetail_label_projectl639289702431192932">Project Description:</span></h1><span class="ACA_SmLabel ACA_SmLabel_FontSize"><table role='presentation' style='TEMPLATE_STYLE' class='table_child'><tr><td class='td_child_left font12px'></td><td>LANDMARK BUILDERS OF THE TRIAD, INC - SHALLOW BAY FLEX WAREHOUSE BLDG A<br/>                SHALLOW BAY FLEX WAREHOUSE<br/>                REAR-LOADED SPECULATIVE FLEX INDUSTRIAL FACILITY LOCATED ON LIPPARD
+LANE IN HARRISBURG, NC.</td></tr></table></span>
+			</div></td>
+			<td class="td_parent_left"><div>
+				<h1 style='font-size:1.4em;'><span id="ctl00_PlaceHolderMain_PermitDetailList1_per_permitdetail_label_owner639289702431192932">Owner:</span></h1><span class="ACA_SmLabel ACA_SmLabel_FontSize"><table role='presentation' style='TEMPLATE_STYLE' class='table_child'><tr><td class='td_child_left font12px'><table role='presentation' style='TEMPLATE_STYLE' class='table_child'><tr><td class='td_child_left font12px'></td><td><table role='presentation' border='0' cellpadding='0' cellspacing='0'><tr><td style='vertical-align:top'>LIPPARD LANE OWNER LLC<Span style='color:blue';> *</Span></td></tr><tr><td style='vertical-align:top'>177 PEACHTREE ST NW STE 100</td></tr><tr><td style='vertical-align:top'>ATLANTA GA </td></tr></table></td></tr></table><br></td></tr></table></span>
+			</div></td>
+		</tr>
+	</table>
+</div>
+<div id="ctl00_PlaceHolderMain_PermitDetailList1_tbMoreDetail">
+    <table role='presentation' border="0" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="3" style="height: 24px">
+                <h1 class="ACA_FLeftForStyle">
+                    <a href="javascript:void(0);" class="NotShowLoading" onclick='ControlDisplay($get("TRMoreDetail"),$get("imgMoreDetail"),false,$get("lnkMoreDetail"),$get("ctl00_PlaceHolderMain_PermitDetailList1_lblMoreDetail"))'
+                     title="Expand More Details" id="lnkMoreDetail">
+                    <img  style="cursor: pointer; border-width:0px;" alt="Expand"
+                        src="/CABARRUS/app_themes/Default/assets/caret_collapsed.gif"
+                        id="imgMoreDetail" /></a><span id="ctl00_PlaceHolderMain_PermitDetailList1_lblMoreDetail">More Details</span></h1>
+            </td>
+        </tr>
+        <tr id="TRMoreDetail" style="display: none;">
+            <td class="moredetail_td">
+                &nbsp;</td>
+            <td colspan="2" style="height: 24px;">
+                <div style="text-align: center;">
+                    <span id="ctl00_PlaceHolderMain_PermitDetailList1_tbADIList">
+                        <table role='presentation' border="0" cellpadding="0" cellspacing="0" style="width: 98%">
+                            <tr>
+                                <td class="MoreDetail_BlockTitle">
+                                    <h1>
+                                        <a href="javascript:void(0)" class="NotShowLoading" onclick='ControlDisplay($get("trADIList"),$get("imgAddtional"),true,$get("lnkAddtional"),$get("ctl00_PlaceHolderMain_PermitDetailList1_lblAddtionalInfor"))'
+                                         title="Expand Additional Information" id="lnkAddtional">
+                                        <img style="cursor: pointer; border-width:0px;"  alt="Expand"
+                                            src="/CABARRUS/app_themes/Default/assets/plus_expand.gif"
+                                            id="imgAddtional" /></a>&nbsp;<span id="ctl00_PlaceHolderMain_PermitDetailList1_lblAddtionalInfor"><font style="text-align: left;">Additional Information</font></span></h1>
+                                </td>
+                            </tr>
+                            <tr id="trADIList" style="display: none">
+                                <td id="ctl00_PlaceHolderMain_PermitDetailList1_tdADIContent" class="MoreDetail_BlockContent">
+                                <div class="ACA_TabRow"><div class="MoreDetail_ItemCol MoreDetail_ItemCol1"><span><h2>Number of Buildings:</h2></span><span class="ACA_SmLabel ACA_SmLabel_FontSize">1</span></div><div class="MoreDetail_ItemCol MoreDetail_ItemCol2"><span><h2>Construction Type:</h2></span><span class="ACA_SmLabel ACA_SmLabel_FontSize">320-Industrial Buildings</span></div></div></td>
+                            </tr>
+                        </table>
+                    </span><span id="ctl00_PlaceHolderMain_PermitDetailList1_tbASIList">
+                        <table role='presentation' border="0" cellpadding="0" cellspacing="0" style="width: 98%">
+                            <tr>
+                                <td class="MoreDetail_BlockTitle">
+                                    <h1>
+                                        <a href="javascript:void(0);" onclick='ControlDisplay($get("trASIList"),$get("imgASI"),true,$get("lnkASI"),$get("ctl00_PlaceHolderMain_PermitDetailList1_lblASIList"))'
+                                         title="Expand Application Information" id="lnkASI" class="NotShowLoading">
+                                        <img style="cursor: pointer; border-width:0px;"  alt="Expand"
+                                            src="/CABARRUS/app_themes/Default/assets/plus_expand.gif"
+                                            id="imgASI" /></a>&nbsp;<span id="ctl00_PlaceHolderMain_PermitDetailList1_lblASIList">Application Information</span></h1>
+                                </td>
+                            </tr>
+                            <tr id="trASIList" style="display: none;">
+                                <td class="MoreDetail_BlockContent">
+                                    <div id="ctl00_PlaceHolderMain_PermitDetailList1_phPlumbingGroup" class="ACA_OC_PHPlumbingGroup">
+		<div class="MoreDetail_ItemTitle MoreDetail_ItemCol1 ACA_Title_Text font12px">GENERAL</div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Occupancy: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>S-1 Storage (Moderate Hazard) - Complete</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Estimated Cost: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>4393440.00</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Jurisdiction: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Harrisburg</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Estimated Sqft: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>14302</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>No Charge: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Subdivision: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>No APF</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Multi-Family: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>No</span>
+                                                 </div><div class='ACA_TabRow ACA_BkGray'>&nbsp;</div><div class="MoreDetail_ItemTitle MoreDetail_ItemCol1 ACA_Title_Text font12px">RELATED COMPLIANCE</div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Building Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Electrical Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Erosion Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Fire Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Mechanical Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Plumbing Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol1' style='width:125px;vertical-align:top'>
+                                                     <span class='ACA_SmLabelBolder font11px'>Zoning Final Required: </span>
+                                                 </div>
+                                                 <div class='MoreDetail_ItemColASI MoreDetail_ItemCol2'>
+                                                     <span class='ACA_SmLabel ACA_SmLabel_FontSize'>Yes</span>
+                                                 </div>
+	</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </span><span id="ctl00_PlaceHolderMain_PermitDetailList1_tbParcelList">
+                        <table role='presentation' border="0" cellpadding="0" cellspacing="0" style="width: 98%;">
+                            <tr>
+                                <td class="MoreDetail_BlockTitle">
+                                    <h1>
+                                        <a href="javascript:void(0);" onclick='ControlDisplay($get("trParcelList"),$get("imgParcel"),true,$get("lnkParcelList"),$get("ctl00_PlaceHolderMain_PermitDetailList1_lblParcelList"))'
+                                        title="Expand Parcel Information" id="lnkParcelList" class="NotShowLoading">
+                                        <img  style="cursor: pointer; border-width:0px;"  alt="Expand"
+                                            src="/CABARRUS/app_themes/Default/assets/plus_expand.gif"
+                                            id="imgParcel" /></a>&nbsp;<span id="ctl00_PlaceHolderMain_PermitDetailList1_lblParcelList">Parcel Information</span></h1>
+                                </td>
+                            </tr>
+                            <tr id="trParcelList" style="display: none">
+                                <td class="MoreDetail_BlockContent">
+                                    <div id="ctl00_PlaceHolderMain_PermitDetailList1_palParceList">
+		<div class='MoreDetail_ItemCol MoreDetail_ItemCol2'><h2><table><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>Parcel Number:55187253480000<Span style='color:blue';> *</Span></div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'><div style='width:50%; float:left;' class='ACA_SmLabel ACA_SmLabel_FontSize'>Block:72</div></div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'><div style='width:50%; float:left;' class='ACA_SmLabel ACA_SmLabel_FontSize'>Lot:--</div><div class='ACA_SmLabel ACA_SmLabel_FontSize' style='margin-left:50%;'>Subdivision:WHITE OAK FARM & CABARRUS LLC</div></div></td></tr></br><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>NBH_NAME: STOUGH ROAD</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>NBH_NUM: 50011</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>APFSUBDIVISION: No APF</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>MIDDLESCHOOLFEEDER: Roberta Road MS</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>ELEMENTARYSCHOOLFEEDER: Pitts School Road ES</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>HIGHSCHOOLFEEDER: Jay M. Robinson HS</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>JURISDICTION: Harrisburg</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>FLOOD: No</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>FLOOD100: No</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>FLOOD500: No</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>ZONINGINSPDIST: ZN1</div></td></tr><tr><td><div class='MoreDetail_ItemCol MoreDetail_ItemCol2'>SQFOOTAGE: 556586</div></td></tr></table>
+	</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+                            <div class="ACA_TabRow ACA_LiLeft action_buttons" id="buttonsContainer">
+                                <div id="ctl00_PlaceHolderMain_sepForPermitDetail" style="height:5px;clear:both;width:100%;">&nbsp;</div>
+                                <ul>
+                                    <li>
+                                        <div class="ACA_SmButton ACA_SmButton_FontSize">
+                                            <a onclick="print_onclick(&#39;../Report/ReportParameter.aspx?Module=Permits&amp;reportType=PRINT_PERMIT_REPORT&amp;reportID=282&amp;agencyCode=CABARRUS&#39;);return false;" id="ctl00_PlaceHolderMain_lnkPrintPermit" title="aca_permit" class="NotShowLoading" title="Permits/View Permits »" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$lnkPrintPermit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Permits/View Permits &raquo;</span></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="ACA_SmButton ACA_SmButton_FontSize">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="ACA_SmButton ACA_SmButton_FontSize">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="ACA_SmButton ACA_SmButton_FontSize">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="ACA_TabRow ACA_LiLeft action_buttons">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--   End Permit Detail Section-->
+                <!--Begin Legislative Management Section-->
+                <div id="tab-legislative_management" class="record-tab-content">
+                </div>
+                <!--Fees-->
+                <div id="tab-fee" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divFee">
+                        <div id="ctl00_PlaceHolderMain_shFee_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shFee"></span>
+<div id="ctl00_PlaceHolderMain_shFee_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shFee_lblSectionTitle" EnableExpand="Y">Fees</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shFee_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shFee$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shFee$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shFee_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divFeeListContent">
+                            <div id="divFeeList" style="display: none">
+                            </div>
+                            <div id="divFeeListPaid" style="display: none" class="ACA_SmLabel ACA_SmLabel_FontSize">
+                                Loading...
+                            </div>
+                            <div id="divNoRecord" style="display: none" class="ACA_SmLabel ACA_SmLabel_FontSize">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Inspection-->
+                <div id="tab-inspections" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divInspection">
+                        <div id="ctl00_PlaceHolderMain_shInspection_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shInspection"></span>
+<div id="ctl00_PlaceHolderMain_shInspection_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shInspection_lblSectionTitle" EnableExpand="Y">Inspections</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shInspection_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shInspection$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shInspection$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shInspection_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="inspectionTable">
+<div id="inspectionLoding" class="ACA_SmLabel ACA_SmLabel_FontSize">
+    Loading...</div>
+<div id="ctl00_PlaceHolderMain_InspectionList_inspectionUpdatePanel">
+        <a id="ctl00_PlaceHolderMain_InspectionList_btnRefreshGridView" tabindex="-1" class="ACA_Hide" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$InspectionList$btnRefreshGridView&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"></a>
+        <div id="ctl00_PlaceHolderMain_InspectionList_upcomingPanel">
+                <div id="ctl00_PlaceHolderMain_InspectionList_divInspectionListUpcoming" class="ACA_Page ACA_Hide">
+                    <h1 class="font13px">
+                        <span id="ctl00_PlaceHolderMain_InspectionList_lblInspectionUpcoming">Upcoming</span>
+                    </h1>
+                    <div id="ctl00_PlaceHolderMain_InspectionList_AccelaHeightSeparate12" style="height:10px;clear:both;width:100%;">&nbsp;</div>
+                    <div id="ctl00_PlaceHolderMain_InspectionList_divInstructions" class="ACA_TabRow_Italic">
+                        <span id="ctl00_PlaceHolderMain_InspectionList_lblEmptyUpcoming" class="ACA_Body_Text ACA_Body_Text_FontSize">You have not added any inspections.<br/></span>
+                    </div>
+                    <a id='ctl00_PlaceHolderMain_InspectionList_gvListUpcoming_4ValidateGridView_anchor' name='ctl00_PlaceHolderMain_InspectionList_gvListUpcoming_4ValidateGridView_anchor'></a><div class="ACA_Grid_OverFlow">
+</div>
+                </div>
+	</div>
+        <div id="ctl00_PlaceHolderMain_InspectionList_completedPanel">
+                <div id="divInspectionListCompleted" class="ACA_Page ACA_Hide">
+                    <div id="ctl00_PlaceHolderMain_InspectionList_AccelaHeightSeparate5" style="height:20px;clear:both;width:100%;">&nbsp;</div>
+                    <h1 class="font13px">
+                        <span id="ctl00_PlaceHolderMain_InspectionList_lblInspectionCompleted">Completed</span>
+                    </h1>
+                    <div id="ctl00_PlaceHolderMain_InspectionList_AccelaHeightSeparate6" style="height:10px;clear:both;width:100%;">&nbsp;</div>
+                    <a id='ctl00_PlaceHolderMain_InspectionList_gvListCompleted_4ValidateGridView_anchor' name='ctl00_PlaceHolderMain_InspectionList_gvListCompleted_4ValidateGridView_anchor'></a><div class="ACA_Grid_OverFlow">
+	<table class="ACA_GridView ACA_Grid_Caption"  cellspacing="0" role="presentation" border="0" id="ctl00_PlaceHolderMain_InspectionList_gvListCompleted" style="border-width:0px;">
+		<tr class="ACA_SmLabel ACA_SmLabel_FontSize">
+			<td>
+                            <div class="ACA_TabRow_Italic">
+                                <span id="ctl00_PlaceHolderMain_InspectionList_gvListCompleted_ctl01_lblEmptyCompleted" class="ACA_Body_Text ACA_Body_Text_FontSize">There are no completed inspections on this record.</span>
+                            </div>
+                        </td>
+		</tr>
+	</table>
+</div>
+                </div>
+	</div>
+</div>
+                        </div>
+                    </div>
+                </div>
+                <!--Attachment-->
+                <div id="tab-attachments" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divAttachmentContainer">
+                        <div id="ctl00_PlaceHolderMain_shAttachment_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shAttachment"></span>
+<div id="ctl00_PlaceHolderMain_shAttachment_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shAttachment_lblSectionTitle" EnableExpand="Y"><font style="text-align: left;">Attachments</font></span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shAttachment_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shAttachment$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shAttachment$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shAttachment_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divAttachment">
+                            <!--Attachment List Section end-->
+                            <div class="ACA_TabRow">
+<div class="attachment_section">
+    <div class="ACA_Section_Instruction ACA_Section_Instruction_FontSize" tabindex="0">
+        <div>
+            <span id="ctl00_PlaceHolderMain_attachmentEdit_lblSizeIntroduction">The maximum file size allowed is <b>1000 MB</b>.</span>
+        </div>
+        <div>
+            <span id="ctl00_PlaceHolderMain_attachmentEdit_lblTypeIntroduction"><b>ade;adp;bat;chm;cmd;com;cpl;exe;hta;htm;html;ins;isp;jar;js;jse;lib;lnk;mde;mht;mhtml;msc;msp;mst;php;pif;scr;sct;shb;sys;vb;vbe;vbs;vxd;wsc;wsf;wsh</b> are disallowed file types to upload.</span>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="ACA_FLeft ACA_LinkButton ACA_Title_Color font12px NotShowLoading ACA_Page">
+        <a id="lnkViewPeopleDocument" onclick="ViewPeopleDocument(true)" class="NotShowLoading ACA_Hide"
+            href="javascript:void(0);">
+            <span id="ctl00_PlaceHolderMain_attachmentEdit_lblViewPeopleDocument">View People Attachments</span>
+        </a><a id="lnkViewRecordDocument" onclick="ViewPeopleDocument(false)" class="NotShowLoading ACA_Hide ACA_Unit"
+            href="javascript:void(0);">
+            <span id="ctl00_PlaceHolderMain_attachmentEdit_lblViewRecordDocument">View Record Attachments</span>
+        </a>
+    </div>
+    <iframe id="ctl00_PlaceHolderMain_attachmentEdit_iframeAttachmentList"
+        src="../FileUpload/AttachmentsList.aspx?iframeid=ctl00_PlaceHolderMain_attachmentEdit&module=Permits&isInConfirm=False&isdetail=True&isaccountmanager=False&isAdmin=False&isPeopleDocument=&agencyCode=CABARRUS&isForConditionDocument=N"
+        title="Attachment list iframe"
+        frameborder="0" width="100%" height="0">
+        <p>If you can see this text, your browser does not support iframes. <a href='../FileUpload/AttachmentsList.aspx?module=Permits'>View the content of this inline frame</a> within your browser.</p></iframe>
+    <div id="ctl00_PlaceHolderMain_attachmentEdit_divUploadLink" class="ACA_Row">
+        <div class="attachment_edit">
+            <div id="ctl00_PlaceHolderMain_attachmentEdit_attachmentEditPanel">
+                    <span id="ctl00_PlaceHolderMain_attachmentEdit_errorMessageLabel"></span>
+                    <table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_table' class='ACA_TDAlignLeftOrRightTop' style='display:none;'><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_label_0'><div class='ACA_Required_Indicator'>*</div></span><span id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$attachmentEdit$txtValidateSaveAction" type="text" id="ctl00_PlaceHolderMain_attachmentEdit_txtValidateSaveAction" title="Required" validationByHiddenTextBox="true" aria-required="true" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table>
+                    <DIV style="WIDTH: 0px; HEIGHT: 0px;" id="divctl00_PlaceHolderMain_attachmentEdit_lnkFocusAnchor" class=""><a id="ctl00_PlaceHolderMain_attachmentEdit_lnkFocusAnchor" accesskey="" href="#" tabIndex="-1" onclick="if(typeof(SetNotAsk)!='undefined') SetNotAsk();var obj = document.getElementById('ctl00_PlaceHolderMain_attachmentEdit_'); if (obj) obj.focus();" title="This is the start of the document edit form."  class="NotShowLoading"><img alt="This is the start of the document edit form." src="/CABARRUS/WebResource.axd?d=_srwWNS1MSJOYH4C35b1oFn7VEYtvNa8YGGRg1sqtrF_faY_-fd0egWACbQyGWVnyPpONGyWOQylydrXXpHjvXdl4T0G4TrJ5TZlCzCCz424pMVoF3uq-ZWyjKkSQo7UFVPfshRXWd-tDgOs0est9E0Mlus1&t=639262789020000000" width='0px' height='0px' style='border-width:0px;'/></a></DIV>
+                    <div id="ctl00_PlaceHolderMain_attachmentEdit_attatchmentPanel">
+                            <a id="ctl00_PlaceHolderMain_attachmentEdit_btnFillDocEditForm" tabindex="-1" class="ACA_Hide" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$attachmentEdit$btnFillDocEditForm&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"></a>
+                            <input type="hidden" name="ctl00$PlaceHolderMain$attachmentEdit$hdfEditingFileIds" id="ctl00_PlaceHolderMain_attachmentEdit_hdfEditingFileIds" />
+	</div>
+                    <div id="ctl00_PlaceHolderMain_attachmentEdit_divUploadButton" class="ACA_Row ACA_LiLeft action_buttons">
+                        <ul>
+                            <li id="ctl00_PlaceHolderMain_attachmentEdit_btnSaveContainer" class="ACA_Hide">
+                                <div id='ctl00_PlaceHolderMain_attachmentEdit_btnSave_container'><div class='ACA_LgButton ACA_LgButton_FontSize'><a onclick="ctl00_PlaceHolderMain_attachmentEdit_SaveDocument();" id="ctl00_PlaceHolderMain_attachmentEdit_btnSave" accessKey="k" title="Save" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$attachmentEdit$btnSave&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Save</span></a></div></div>
+                            </li>
+                            <li>
+                                <div id='ctl00_PlaceHolderMain_attachmentEdit_btnBrowse_container'><div class='ACA_LgButton ACA_LgButton_FontSize'><a onclick="return ctl00_PlaceHolderMain_attachmentEdit_BrowseFile();" id="ctl00_PlaceHolderMain_attachmentEdit_btnBrowse" class="ACA_Hide" title="Add" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$attachmentEdit$btnBrowse&#39;,&#39;&#39;)"><span>Add</span></a></div></div>
+                                <div id="ctl00_PlaceHolderMain_attachmentEdit_divFileSelect">
+<div id="ctl00_PlaceHolderMain_attachmentEdit_fileSelect_divSilverlightObj">
+     <object class="silverlight_button" id="ctl00_PlaceHolderMain_attachmentEdit_fileSelect_fileSelect" data="data:application/x-silverlight-2," type="application/x-silverlight-2" height="24" tabindex="0">
+        <param name="source" value="../ClientBin/mpost.SilverlightMultiFileSelect.xap?86754d13-8385-48a2-9886-ba32e0d9b49e" />
+        <param name="initParams" value="uploadOnSelect=N,uploadURL=https://aca-prod.accela.com/CABARRUS/FileUploadService?action=Add,FontFamily=Arial,FontSize=10,FontColor=#FF003366,FontWeight=SemiBold,Width=,Height=24,Cursor=Hand,ChunkSize=1048576,isDisplayLinkButton=N,isDisplayResubmitIcoButton=N" />
+        <param name="background" value="transparent" />
+        <param name="onload" value="ctl00_PlaceHolderMain_attachmentEdit_fileSelect_FileSelect_Loaded" />
+        <param name="minRuntimeVersion" value="4.0.50401.0" />
+        <param name="windowless" value="False" />
+        <param name="autoUpgrade" value="true" />
+    </object>
+    <iframe id='_sl_historyFrame'  style='visibility: hidden; height: 0; width: 0; border: 0px' title="Accela Citizen Access Form Designer iFrame">Sorry, your browser does not support iframes; try a browser that supports W3 standards.</iframe>
+    <input type="hidden" id="maxSize" value="1000 MB" />
+    <input type="hidden" id="disAllowedTypes" value="ade;adp;bat;chm;cmd;com;cpl;exe;hta;htm;html;ins;isp;jar;js;jse;lib;lnk;mde;mht;mhtml;msc;msp;mst;php;pif;scr;sct;shb;sys;vb;vbe;vbs;vxd;wsc;wsf;wsh" />
+    <input type="hidden" id="filekeyPrefix" value='ietwazu4xesnguabc414mxoy' />
+    <input type="hidden" id="languageSetting" value='en_US' />
+    <input type="hidden" id="isMultipleSelect" value='Y' />
+    <input type="hidden" id="selectFileLabel" value='Add' />
+    <input type="hidden" id="mouseEnterLeft" value="/Image/btn_bg_l_m.png" />
+    <input type="hidden" id="mouseEnterMiddle" value="/Image/bg_btn_center_over.png" />
+    <input type="hidden" id="mouseEnterRight" value="/Image/btn_bg_r_m.png" />
+    <input type="hidden" id="mouseOutLeft" value="/Image/btn_bg_l_t.png" />
+    <input type="hidden" id="mouseOutMiddle" value="/Image/bg_btn_center_normal.png" />
+    <input type="hidden" id="mouseOutRight" value="/Image/btn_bg_r_t.png" />
+    <input type="hidden" id="resubmitIcon" value="/Image/resubmitIcon.png" />
+    <input type="hidden" name="ctl00$PlaceHolderMain$attachmentEdit$fileSelect$hdFinishedFileArray" id="ctl00_PlaceHolderMain_attachmentEdit_fileSelect_hdFinishedFileArray" />
+</div>
+                                </div>
+                                <div id="ctl00_PlaceHolderMain_attachmentEdit_divHtml5Upload">
+                                </div>
+                                <input type="hidden" name="ctl00$PlaceHolderMain$attachmentEdit$hdAllFinishedFileArray" id="ctl00_PlaceHolderMain_attachmentEdit_hdAllFinishedFileArray" />
+                            </li>
+                            <li id="ctl00_PlaceHolderMain_attachmentEdit_btnClearContainer" class="ACA_Hide">
+                                <div id='ctl00_PlaceHolderMain_attachmentEdit_btnClearAll_container'><div class='ACA_LgButton ACA_LgButton_FontSize'><a onclick="ctl00_PlaceHolderMain_attachmentEdit_RemoveAllFiles();" id="ctl00_PlaceHolderMain_attachmentEdit_btnClearAll" title="Remove All" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$attachmentEdit$btnClearAll&#39;,&#39;&#39;)"><span>Remove All</span></a></div></div>
+                            </li>
+                        </ul>
+                    </div>
+</div>
+        </div>
+    </div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Education-->
+                <div id="tab-education" class="record-tab-content">
+                </div>
+                <!--Continuing Education-->
+                <div id="tab-continuing_education" class="record-tab-content">
+                </div>
+                <!--Examination-->
+                <div id="tab-examination" class="record-tab-content">
+                </div>
+                <!--Custom Component-->
+                <div id="tab-custom_component" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divSectionCustomComponent">
+                        <div id="ctl00_PlaceHolderMain_shCustomComponent_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shCustomComponent"></span>
+<div id="ctl00_PlaceHolderMain_shCustomComponent_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shCustomComponent_lblSectionTitle" EnableExpand="Y">Custom Component</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shCustomComponent_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shCustomComponent$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shCustomComponent$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shCustomComponent_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divCustomComponent">
+                            <div id="ctl00_PlaceHolderMain_divPHCustomComponent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Processing Status-->
+                <div id="tab-processing_status" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divWorkflow">
+                        <div id="ctl00_PlaceHolderMain_divProcessStatus">
+                            <div id="ctl00_PlaceHolderMain_shProcessStatus_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shProcessStatus"></span>
+<div id="ctl00_PlaceHolderMain_shProcessStatus_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shProcessStatus_lblSectionTitle" EnableExpand="Y">Processing Status</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shProcessStatus_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shProcessStatus$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shProcessStatus$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shProcessStatus_btnSearch" class="ACA_Hide" />
+</div>
+                            <div id="divProcessInfo">
+                                <div id="divProcessLoading" style="display: none" class="ACA_SmLabel ACA_SmLabel_FontSize">
+                                    Loading...
+                                </div>
+                                <div id="divProcessingTable" class="fontbold">
+                                </div>
+<div id="divLoading" class="ACA_SmLabel ACA_SmLabel_FontSize ACA_Hide">
+    Loading...
+</div>
+<div id="ctl00_PlaceHolderMain_processInstruction_workFlowProcess">
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Related Permits -->
+                <div id="tab-related_records" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_divRelatedPermits">
+                        <div id="ctl00_PlaceHolderMain_shRelatedPermit_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_shRelatedPermit"></span>
+<div id="ctl00_PlaceHolderMain_shRelatedPermit_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_shRelatedPermit_lblSectionTitle" EnableExpand="Y">Related Permits</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_shRelatedPermit_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$shRelatedPermit$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$shRelatedPermit$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_shRelatedPermit_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divRelatedPermit" class="ACA_TabRow ACA_LiLeft">
+                            <div id="divRelatePermitButton" class="ACA_Row">
+                                <ul>
+                                    <li>
+                                        <div class="ACA_SmButton ACA_SmButton_FontSize">
+                                            <a onclick="ExpandRelatedPermitSection(true);var p = new ProcessLoading();p.showLoading(true);return false;" id="ctl00_PlaceHolderMain_btnSwitchTreeView" title="View Entire Tree »" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$btnSwitchTreeView&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>View Entire Tree &raquo;</span></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div id="ctl00_PlaceHolderMain_heightSeparater" style="height:5px;clear:both;width:100%;">&nbsp;</div>
+                            </div>
+                            <div id="divRelatedCapLoading" style="display: none" class="ACA_SmLabel ACA_SmLabel_FontSize">
+                                Loading...
+                            </div>
+                            <div id="divRelatedCapTree">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Valuations -->
+                <div id="tab-valuation_calculator" class="record-tab-content">
+                </div>
+                <!--Trust Accounts -->
+                <div id="tab-trust_account" class="record-tab-content">
+                </div>
+                <!--Right Of Way Management (ROWM) -->
+                <div id="tab-right_of_way_management" class="record-tab-content">
+                    <div id="ctl00_PlaceHolderMain_div1">
+                        <div id="ctl00_PlaceHolderMain_SectionHeader1_hsHeight" style="height:0px;clear:both;width:100%;">&nbsp;</div>
+<span id="ctl00_PlaceHolderMain_SectionHeader1"></span>
+<div id="ctl00_PlaceHolderMain_SectionHeader1_divSectionHeader" class="ACA_SectionHeaderTemp">
+        <div class="ACA_Title_Bar">
+            <h1>
+                <span class="ACA_FLeft"><span id="ctl00_PlaceHolderMain_SectionHeader1_lblSectionTitle" EnableExpand="Y">Right Of Way Management</span>
+                </span>
+            </h1>
+            <span class="ACA_FRight">
+            </span>
+            </div>
+        <span id="ctl00_PlaceHolderMain_SectionHeader1_lblSectionTitle_sub_label" class="ACA_Hide" HiddenCssClass="ACA_Hide" ShownCssClass="ACA_Section_Instruction ACA_Section_Instruction_FontSize"></span>
+    <input type="submit" name="ctl00$PlaceHolderMain$SectionHeader1$btnSearch" value="" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$SectionHeader1$btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_PlaceHolderMain_SectionHeader1_btnSearch" class="ACA_Hide" />
+</div>
+                        <div id="divROWM">
+<div id="ROMWMainDiv">
+    <div id="ctl00_PlaceHolderMain_ROWM_ROWMNoDataDiv">
+        <h3><span>No ROWM data available at this time.</span></h3>
+    </div>
+    <div id="ctl00_PlaceHolderMain_ROWM_ROMWDataDiv">
+        <h1></h1>
+        <h3></h3>
+        <br/>
+        <table width="100%" role="presentation" class="ACA_FullWidthTable fontbold font12px" cellspacing="8" style="background-color: aliceblue">
+            <tr>
+                <td>
+                    <span>Type</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Owner</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Contact</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Email</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Address</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Start Date</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>End Date</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>    
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ROWM Website</span>
+                </td>    
+                <td>
+                    <a href="#" onclick="window.open('');return false;" class="NotShowLoading">  </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Record Main section End-->
+        </div>
+        <div id="divAdded" class="ACA_Loading_Message ACA_SmLabel ACA_SmLabel_FontSize">
+        </div>
+    </div>
+    <iframe width="0" height="0" id="iframeExport" class="ACA_Hide" title="Sorry, your browser does not support iframes; try a browser that supports W3 standards.">Sorry, your browser does not support iframes; try a browser that supports W3 standards.</iframe>
+    </div>
+                    </main>
+                    <!--
+                In Chorme and Opera 15, need add the div,
+                because when content div set float property, not hodler height in container
+                -->
+                    <div style="clear: both;"></div>
+                </div>
+                <div id="divLoadingTemplate" class="ACA_Loading_Message" style="width: auto">
+                    <img alt="Please wait..." src="/CABARRUS/app_themes/Default/assets/loading.gif" />
+                    <span id="ctl00_lblLoading" class="ACA_SmLabel ACA_SmLabel_FontSize">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div id="ctl00_UpdatePanel4Expression">
+                <input name="ctl00$HDExpressionParam" type="hidden" id="ctl00_HDExpressionParam" class="HDExpressionResultCss" />
+</div>
+        <input type="hidden" name="Submit" value="Submit" class="HiddenButton" onclick="return false;" />
+</form>
+    <noscript>Your browser does not support JavaScript.</noscript>
+</body>
+</html>

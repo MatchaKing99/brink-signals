@@ -17,7 +17,7 @@ import urllib.parse
 from pathlib import Path
 
 import run_weekly
-from signals import config, energov, jobs, permits
+from signals import accela, config, energov, jobs, permits
 
 NOW = int(dt.datetime.now().timestamp() * 1000)
 DAY = 86_400_000
@@ -120,6 +120,34 @@ def energov_route(handler, path, q, body):
         hit = EG["kyle_parcel"] if str(EG["kyle_parcel"]["PID"]) in q.get("where", "") else None
         return handler._send({"features": [{"attributes": hit}] if hit else []})
 
+# Cabarrus Accela Citizen Access: real pages saved from the live portal (Oct 2026),
+# trimmed of scripts and view state.
+FIX = Path(__file__).parent / "fixtures"
+ACA_SEARCH = (FIX / "cabarrus_search.html").read_text()
+ACA_RESULTS = (FIX / "cabarrus_results.html").read_text()
+ACA_DETAIL = (FIX / "cabarrus_detail.html").read_text()   # BU2026-03307, Shallow Bay flex warehouse
+ACA_LAST = re.sub(r"<a[^>]*>Next &gt;</a>", "", ACA_RESULTS)
+
+
+def accela_route(handler, path, q, form):
+    handler.send_response(200)
+    handler.end_headers()
+    if "CapDetail" in path:
+        page = ACA_DETAIL if q.get("capID3") == "02802" else "<html>Project Description: Small job More Details</html>"
+    elif form is None:
+        page = ACA_SEARCH
+    else:
+        assert handler.headers.get("Referer") and handler.headers.get("Origin"), "portal's CSRF check"
+        target = form.get("__EVENTTARGET", "")
+        if target.endswith("btnNewSearch"):
+            assert form["ctl00$PlaceHolderMain$ddlSearchType"] == "0"
+            # Only one permit type has results here, so the 10-row page isn't counted twice.
+            page = ACA_RESULTS if form["ctl00$PlaceHolderMain$generalSearchForm$ddlGSPermitType"].endswith("/New") \
+                else ACA_LAST.replace("ACA_TabRow_", "x_")
+        else:
+            page = ACA_LAST.replace("ACA_TabRow_", "x_")   # page 2: no further rows
+    handler.wfile.write(page.encode())
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -192,12 +220,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
         u = urllib.parse.urlparse(self.path)
         if u.path.startswith("/energov/"):
             return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
+        if u.path.startswith("/aca/") or "CapDetail" in u.path:
+            return accela_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         self.route(u.path, dict(urllib.parse.parse_qsl(u.query)))
 
     def do_POST(self):
         body = self.rfile.read(int(self.headers["Content-Length"])).decode()
         if self.path.startswith("/energov/"):
             return energov_route(self, self.path, {}, json.loads(body))
+        if self.path.startswith("/aca/"):
+            return accela_route(self, urllib.parse.urlparse(self.path).path, {}, dict(urllib.parse.parse_qsl(body)))
         self.route(self.path, dict(urllib.parse.parse_qsl(body)))
 
     def route(self, path, q):
@@ -270,7 +302,9 @@ class EndToEnd(unittest.TestCase):
         ]
         config.ENERGOV_SOURCES = [{"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
                                    "api": base + "/energov/api", "parcels": base + "/energov/parcels/11"}]
-        energov.PAUSE = 0
+        energov.PAUSE = accela.PAUSE = 0
+        config.ACCELA_SOURCES = [{"county": "Cabarrus", "days": 21, "base": base + "/aca/CABARRUS",
+                                  "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Upfit"]}]
         config.INSPECTION_SOURCES = [{"county": "Union", "days": 120,
                                       "urls": [base + "/union/ok/0", base + "/union/not/6"]}]
         jobs.API = base + "/adzuna/{page}"
@@ -339,6 +373,13 @@ class EndToEnd(unittest.TestCase):
             self.assertNotIn(junk, d)
         self.assertIn("| Gaston permits (live portal) | 🟢 5 permits, 4 commercial, 1 industrial, 1 new |", d)
         self.assertNotIn("Gaston permits (portal)", d)
+        # Cabarrus live permits: spec flex warehouse in with owner, contractor, cost and SF from
+        # the detail page; Building B (flex warehouse) in too; schools, EV chargers, shelters out.
+        self.assertIn("| Cabarrus | 5542 LIPPARD LN, AC, HARRISBURG NC 28075 | LIPPARD LANE OWNER LLC | $4,393,440 |", d)
+        self.assertIn("S-1 Storage (Moderate Hazard)", d)
+        for junk in ("RICELAND", "GRACES RESERVE", "IRON HORSE", "SUDBURY"):
+            self.assertNotIn(junk, d)
+        self.assertIn("| Cabarrus permits (live portal) | 🟢 10 permits, 10 commercial, 2 industrial, 2 new |", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

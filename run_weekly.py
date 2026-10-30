@@ -23,7 +23,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from signals import config, energov, jobs, permits
+from signals import accela, config, energov, jobs, permits
 
 ROOT = Path(__file__).parent
 STATE = ROOT / "data" / "seen.json"
@@ -99,26 +99,27 @@ def run_arcgis(state, show_all, status):
     return found
 
 
-def run_energov(state, show_all, status):
-    """Live permits from EnerGov portals; industrial ones only."""
+def run_portals(state, show_all, status):
+    """Live permits from county permit portals; industrial ones only."""
     out = []
-    for src in config.ENERGOV_SOURCES:
-        label = f"{src['county']} permits (live portal)"
-        try:
-            pulled, items = energov.pull(src, src["days"])
-            ind = [r for r in items if r["industrial"]]
-            new = 0
-            for r in ind:
-                k = permit_key(src["county"], r)
-                if show_all or k not in state["permits"]:
-                    state["permits"].setdefault(k, TODAY)
-                    r["county"] = src["county"]
-                    out.append(r)
-                    new += 1
-            status.append((label, f"🟢 {pulled} permits, {len(items)} commercial, {len(ind)} industrial, {new} new"))
-        except Exception as e:
-            traceback.print_exc()
-            status.append((label, f"🔴 failed: {str(e)[:120]}"))
+    for module, sources in ((energov, config.ENERGOV_SOURCES), (accela, config.ACCELA_SOURCES)):
+        for src in sources:
+            label = f"{src['county']} permits (live portal)"
+            try:
+                pulled, items = module.pull(src, src["days"])
+                ind = [r for r in items if r["industrial"]]
+                new = 0
+                for r in ind:
+                    k = permit_key(src["county"], r)
+                    if show_all or k not in state["permits"]:
+                        state["permits"].setdefault(k, TODAY)
+                        r["county"] = src["county"]
+                        out.append(r)
+                        new += 1
+                status.append((label, f"🟢 {pulled} permits, {len(items)} commercial, {len(ind)} industrial, {new} new"))
+            except Exception as e:
+                traceback.print_exc()
+                status.append((label, f"🔴 failed: {str(e)[:120]}"))
     return out
 
 
@@ -341,7 +342,7 @@ def main():
     state = load_state()
     status = []
     found = run_arcgis(state, args.all, status)
-    permit_rows = found["permits"] + run_energov(state, args.all, status) + run_inbox(state, args.all, status)
+    permit_rows = found["permits"] + run_portals(state, args.all, status) + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
     planning_rows = found["planning"]
     if args.no_jobs or not jobs.provider():

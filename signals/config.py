@@ -67,16 +67,6 @@ ARCGIS_SOURCES = [
         "url": "https://maps.iredellcountync.gov/server/rest/services/Planning/Development_Activity_Countywide/MapServer/5",
     },
     {
-        # Accela plan reviews (permit applications). Newest filing seen Oct 2026
-        # was April 2025, so this may stay quiet until the county refreshes it.
-        "county": "Cabarrus", "kind": "permits", "days": 60, "name": "Accela plan reviews",
-        "url": "https://location.cabarruscounty.us/arcgisservices/rest/services/Current_Accela_Permits/Plan_Reviews/MapServer/0",
-        # Only review types are published (no description), so require an
-        # industrial word in the type itself.
-        "type_rx": r"commercial|industrial|shell|warehouse|upfit", "min_score": 1,
-        "require_industrial": True,
-    },
-    {
         # Charlotte rezoning petitions still in process (~80 at a time). Only
         # requests INTO industrial zoning (ML-1/ML-2, old I-1/I-2) or with an
         # industrial proposed use make the digest; rezonings away from
@@ -125,6 +115,17 @@ ENERGOV_SOURCES = [
     {"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
      "api": "https://selfservice.gastongov.com/energov_prod/selfservice/api/energov",
      "parcels": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Parcels/FeatureServer/11"},
+]
+
+# Live permits from Accela Citizen Access portals (public search, no login).
+# Only commercial permit types are searched; each record's public detail page
+# adds contractor, applicant, owner, occupancy, estimated cost and square feet.
+ACCELA_SOURCES = [
+    {"county": "Cabarrus", "days": 21, "base": "https://aca-prod.accela.com/CABARRUS",
+     "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Shell",
+               "Permits/Building/Commercial/Upfit", "Permits/Building/Commercial/Addition",
+               "Permits/Building/Commercial/Footing Foundation", "Permits/Building/Commercial/Existing CO",
+               "Permits/Kannapolis/Change in Use/NA", "Permits/Kannapolis/NonResidential Zoning Permit/NA"]},
 ]
 
 # Counties whose permit systems have no open feed. Their weekly exports can be

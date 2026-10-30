@@ -1,0 +1,1316 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="appAca" xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head id="ctl00_Head1"><title>
+        Accela Citizen Access
+</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</link></link></head>
+<body>
+    <div id="iframeBlocker" class="page-overlay-blocker"></div>
+    <DIV style="WIDTH: 0px; HEIGHT: 0px;" id="divctl00_hlSkipToolBar" class=""><a id="ctl00_hlSkipToolBar" accesskey="1" href="#FirstAnchorInACAMainContent" tabIndex="-1" onclick="skipToMainContent();" title="Skip Module Navigation"  class="NotShowLoading"><img alt="Skip Module Navigation" src="/CABARRUS/WebResource.axd?d=_srwWNS1MSJOYH4C35b1oFn7VEYtvNa8YGGRg1sqtrF_faY_-fd0egWACbQyGWVnyPpONGyWOQylydrXXpHjvXdl4T0G4TrJ5TZlCzCCz424pMVoF3uq-ZWyjKkSQo7UFVPfshRXWd-tDgOs0est9E0Mlus1&t=639262789020000000" width='0px' height='0px' style='border-width:0px;'/></a></DIV>
+    <form name="aspnetForm" method="post" action="./CapHome.aspx?module=Permits&amp;TabName=Permits" id="aspnetForm">
+<input type="hidden" name="ACA_CS_FIELD" id="ACA_CS_FIELD" value="109f50f04c05404193df9477c125840e" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="x" />
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="EAB4478C" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+        <div class="aca_wrapper">
+            <div style="width: 80em; margin: 0 auto;">
+<div id="overlayAnnouncement" class="ACA_Announcement_Window_Detail_Overlayer"></div>
+<div id="winAnnouncement" class="ACA_Hide PopUpDlg ACA_Announcement_Window">
+    <div id="announcementWindowHeader" class="ACA_Announcement_Window_Header">
+        <span id="close">
+            <span class="ACA_AlignRightOrLeft CloseImage ACA_FRight" >        
+                <input id="closeWinAnn" onclick="return false;" type="image" src='/CABARRUS/app_themes/Default/assets/closepopup.png' class="ACA_ActionIMG" alt="Close" title="Close"/>
+            </span>
+        </span>
+    </div>
+    <div class="ACA_Announcement_Window_Detail">
+        <div id="winAnnouncementContentTitle" class="ACA_Popup_Title ACA_Announcement_Title_Center"></div> 
+        <div class="ACA_TabRow ACA_Line_Content"></div>
+        <div id="winAnnouncementContentAll" class="ACA_Announcement_Content"></div> 
+    </div>
+</div>
+<!-- Start HeadNavigation Block -->
+<div id="ctl00_HeaderNavigation_hsLine" style="height:2px;clear:both;width:100%;">&nbsp;</div>
+<div id="ctl00_HeaderNavigation_divNavigation" ng-non-bindable="true">
+    <div class="ACA_NaviTitle">
+        <div id="ACARegisterLoginMenu" class="ACA_RegisterLogin ACA_RegisterLogin_FontSize">
+            <table role='presentation' border="0" cellpadding="0" cellspacing="0" summary="">
+                <tr valign="bottom">
+                    <td>
+                        <div id="ctl00_HeaderNavigation_beforeLogin">
+                            <!--Login link-->
+                            <div class="ACA_FRight">
+                                <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                    <tr>
+                                        <td>
+                                            <a href="/CABARRUS/Login.aspx" id="ctl00_HeaderNavigation_btnLogin" onclick="validateSSOLogin(this);">
+                                                <span id="ctl00_HeaderNavigation_lblLogin" class="ACA_Body_Text ACA_Body_Text_FontSize">Login</span>
+                                            </a>
+                                        </td>
+                                        <td class="ACA_TabRow_Line">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Login link-->
+                            <!--Report-->
+                            <div class="ACA_FRight">
+                                <div>
+                                    <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                        <tr id='reportLink'>
+                                            <td class="ACA_TabRow_Line">
+                                                <a href="javascript:void(0);" onclick="showReports();" class="nav_more_arro ACA_Report_Arrow NotShowLoading" title="Report List">
+                                                    <span id="ctl00_HeaderNavigation_lblReports"></span>
+                                                    <span id="ctl00_HeaderNavigation_lblAdminReports" class="ACA_Body_Text ACA_Body_Text_FontSize" style="display:none;"></span>
+                                                    <img alt="Report List" src="/CABARRUS/app_themes/Default/assets/caret_expanded.gif"
+                                                        style="border-width: 0px;" />
+                                                </a>
+                                            </td>
+                                            <td class="ACA_TabRow_Line">
+                                                <span id="ctl00_HeaderNavigation_reportSplit" isneedencode="false">&nbsp; | &nbsp;</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display: none; position: absolute; z-index: 10;'>
+                                    <div id='reportList' class='ACA_Report_Menu ActionMenu_Link' onmouseover="onMouseOver();"
+                                        onmouseout="onMouseOut();">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Report-->
+                            <!--Register link-->
+                            <div class="ACA_FRight">
+                                <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+                                    <tr>
+                                        <td class="ACA_TabRow_Line">
+                                            <a href="/CABARRUS/CommunityView/account/new" id="ctl00_HeaderNavigation_btnRegister" onclick="validateSSOLogin(this);">
+                                                <span id="ctl00_HeaderNavigation_lblRegister" class="ACA_Body_Text ACA_Body_Text_FontSize">Register for an Account</span>
+                                            </a>
+                                        </td>
+                                        <td class="ACA_TabRow_Line">
+                                            <span id="ctl00_HeaderNavigation_lblSplit2">&nbsp; | &nbsp;</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Register link-->
+                            <!--Announcement-->
+<div class="ACA_FRight">
+    <div>
+        <table role='presentation' border='0' cellspacing='0' cellpadding='0'>
+            <tr>
+                <td class="ACA_TabRow_Line">
+                    <span class="ACA_FLeft"><a href="/CABARRUS/Announcement/AnnouncementList.aspx" id="ctl00_HeaderNavigation_ucAnnBeforeLogin_A2">
+                        <span id="ctl00_HeaderNavigation_ucAnnBeforeLogin_lblAnnounementLink" class="ACA_Body_Text ACA_Body_Text_FontSize">Announcements</span></a></span><span
+                                class="ACA_FLeft" id="spanAnnouncementCount" style="display: none"><a href="/CABARRUS/Announcement/AnnouncementList.aspx" id="ctl00_HeaderNavigation_ucAnnBeforeLogin_A3">(<span id="announcementCount"></span>)</a></span>
+                </td>
+                <td valign="top" class="ACA_TabRow_Line">
+                    <div id="divExpandAnnouncement" style="display: block;">
+                        <a id="A4" href="javascript:void(0)" onclick="OpenAnnouncementAuto(); return false;"
+                             class="nav_more_arrow NotShowLoading" title="Announcement List">
+                            <img alt="Announcement List" src="/CABARRUS/app_themes/Default/assets/caret_expanded.gif" /></a>
+                    </div>
+                </td>
+                <td class="ACA_TabRow_Line">
+                    <span id="ctl00_HeaderNavigation_ucAnnBeforeLogin_lblSplitAnnouncement">&nbsp; | &nbsp;</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div id='divAnnouncement' class="ACA_Anouncement_Popup_Window ACA_Report_Menu">
+            <div id="announcementId" class="ACA_Hide">
+            </div>
+            <div id="announcementContentFull" class="ACA_Hide">
+            </div>
+            <div id="announcementContentTitle" class="ACA_Hide">
+            </div>
+            <div id="announcementContentPart" class="ACA_Anouncement_Poupu_Window_Part_Height">
+            </div>
+            <div class="ACA_Anouncement_Poupu_Window_MarkAsRead">
+                <div id="closeMarkAsReadOfAnnouncementBtn" class="ACA_FRight">
+                    <a href="javascript:void(0);" onclick="MarkAsReadOfAnnouncement(); return false;" class="ACA_LinkButton NotShowLoading">
+                        Mark as Read</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+                            </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ACA_BannerAndSearch">
+            <div class="ACA_NavBanner">
+                <span id="ctl00_HeaderNavigation_lblNavBanner" class="ACA_Page_Instruction ACA_Page_Instruction_FontSize"><p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 16px;" align="center"></p>
+    <div style="line-height: 40px;"><font size="5" style="" face="tahoma"><strong style=""></div><div style="border: 2px solid black; box-shadow: 5px 5px 10px 0px black; padding: 5px; color: black">Fraud Alert:</strong> Fake permit emails are circulating. We <b style="">do not</b> request wire payment or ask you to communicate only by email. If you get a suspicious message, do not respond—contact us using the information on this site.</font></div>
+    <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;" align="center">
+        <strong style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">
+            <font size="2">&nbsp;</font>
+        </strong>
+<br>
+        <img src="https://www.cabarruscounty.us/files/assets/public/v/1/images/america-thrives-here-logo-trimmed.jpg" padding="0px;" height="78px;" border="0">&nbsp;
+        <img src="https://www.concordnc.gov/Portals/0/logo.png" style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;" height="78px;" border="0">&nbsp;        
+        <img src="https://www.cabarruscounty.us/files/assets/public/v/1/images/kannapolis-logo.png" height="78px;" border="0">&nbsp;
+        <img src="https://www.cabarruscounty.us//files/assets/public/v/1/images/harrisburg-logo.png" height="78px" border="0">&nbsp; 
+        <img src="https://www.cabarruscounty.us//files/assets/public/v/2/images/chalogo2.png" height="78px" border="0">
+    </p></span>
+            </div>
+<div id="gsContainer" class="gs_container">
+    <table role='presentation' class="gs_top_table" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td id="tdSpace">
+                &nbsp;
+            </td>
+            <td class="gs_border" style="width:16.5em">
+                <p>
+                    <input class="gs_search_box" type="text" autocomplete="off" id="txtSearchCondition" name="txtSearchCondition" title='Search...' 
+                        aria-label='Search...'/>
+                </p>
+            </td>
+            <td style="width:2px">
+            <span>&nbsp;</span>
+            </td>
+            <td class="gs_border gs_nowidth" style="width:18px;text-align:center;vertical-align:middle;">
+                <a id="btnSearch" class="gs_go NotShowLoading" title="Search" href="#">
+                    <img class="gs_go_img" alt="Search" src="/CABARRUS/app_themes/Default/assets/gsearch_disabled.png"/>
+                </a>
+            </td>
+            <td class="gs_border_right gs_nowidth" style='width: 24px;height: 24px; text-align:center;vertical-align:middle;' id="tdSearchHistory">
+                <a id="btnSearchHistory" class="gs_history NotShowLoading" title="Search History" href="#">
+                    <img class="gs_history_img" alt="Search History" src="/CABARRUS/app_themes/Default/assets/Caret_down_sml.gif"/>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="divHistoryList" class="gs_border gs_history_list" style="display:none">
+</div>
+        </div>
+    </div>
+    <div class="nav_bar_container">
+        <div id="ctl00_HeaderNavigation_divMenu">
+            <div id="divNaviMenu">
+                <div id="divMoreTabTemplate" style="display:none;">
+	<div id="__divMoreTemplate">
+                            <table role='presentation' id="span_more_tab" border="0" cellspacing="0" cellpadding="0" summary="See More Tab Item">
+                                <tr>
+                                    <td class="ACA_MoreItemLeft ACA_LeftOff">
+                                    </td>
+                                    <td class="ACA_MoreItemCenter ACA_CenterOff more_tab">
+                                        <a href="#" onfocus="onfocusMore();" onblur="SetBlurOutForMore();" class="NotShowLoading">
+                                            <span id="ctl00_HeaderNavigation___divMoreTemplate_lblMoreTab" module="more" class="more_button font12px">more</span>
+                                        </a>
+                                    </td>
+                                    <td class='ACA_CenterOff' style="width: 15px;">
+                                        <a href="javascript:void(0)" onclick="CheckAndSetNoAsk();" id="moreArrowLink" class="nav_more_arrow NotShowLoading"
+                                            title="more">
+                                            <img alt="more" src="/CABARRUS/app_themes/Default/assets/caret_arrow.gif"
+                                                style="border-width: 0px;" /></a>
+                                    </td>
+                                    <td class="ACA_MoreItemRight ACA_RightOff">
+                                    </td>
+                                </tr>
+                            </table>
+	</div><div id="__divMoreLinkBtnTemplate">
+                            <a href="javascript:void(0)" onfocus="onfocusMoreLink();" class="NotShowLoading" title="more menu, press tab to expand">
+                                <span id="ctl00_HeaderNavigation___divMoreLinkBtnTemplate_lblMoreLinks" class="more_button font12px">more</span>
+                                <img alt="" src="/CABARRUS/app_themes/Default/assets/caret_arrow.gif" />
+                            </a>
+	</div>
+</div><table role='presentation' style='visibility:hidden'><tr><td id='tdTabContainer'></td></tr></table><div id='nav_parent_container' class='ACA_NaviMenu'><span id='tab_item_place_holder' style='visibility:hidden;'></span><span id='more_tab_place_holder'></span><div id='divNavMenu' style='display:none;position:absolute;'></div></div><div id='nav_link_place_holder' class='ACA_SubMenuList' align='center'><b><span id='nav_link_content'><span id='nav_span_links' class='font11px'></span><span id='nav_span_more_link'></span></span><div id='divLinkMenu' class='font11px' style='display:none;'></div></b></div>
+            </div>
+        </div>
+    </div>
+    </div>
+<input type="hidden" name="ctl00$HeaderNavigation$hdnShoppingCartItemNumber" id="ctl00_HeaderNavigation_hdnShoppingCartItemNumber" />
+<input type="hidden" name="ctl00$HeaderNavigation$hdnShowReportLink" id="ctl00_HeaderNavigation_hdnShowReportLink" value="Y" />
+<div id="ctl00_HeaderNavigation_panButton">
+        <a id="ctl00_HeaderNavigation_btnPostForReport" tabindex="-1" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$HeaderNavigation$btnPostForReport&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))" style="display: none"></a>
+</div>
+<!-- End HeadNavigation Block -->
+                <span id="goTOMessage" href="#messageSpan" tabindex="-1"></span>
+                <div class="ACA_Content ACA_Hide">
+                    <!-- The h1 element is only for WCAG2.0 rule 1.1.1 H42 -->
+                    <h1 class="ACA_Hide">Message Bar</h1>
+                    <span id="messageSpan" name="messageSpan"></span>
+                </div>
+                <div>
+                    <a class="skip-link" href="#mainContent" aria-label="Skip to main content"  ></a>
+                    <span id="ErrorList1"></span>
+                    <main id="mainContent" tabindex="-1">
+<div class="ACA_Area_CapHome">
+   <table role='presentation' cellspacing="0" class="ACA_CapHome" ><tr><td><iframe width="0" height="0" id="iframeExport" title="Sorry, your browser does not support iframes; try a browser that supports W3 standards.">Sorry, your browser does not support iframes; try a browser that supports W3 standards.</iframe>
+    <div id="divForPermitsCollection" class="ACA_Add2CollectionForm">
+<div id="ctl00_PlaceHolderMain_addForMyPermits_updatePanelAdd">
+<table role='presentation' onkeydown="javascript:EscapePopupWindowBykey_ctl00_PlaceHolderMain_addForMyPermits_btnCancel(event);">
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="padding-bottom:6px;"></td><td style="padding-bottom:6px;"></td></tr>
+    <tr>
+        <td><input value="rdoNewCollection" name="ctl00$PlaceHolderMain$addForMyPermits$collection" type="radio" id="ctl00_PlaceHolderMain_addForMyPermits_rdoNewCollection" class="ACA_Collection_RdoButton ACA_Collection_RdoButton_FontSize" onclick="rdoCollectionClick_ctl00_PlaceHolderMain_addForMyPermits_rdoNewCollection(this);" title="Create a New Collection" /></td>
+        <td><label for="ctl00_PlaceHolderMain_addForMyPermits_rdoNewCollection" id="ctl00_PlaceHolderMain_addForMyPermits_lblNewCollection" class="ACA_Collection_RdoButton font13px">Create a New Collection</label></td> 
+    </tr>
+    <tr>
+        <td id="ctl00_PlaceHolderMain_addForMyPermits_tdEmpty">&nbsp;</td>
+        <td colspan="2"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_addForMyPermits_txtName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_addForMyPermits_txtName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_addForMyPermits_txtName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_addForMyPermits_txtName_label_0'><div class='ACA_Required_Indicator'>*</div></span><label id='ctl00_PlaceHolderMain_addForMyPermits_txtName_label_1' for='ctl00_PlaceHolderMain_addForMyPermits_txtName'>Name:</label><span id='ctl00_PlaceHolderMain_addForMyPermits_txtName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_addForMyPermits_txtName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_addForMyPermits_txtName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$addForMyPermits$txtName" type="text" value="name" maxlength="50" id="ctl00_PlaceHolderMain_addForMyPermits_txtName" title="Required" onpropertychange="collectionNameChanged_ctl00_PlaceHolderMain_addForMyPermits_txtName();" oninput="collectionNameChanged_ctl00_PlaceHolderMain_addForMyPermits_txtName();" onblur="AdjustCollectionNameStyle_ctl00_PlaceHolderMain_addForMyPermits();" aria-required="true" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;</td><td style="padding-bottom:6px;"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_label_0'></span><label id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_label_1' for='ctl00_PlaceHolderMain_addForMyPermits_txtDesc'>Description:</label><span id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_addForMyPermits_txtDesc_td' style='width:100%; '><textarea name="ctl00$PlaceHolderMain$addForMyPermits$txtDesc" rows="2" cols="20" id="ctl00_PlaceHolderMain_addForMyPermits_txtDesc">
+</textarea></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div><a href="#" style="cursor:pointer" class="font11px NotShowLoading" onclick="if (typeof(SetNotAskForSPEAR)!='undefined') SetNotAskForSPEAR();DoSpellCheck('https://aca-prod.accela.com:443/CABARRUS', 'ctl00_PlaceHolderMain_addForMyPermits_txtDesc', event);return false;" >spell check</a></div></td></tr></table></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <table role='presentation'>
+                <tr>
+                    <td>
+                        <div class="ACA_LgButton ACA_LgButton_FontSize">
+                            <a onclick="return CloseAddForm_ctl00_PlaceHolderMain_addForMyPermits_btnAdd(this);" id="ctl00_PlaceHolderMain_addForMyPermits_btnAdd" title="Add" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$addForMyPermits$btnAdd&#39;,&#39;&#39;)"><span>Add</span></a>
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div class="ACA_LgButton ACA_LgButton_FontSize">
+                            <a onclick="ExitAddForm_ctl00_PlaceHolderMain_addForMyPermits_btnCancel(this);return false;" id="ctl00_PlaceHolderMain_addForMyPermits_btnCancel" onkeydown="focusCurrentObj(event)" title="Cancel" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$addForMyPermits$btnCancel&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+                        </div>
+                   </td>
+                </tr>
+            </table>
+         </td>
+    </tr>
+</table>
+</div>
+    </div>
+    <div id="MainContent" class="ACA_Content caphome">
+        <div id="divMyPermitListSection" class="ACA_Section mypermitlist">
+        </div>
+        <div id="ctl00_PlaceHolderMain_divSearchSectionInstruction" class="ACA_SectionBody">
+            <h1 id="ctl00_PlaceHolderMain_h1Permit">
+                <span id="ctl00_PlaceHolderMain_lblPermitListTitle">Search for Permits</span>
+            </h1>
+            <div class="ACA_Page ACA_Page_FontSize introduce">
+                <span id="ctl00_PlaceHolderMain_lblPermitListIntroduce" class="ACA_Body_Text ACA_Body_Text_FontSize">Enter information below to search the County's permitting database. Permits can be searched for by entering any of the following information:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• General Search<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Site Address<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Contractor License Information<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Parcel Number<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Permit Information<BR>Use the dropdown menu to change the Search type.</span> 
+            </div>
+        </div>
+        <div id="ctl00_PlaceHolderMain_searchSection" ng-non-bindable="true" class="ACA_Section searchsection">
+            <div class="ACA_SectionHeader">
+            <div id="ctl00_PlaceHolderMain_updatePanalLabel">
+                <a name="SearchForm_Start" id="SearchForm_Start"></a>
+                <div class="ACA_InfoTitle ACA_InfoTitle_FontSize">
+                    <h1>                                
+                        <span id="ctl00_PlaceHolderMain_lblSelectedSearchType" class="ACA_FLeft">General Search</span>
+                    </h1>
+                    <span class="ACA_FRight">
+                        <table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_ddlSearchType_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_ddlSearchType_element_group'><div class='ACA_Label font12px'><div id='ctl00_PlaceHolderMain_ddlSearchType_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_ddlSearchType_label_0'></span><span id='ctl00_PlaceHolderMain_ddlSearchType_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_ddlSearchType_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_ddlSearchType_td' style='width:100%; '><select name="ctl00$PlaceHolderMain$ddlSearchType" id="ctl00_PlaceHolderMain_ddlSearchType" title="Select a dropdown value to load the associated form. Keyboard Operating Instruction: Please hold ALT and press UP ARROW to expand the list, then press UP ARROW or DOWN ARROW to select an item, and finally press ENTER." onchange="var p = new ProcessLoading();p.showLoading();">
+		<option value="0" selected="selected">General Search</option>
+		<option value="1">Search by Address</option>
+		<option value="2">Search by Licensed Professional Information</option>
+		<option value="3">Search by Record Information</option>
+		<option value="5">Search by Contact</option>
+	</select></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table>
+                    </span>
+                </div>
+            <div class="ACA_SectionBody">
+                <div id="divSearchPanel">
+                    <div id="ctl00_PlaceHolderMain_updatePanel">
+                            <table role='presentation' class="ACA_FRight">
+                                <tr>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_chkCrossModuleSearch_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_chkCrossModuleSearch_element_group'><div class='ACA_Label font12px'><div id='ctl00_PlaceHolderMain_chkCrossModuleSearch_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_chkCrossModuleSearch_label_0'></span><span id='ctl00_PlaceHolderMain_chkCrossModuleSearch_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_chkCrossModuleSearch_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td class='ACA_Label' id='ctl00_PlaceHolderMain_chkCrossModuleSearch_td'  style='width:100%; '><span class="aca_checkbox aca_checkbox_fontsize"><input id="ctl00_PlaceHolderMain_chkCrossModuleSearch" type="checkbox" name="ctl00$PlaceHolderMain$chkCrossModuleSearch" title="Search All Records" /><label for="ctl00_PlaceHolderMain_chkCrossModuleSearch" Id="ctl00_PlaceHolderMain_chkCrossModuleSearch_label_1">Search All Records</label></span></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div id="divSearchPaneltoPressEnter">
+                            <div id="ctl00_PlaceHolderMain_dvGenearlSearch">
+                                <div class="ACA_TabRow">
+                                    <div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_parentGrid" class="grid_7 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate'>Start Date:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td><td class='ACA_Help_Icon_Container'><a title="Help" id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_help' href='javascript:void(0);' onclick='return false;' class='ACA_Help_Icon ACA_FRight NotShowLoading ACA_Show'><img src='/CABARRUS/WebResource.axd?d=2eu-UbO4WV_nMrxc4tBautFUxrgAZ7jrzDEWk79n6Z1MLbzr3_BfAmv3LmCf6iP8BAOB-HYi4Fll5U2u54SJmDKliS3Dlb5Bl-JuoX6Bkb72xasYrmxVH03xWWKZAYwiUhg6ko5o9jWFu40_4MUPAO8wMJI1&t=639262789020000000' alt='Help' /></a></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' class='subTable' cellpadding='0' cellspacing='0' border='0'><tr><td style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSStartDate" type="text" value="10/01/2026" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate" class="maskedfields maskedfields" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" onblur="ClearSplitChar(this, true)" style="z-index:10;" /> <a href="../Component/#" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_calendar_button" title="Click to show calendar" onclick="return false;" class="calendar_button NotShowLoading"><img src="../App_Themes/Default/assets/Calendar_scheduleHS.png" alt="Click to show calendar" /></a><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSStartDate_ext_ClientState" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_ext_ClientState" /></td><td style="white-space: nowrap;"></td></tr></table><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStartDate_sub_label' ControlType='1' class='ACA_Sub_Label ACA_Hide'>(mm/dd/yyyy)</div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_parentGrid" class="grid_7 suffix_2">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate'>End Date:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td><td class='ACA_Help_Icon_Container'><a title="Help" id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_help' href='javascript:void(0);' onclick='return false;' class='ACA_Help_Icon ACA_FRight NotShowLoading ACA_Show'><img src='/CABARRUS/WebResource.axd?d=2eu-UbO4WV_nMrxc4tBautFUxrgAZ7jrzDEWk79n6Z1MLbzr3_BfAmv3LmCf6iP8BAOB-HYi4Fll5U2u54SJmDKliS3Dlb5Bl-JuoX6Bkb72xasYrmxVH03xWWKZAYwiUhg6ko5o9jWFu40_4MUPAO8wMJI1&t=639262789020000000' alt='Help' /></a></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' class='subTable' cellpadding='0' cellspacing='0' border='0'><tr><td style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSEndDate" type="text" value="10/30/2026" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate" class="maskedfields maskedfields" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" onblur="ClearSplitChar(this, true)" style="z-index:10;" /> <a href="../Component/#" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_calendar_button" title="Click to show calendar" onclick="return false;" class="calendar_button NotShowLoading"><img src="../App_Themes/Default/assets/Calendar_scheduleHS.png" alt="Click to show calendar" /></a><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSEndDate_ext_ClientState" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_ext_ClientState" /></td><td style="white-space: nowrap;"></td></tr></table><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSEndDate_sub_label' ControlType='1' class='ACA_Sub_Label ACA_Hide'>(mm/dd/yyyy)</div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_parentGrid" class="grid_10"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber'>Permits Number:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSPermitNumber" type="text" maxlength="30" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSPermitNumber" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_parentGrid" class="grid_13"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType'>Permits Type:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType_td' style='width:100%; '><select name="ctl00$PlaceHolderMain$generalSearchForm$ddlGSPermitType" id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSPermitType" title="Select a dropdown value to refresh dropdown options in associated fields or refresh the Additional Criteria Form. Keyboard Operating Instruction: Please hold ALT and press UP ARROW to expand the list, then press UP ARROW or DOWN ARROW to select an item, and finally press ENTER." onchange="var p = new ProcessLoading();p.showLoading();" style="z-index:10;">
+			<option value="">--Select--</option>
+			<option value="Permits/Health Alliance/Additional Acreage/NA">Additional Acreage</option>
+			<option value="Permits/Building/Commercial/Addition">Building Commercial Addition</option>
+			<option value="Permits/Building/Commercial/Trailer Construction">Building Commercial Construction Trailer</option>
+			<option value="Permits/Building/Commercial/Deck">Building Commercial Deck</option>
+			<option value="Permits/Building/Commercial/Demolition">Building Commercial Demo</option>
+			<option value="Permits/Building/Commercial/Footing Foundation">Building Commercial Footing Foundation</option>
+			<option value="Permits/Building/Commercial/New" selected="selected">Building Commercial New</option>
+			<option value="Permits/Building/Commercial/Trailer Office">Building Commercial Office Trailer</option>
+			<option value="Permits/Building/Commercial/Pool">Building Commercial Pool</option>
+			<option value="Permits/Building/Commercial/Repair">Building Commercial Repair</option>
+			<option value="Permits/Building/Commercial/Shell">Building Commercial Shell</option>
+			<option value="Permits/Building/Commercial/Sign">Building Commercial Sign</option>
+			<option value="Permits/Building/Commercial/Tent">Building Commercial Tent</option>
+			<option value="Permits/Building/Commercial/Upfit">Building Commercial Upfit</option>
+			<option value="Permits/Building/Commercial/Wall">Building Commercial Wall</option>
+			<option value="Permits/Building/Residential/Accessory Structure">Building Residential Accessory Structure</option>
+			<option value="Permits/Building/Residential/Addition">Building Residential Addition</option>
+			<option value="Permits/Building/Residential/Deck">Building Residential Deck</option>
+			<option value="Permits/Building/Residential/Demolition">Building Residential Demo</option>
+			<option value="Permits/Building/Residential/House Move In">Building Residential House Move In</option>
+			<option value="Permits/Building/Residential/Mobile">Building Residential Mobile</option>
+			<option value="Permits/Building/Residential/Modular">Building Residential Modular</option>
+			<option value="Permits/Building/Residential/New">Building Residential New</option>
+			<option value="Permits/Building/Residential/Pool">Building Residential Pool</option>
+			<option value="Permits/Building/Residential/Repair">Building Residential Repair</option>
+			<option value="Permits/Fire/Permit/Construction Permit">County Fire Construction Permit</option>
+			<option value="Permits/Fire/Permit/Environmental Survey">County Fire Environmental Survey Request</option>
+			<option value="Permits/Fire/Permit/Foster or Group Home">County Fire Foster/Group Home/State Licensing Inspection</option>
+			<option value="Permits/Fire/Permit/Hydrant">County Fire Hydrant Flow Test</option>
+			<option value="Permits/Fire/Permit/Pyro or Blasting">County Fire Pyro / Blasting Permit</option>
+			<option value="Permits/Fire/Permit/Special Event">County Fire Special Event</option>
+			<option value="Permits/Fire/Permit/Tank">County Fire Tank Permit</option>
+			<option value="Permits/Fire/Permit/Tent">County Fire Tent Permit</option>
+			<option value="Permits/Fire/Violation/NA">County Fire Violation</option>
+			<option value="Permits/ACA/Electrical Commercial New/na">Electrical (Commercial New)</option>
+			<option value="Permits/ACA/Electrical Commercial Upfit/na">Electrical (Commercial Upfit)</option>
+			<option value="Permits/ACA/Electrical Residential New/na">Electrical (Residential New)</option>
+			<option value="Permits/ACA/Electrical Residential Upfit/na">Electrical (Residential Upfit)</option>
+			<option value="Permits/Trade/Electrical Temp Power/na">Electrical Temporary Power</option>
+			<option value="Permits/Building/Commercial/Existing CO">Existing BU CO</option>
+			<option value="Permits/Health Alliance/Existing System Approval/NA">Existing System Approval</option>
+			<option value="Permits/Fire Harrisburg/Installation/NA">Harrisburg Fire Installation</option>
+			<option value="Permits/Fire Harrisburg/Operation/NA">Harrisburg Fire Operation</option>
+			<option value="Permits/Health Alliance/Complaint/NA">Health Alliance Complaint</option>
+			<option value="Permits/Kannapolis/Accessory Use-Structure/NA">KN_Accessory Use/Structure</option>
+			<option value="Permits/Kannapolis/Addition/NA">KN_Addition</option>
+			<option value="Permits/Kannapolis/Certificate of Compliance/NA">KN_Certificate of Compliance</option>
+			<option value="Permits/Kannapolis/Change in Use/NA">KN_Change in Use</option>
+			<option value="Permits/Kannapolis/Zoning/Demolition">KN_Demo</option>
+			<option value="Permits/Kannapolis/Fire Permit/NA">KN_Fire Permit</option>
+			<option value="Permits/Kannapolis/Home Occupation/NA">KN_Home Occupation</option>
+			<option value="Permits/Kannapolis/Kannapolis Inspections/NA">KN_Inspections</option>
+			<option value="Permits/Kannapolis/Multi-Family/NA">KN_MultiFamily Zoning</option>
+			<option value="Permits/Kannapolis/NonResidential Zoning Permit/NA">KN_NonResidential Zoning Permit</option>
+			<option value="Permits/Kannapolis/Signs/NA">KN_Signs</option>
+			<option value="Permits/Kannapolis/Zoning/Single-Family Residential">KN_Single Family Residential</option>
+			<option value="Permits/Kannapolis/Temporary Use/NA">KN_Temporary Use</option>
+			<option value="Permits/Kannapolis/Two Family Residential/NA">KN_Two Family Residential</option>
+			<option value="Permits/ACA/Mechanical Commercial New/na">Mechanical (Commercial New)</option>
+			<option value="Permits/ACA/Mechanical Commercial Upfit/na">Mechanical (Commercial Upfit)</option>
+			<option value="Permits/ACA/Mechanical Residential New/na">Mechanical (Residential New)</option>
+			<option value="Permits/ACA/Mechanical Residential Upfit/na">Mechanical (Residential Upfit)</option>
+			<option value="Permits/Building/Commercial/ABC Store">Permits/Building/Commercial/ABC Store</option>
+			<option value="Permits/Building/Commercial/Daycare">Permits/Building/Commercial/Daycare</option>
+			<option value="Permits/Building/Commercial/Foster Care">Permits/Building/Commercial/Foster Care</option>
+			<option value="Permits/Building/Commercial/Group Home">Permits/Building/Commercial/Group Home</option>
+			<option value="Permits/Fire Harrisburg/Public Safety Plan/NA">Permits/Fire Harrisburg/Public Safety Plan/NA</option>
+			<option value="Permits/Miscellaneous/Consultation/NA">Permits/Miscellaneous/Consultation/NA</option>
+			<option value="Permits/Miscellaneous/Site Visit/NA">Permits/Miscellaneous/Site Visit/NA</option>
+			<option value="Permits/Zoning Harrisburg/Home Occupation/NA">Permits/Zoning Harrisburg/Home Occupation/NA</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Accessory">Permits/Zoning Harrisburg/Non Residential/Accessory</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Agriculture">Permits/Zoning Harrisburg/Non Residential/Agriculture</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Commercial">Permits/Zoning Harrisburg/Non Residential/Commercial</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Industrial">Permits/Zoning Harrisburg/Non Residential/Industrial</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Institutional Public">Permits/Zoning Harrisburg/Non Residential/Institutional Public</option>
+			<option value="Permits/Zoning Harrisburg/Non Residential/Transportation">Permits/Zoning Harrisburg/Non Residential/Transportation</option>
+			<option value="Permits/Zoning Harrisburg/Residential/NA">Permits/Zoning Harrisburg/Residential/NA</option>
+			<option value="Permits/Zoning Harrisburg/Sign/NA">Permits/Zoning Harrisburg/Sign/NA</option>
+			<option value="Permits/Zoning Harrisburg/Zoning Use/NA">Permits/Zoning Harrisburg/Zoning Use/NA</option>
+			<option value="Permits/Zoning/Home Occupation/NA">Permits/Zoning/Home Occupation/NA</option>
+			<option value="Permits/Zoning/Infra Guarantee/na">Permits/Zoning/Infra Guarantee/na</option>
+			<option value="Permits/Zoning/Non Residential/Accessory">Permits/Zoning/Non Residential/Accessory</option>
+			<option value="Permits/Zoning/Non Residential/Agriculture">Permits/Zoning/Non Residential/Agriculture</option>
+			<option value="Permits/Zoning/Non Residential/Commercial">Permits/Zoning/Non Residential/Commercial</option>
+			<option value="Permits/Zoning/Non Residential/Industrial">Permits/Zoning/Non Residential/Industrial</option>
+			<option value="Permits/Zoning/Non Residential/Institutional Public">Permits/Zoning/Non Residential/Institutional Public</option>
+			<option value="Permits/Zoning/Non Residential/Transportation">Permits/Zoning/Non Residential/Transportation</option>
+			<option value="Permits/Zoning/Residential/Accessory">Permits/Zoning/Residential/Accessory</option>
+			<option value="Permits/Zoning/Residential/Acc Building with Living Area">Permits/Zoning/Residential/Accessory Building with Living Area</option>
+			<option value="Permits/Zoning/Residential/Accessory Dwelling">Permits/Zoning/Residential/Accessory Dwelling</option>
+			<option value="Permits/Zoning/Residential/Addition">Permits/Zoning/Residential/Addition</option>
+			<option value="Permits/Zoning/Residential/Live Work">Permits/Zoning/Residential/Live Work</option>
+			<option value="Permits/Zoning/Residential/Mobile Home">Permits/Zoning/Residential/Mobile Home</option>
+			<option value="Permits/Zoning/Residential/Multi Family Apartment">Permits/Zoning/Residential/Multi Family Apartment</option>
+			<option value="Permits/Zoning/Residential/Multi Family Condominium">Permits/Zoning/Residential/Multi Family Condominium</option>
+			<option value="Permits/Zoning/Residential/Single Fam Attached Townhome">Permits/Zoning/Residential/Single Family Attached</option>
+			<option value="Permits/Zoning/Residential/Single Family Duplex">Permits/Zoning/Residential/Single Family Duplex</option>
+			<option value="Permits/Zoning/Sign/NA">Permits/Zoning/Sign/NA</option>
+			<option value="Permits/Zoning/Verification Ltr/NA">Permits/Zoning/Verification Ltr/NA</option>
+			<option value="Permits/Zoning/Zoning Use/Agriculture Exemption">Permits/Zoning/Zoning Use/Agriculture Exemption</option>
+			<option value="Permits/Zoning/Zoning Use/ElevationCertificate">Permits/Zoning/Zoning Use/Elevation Certificate</option>
+			<option value="Permits/Zoning/Zoning Use/FloodPlainDevelopment">Permits/Zoning/Zoning Use/FloodPlainDevelopment</option>
+			<option value="Permits/Zoning/Zoning Use/NA">Permits/Zoning/Zoning Use/NA</option>
+			<option value="Permits/Zoning/Zoning Use/TemporaryUse">Permits/Zoning/Zoning Use/TemporaryUse</option>
+			<option value="Permits/Plan Review/Residential/New">Plan Review - Residential</option>
+			<option value="Permits/ACA/Plumbing Commercial New/na">Plumbing (Commercial New)</option>
+			<option value="Permits/ACA/Plumbing Commercial Upfit/na">Plumbing (Commercial Upfit)</option>
+			<option value="Permits/ACA/Plumbing Residential New/na">Plumbing (Residential New)</option>
+			<option value="Permits/ACA/Plumbing Residential Upfit/na">Plumbing (Residential Upfit)</option>
+			<option value="Permits/Health Alliance/Septic/NA">Septic Expansion or Repair</option>
+			<option value="Permits/Health Alliance/na/na">Soil Evaluation</option>
+			<option value="Permits/Health Alliance/Well Water/NA">Well Application</option>
+			<option value="Permits/Health Alliance/Well Inspection or Sample/NA">Well Head Inspection / Water Sample Collection</option>
+			<option value="Permits/Zoning/Residential/Single Family Detached">Zoning Residential Single Family</option>
+		</select></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_parentGrid" class="grid_9 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType'>License Type:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType_td' style='width:100%; '><select name="ctl00$PlaceHolderMain$generalSearchForm$ddlGSLicenseType" id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSLicenseType" title="Keyboard Operating Instruction: Please hold ALT and press UP ARROW to expand the list, then press UP ARROW or DOWN ARROW to select an item, and finally press ENTER." style="z-index:10;">
+			<option value="" selected="selected">--Select--</option>
+			<option value="BUILDING">BUILDING</option>
+			<option value="ELECTRICAL">ELECTRICAL</option>
+			<option value="FIRE SPRINKLER">FIRE SPRINKLER</option>
+			<option value="MECHANICAL">MECHANICAL</option>
+			<option value="MOBILE HOME">MOBILE HOME</option>
+			<option value="PLUMBING">PLUMBING</option>
+			<option value="REFRIGERATION">REFRIGERATION</option>
+		</select></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_parentGrid" class="grid_10"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber'>State License Number:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSLicenseNumber" type="text" maxlength="40" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSLicenseNumber" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_parentGrid" class="grid_5 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName'>First:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSFirstName" type="text" maxlength="70" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSFirstName" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_parentGrid" class="grid_5 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName'>Last:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSLastName" type="text" maxlength="70" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSLastName" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_parentGrid" class="grid_19"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName'>Name of Business:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSBusiName" type="text" maxlength="255" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSBusiName" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_parentGrid" class="grid_6 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber'>Street No.:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_td' style='width:100%; '><span id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber" class="RangeNumberText_Control_Layout" style="display:inline-block;z-index:10;"><div class="RangeNumberText_SubControl1_Layout"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_element_group'><div class='ACA_Label font12px'><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_label_0'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ChildControl0" type="text" maxlength="9" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0" title="From	" onkeypress="filter(this,false,false,event); " onkeyup="replaceDecimalSeparator(this, event); " onblur="LimitParse(this,event); " onchange="replaceDecimalSeparator(this, event); " validChars=".." /><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_watermark_exd_ClientState" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0_watermark_exd_ClientState" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div><span class="RangeNumberText_Split_Layout"> - </span><div class="RangeNumberText_SubControl2_Layout"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_element_group'><div class='ACA_Label font12px'><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_label_0'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ChildControl1" type="text" maxlength="9" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1" title="To	" onkeypress="filter(this,false,false,event); " onkeyup="replaceDecimalSeparator(this, event); " onblur="LimitParse(this,event); " onchange="replaceDecimalSeparator(this, event); " validChars=".." /><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_watermark_exd_ClientState" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1_watermark_exd_ClientState" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div></span></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_parentGrid" class="grid_5 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection'>Direction:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td><td class='ACA_Help_Icon_Container'><a title="Help" id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_help' href='javascript:void(0);' onclick='return false;' class='ACA_Help_Icon ACA_FRight NotShowLoading ACA_Show'><img src='/CABARRUS/WebResource.axd?d=2eu-UbO4WV_nMrxc4tBautFUxrgAZ7jrzDEWk79n6Z1MLbzr3_BfAmv3LmCf6iP8BAOB-HYi4Fll5U2u54SJmDKliS3Dlb5Bl-JuoX6Bkb72xasYrmxVH03xWWKZAYwiUhg6ko5o9jWFu40_4MUPAO8wMJI1&t=639262789020000000' alt='Help' /></a></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_td' style='width:100%; '><select name="ctl00$PlaceHolderMain$generalSearchForm$ddlGSDirection" id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection" title="Keyboard Operating Instruction: Please hold ALT and press UP ARROW to expand the list, then press UP ARROW or DOWN ARROW to select an item, and finally press ENTER." style="z-index:10;">
+			<option value="" selected="selected">--Select--</option>
+			<option value="E">E</option>
+			<option value="N">N</option>
+			<option value="NE">NE</option>
+			<option value="NW">NW</option>
+			<option value="S">S</option>
+			<option value="SE">SE</option>
+			<option value="SW">SW</option>
+			<option value="W">W</option>
+		</select></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSDirection_sub_label' ControlType='1' class='ACA_Sub_Label ACA_Hide'>(e.g. N)</div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_parentGrid" class="grid_10 suffix_2">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName'>Street Name:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td><td class='ACA_Help_Icon_Container'><a title="Help" id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_help' href='javascript:void(0);' onclick='return false;' class='ACA_Help_Icon ACA_FRight NotShowLoading ACA_Show'><img src='/CABARRUS/WebResource.axd?d=2eu-UbO4WV_nMrxc4tBautFUxrgAZ7jrzDEWk79n6Z1MLbzr3_BfAmv3LmCf6iP8BAOB-HYi4Fll5U2u54SJmDKliS3Dlb5Bl-JuoX6Bkb72xasYrmxVH03xWWKZAYwiUhg6ko5o9jWFu40_4MUPAO8wMJI1&t=639262789020000000' alt='Help' /></a></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSStreetName" type="text" maxlength="40" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName_sub_label' ControlType='1' class='ACA_Sub_Label ACA_Hide'>(e.g. Main)</div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_parentGrid" class="grid_5"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix'>Street Type: </label><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td><td class='ACA_Help_Icon_Container'><a title="Help" id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_help' href='javascript:void(0);' onclick='return false;' class='ACA_Help_Icon ACA_FRight NotShowLoading ACA_Show'><img src='/CABARRUS/WebResource.axd?d=2eu-UbO4WV_nMrxc4tBautFUxrgAZ7jrzDEWk79n6Z1MLbzr3_BfAmv3LmCf6iP8BAOB-HYi4Fll5U2u54SJmDKliS3Dlb5Bl-JuoX6Bkb72xasYrmxVH03xWWKZAYwiUhg6ko5o9jWFu40_4MUPAO8wMJI1&t=639262789020000000' alt='Help' /></a></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_td' style='width:100%; '><select name="ctl00$PlaceHolderMain$generalSearchForm$ddlGSStreetSuffix" id="ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix" title="Keyboard Operating Instruction: Please hold ALT and press UP ARROW to expand the list, then press UP ARROW or DOWN ARROW to select an item, and finally press ENTER." style="z-index:10;">
+			<option value="" selected="selected">--Select--</option>
+			<option value="ALY">ALY</option>
+			<option value="ANX">ANX</option>
+			<option value="ARC">ARC</option>
+			<option value="AVE">AVE</option>
+			<option value="BCH">BCH</option>
+			<option value="BG">BG</option>
+			<option value="BGS">BGS</option>
+			<option value="BLF">BLF</option>
+			<option value="BLFS">BLFS</option>
+			<option value="BLVD">BLVD</option>
+			<option value="BND">BND</option>
+			<option value="BR">BR</option>
+			<option value="BRG">BRG</option>
+			<option value="BRK">BRK</option>
+			<option value="BRKS">BRKS</option>
+			<option value="BTM">BTM</option>
+			<option value="BYP">BYP</option>
+			<option value="BYU">BYU</option>
+			<option value="CIR">CIR</option>
+			<option value="CIRS">CIRS</option>
+			<option value="CMN">CMN</option>
+			<option value="CP">CP</option>
+			<option value="CPE">CPE</option>
+			<option value="CRK">CRK</option>
+			<option value="CSWY">CSWY</option>
+			<option value="CT">CT</option>
+			<option value="CTRS">CTRS</option>
+			<option value="CV">CV</option>
+			<option value="CYN">CYN</option>
+			<option value="DR">DR</option>
+			<option value="EXT">EXT</option>
+			<option value="HWY">HWY</option>
+			<option value="KNL">KNL</option>
+			<option value="LN">LN</option>
+			<option value="LOOP">LOOP</option>
+			<option value="MNR">MNR</option>
+			<option value="PARK">PARK</option>
+			<option value="PATH">PATH</option>
+			<option value="PKWY">PKWY</option>
+			<option value="PL">PL</option>
+			<option value="PLZ">PLZ</option>
+			<option value="PT">PT</option>
+			<option value="RD">RD</option>
+			<option value="RDG">RDG</option>
+			<option value="ROW">ROW</option>
+			<option value="RUN">RUN</option>
+			<option value="SQ">SQ</option>
+			<option value="ST">ST</option>
+			<option value="TER">TER</option>
+			<option value="TRCE">TRCE</option>
+			<option value="TRL">TRL</option>
+			<option value="TRWY">TRWY</option>
+			<option value="TURN">TURN</option>
+			<option value="VW">VW</option>
+			<option value="WAY">WAY</option>
+			<option value="XING">XING</option>
+		</select></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div><div id='ctl00_PlaceHolderMain_generalSearchForm_ddlGSStreetSuffix_sub_label' ControlType='1' class='ACA_Sub_Label ACA_Hide'>Leave blank if unsure - will return match on all street types</div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_parentGrid" class="grid_10 suffix_1">
+		<table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity'>City:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSCity_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSCity" type="text" maxlength="30" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSCity" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_parentGrid" class="grid_5"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit'>Zip:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSAppZipSearchPermit" type="text" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit" class="maskedfields maskedfields" inputmode="numeric" onblur="ClearSplitChar(this, true);ToUpperCase(this);" isusezip="true" autocomplete="off" autocorrect="off" spellcheck="false" style="z-index:10;" /><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSAppZipSearchPermit_ZipFromAA" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_ZipFromAA" value="0" /><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSAppZipSearchPermit_zipMask" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_zipMask" /><input type="hidden" name="ctl00$PlaceHolderMain$generalSearchForm$txtGSAppZipSearchPermit_ext_ClientState" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSAppZipSearchPermit_ext_ClientState" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div class="container_40">
+		<div id="ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_parentGrid" class="grid_15"><table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_element_group'><div class='ACA_Label font12px ACA_LabelHeight'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td><div id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_label_0'></span><label id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_label_1' for='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo'>Parcel No.:</label><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></td></tr></table></div><div style='margin-bottom: 2px;'><table role='presentation' cellpadding='0' cellspacing='0' border='0' class='subTable'><tr><td id='ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo_td' style='width:100%; '><input name="ctl00$PlaceHolderMain$generalSearchForm$txtGSParcelNo" type="text" maxlength="24" id="ctl00_PlaceHolderMain_generalSearchForm_txtGSParcelNo" style="z-index:10;" /></td><td style="white-space: nowrap; padding-top: 5px;">&nbsp;</td></tr></table></div></div></td></tr></table></div>
+		<div class="clear"></div>
+		</div>
+		<div id='ctl00_PlaceHolderMain_generalSearchForm_separatorLine2' class='ACA_TabRow ACA_Line_Content'>&nbsp;</div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="ctl00$PlaceHolderMain$hfASIExpanded" id="ctl00_PlaceHolderMain_hfASIExpanded" />
+                            <div class="ACA_Hide">
+                                <!-- Datetime input control, add for avoid bug of Safari4, please don't delete it!! -->
+                                <table role='presentation' parentcontrol='true' cellpadding=0 cellspacing=0 id='ctl00_PlaceHolderMain_txtHiddenDate_table' class='ACA_TDAlignLeftOrRightTop' ><tr><td><div class='ACA_Form ASI_Vertical_Field' id='ctl00_PlaceHolderMain_txtHiddenDate_element_group'><div class='ACA_Label font12px'><div id='ctl00_PlaceHolderMain_txtHiddenDate_err_indicator' class='ACA_Error_Indicator' style='display:none;'><img src='/CABARRUS/WebResource.axd?d=pRQzGliJj2XjSZL7SVaGneE50U3kaDPSIIVbLcOiuHa5P4HpdQ2-2U3TpXn-cFCuMoJcRNoS-Nn1ymETXmf_03kHxRs6K5C83XP6HcFbYbBxLtgsDR8S0hzjv7izkRqtMI3wls4UFdNVRXxP6PmNBsKzjaA1&t=639262789020000000' alt='An error has occurred.' /></div><span id='ctl00_PlaceHolderMain_txtHiddenDate_label_0'></span><span id='ctl00_PlaceHolderMain_txtHiddenDate_label_2' class='ACA_ErrorMessageLabel'></span><span id='ctl00_PlaceHolderMain_txtHiddenDate_label_exp' class='ACA_VerticalExpressionMessageLabel'></span></div><div style='margin-bottom: 2px;'><table role='presentation' class='subTable' cellpadding='0' cellspacing='0' border='0'><tr><td style='width:100%; '><input name="ctl00$PlaceHolderMain$txtHiddenDate" type="text" id="ctl00_PlaceHolderMain_txtHiddenDate" class="maskedfields maskedfields" title="This is a hidden field." placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" onblur="ClearSplitChar(this, true)" /> <a href="#" id="ctl00_PlaceHolderMain_txtHiddenDate_calendar_button" title="Click to show calendar" onclick="return false;" class="calendar_button NotShowLoading"><img src="../App_Themes/Default/assets/Calendar_scheduleHS.png" alt="Click to show calendar" /></a><input type="hidden" name="ctl00$PlaceHolderMain$txtHiddenDate_ext_ClientState" id="ctl00_PlaceHolderMain_txtHiddenDate_ext_ClientState" /></td><td style="white-space: nowrap;"></td></tr></table></div></td></tr></table>
+                            </div>
+                            </div>
+                            <div id="ctl00_PlaceHolderMain_sepLineForButton" style="height:35px;clear:both;width:100%;">&nbsp;</div>
+                            <div class="ACA_Row ACA_LiLeft">
+                                <table role='presentation' cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <div id='ctl00_PlaceHolderMain_btnNewSearch_container'><div class='ACA_LgButton ACA_LgButton_FontSize'><a id="ctl00_PlaceHolderMain_btnNewSearch" title="Search" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$PlaceHolderMain$btnNewSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Search</span></a></div></div>
+                                            </div>
+                                         </td>
+                                         <td class="button_space">&nbsp;</td>
+                                         <td>
+                                            <div>
+                                                <div id='ctl00_PlaceHolderMain_btnResetSearch_container'><div class='ACA_LgButton ACA_LgButton_FontSize'><a id="ctl00_PlaceHolderMain_btnResetSearch" title="Clear" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$btnResetSearch&#39;,&#39;&#39;)"><span>Clear</span></a></div></div>
+                                            </div>
+                                         </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="ctl00_PlaceHolderMain_AssociatedSearchResultInfo_updatePanel">
+        <div>
+ <div class="ACA_Show">
+</div>  
+        </div>
+		</div>
+	</div>
+                </div>
+                <div id="ctl00_PlaceHolderMain_updatePanel2">
+                            <div id="ctl00_PlaceHolderMain_RecordSearchResultInfo_updatePanel">
+        <div id="ctl00_PlaceHolderMain_RecordSearchResultInfo_divSearchResultList" class="ACA_TabRow ACA_Line_Content">
+            <hr style="border-width: 0px" />
+        </div>
+        <div>
+ <div class="ACA_Show">
+</div>  
+        </div>
+        <div id="ctl00_PlaceHolderMain_RecordSearchResultInfo_divSearchResultCount" class="ACA_TabRow_NoScoll ACA_WrodWrap ACA_TabRow">
+            <div class="ACA_SmallTable_Row_Reset ACA_WrodWrap">
+                <span id="ctl00_PlaceHolderMain_RecordSearchResultInfo_lblSearchResultCountNumSummary" class="font13px fontbold">11 Record results matching your search results</span>
+            </div>
+            <div class="ACA_SmallTable_Row_Reset ACA_WrodWrap">
+                <span id="ctl00_PlaceHolderMain_RecordSearchResultInfo_lblClickPromptSearchResult" class="font13px">Click any of the results below to view more details.</span>
+            </div>
+        </div>
+		</div>
+                            <div id="ctl00_PlaceHolderMain_divPermitList" class="ACA_TabRow_NoScoll ACA_WrodWrap">
+                            </div>
+                        <div id="ctl00_PlaceHolderMain_dvSearchList" class="ACA_TabRow_NoScoll ACA_WrodWrap">
+<div id="ctl00_PlaceHolderMain_dgvPermitList_updatePanel">
+        <input name="ctl00$PlaceHolderMain$dgvPermitList$lblNeedReBind" type="hidden" id="ctl00_PlaceHolderMain_dgvPermitList_lblNeedReBind" title="" />
+        <a id='ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_4ValidateGridView_anchor' name='ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_4ValidateGridView_anchor'></a><div class="ACA_Grid_OverFlow">
+	<table class="ACA_GridView ACA_Grid_Caption"  cellspacing="0" BreakWord="true" PageCount="2" summary="Permit table with one level of column headers" border="0" id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList" style="border-width:0px;width:860px;">
+		<caption>
+			Record list
+		</caption><tr>
+			<td colspan="19"><div class="aca_gridview_caption"><table role="presentation" border="0">
+				<tr>
+					<td style="white-space:nowrap;"><span class="ACA_SmLabel ACA_SmLabel_FontSize ACA_SmLabel_FontColor touch-target-24"> Showing 1-10 of 11 </span></td><td><span class="tab_tar_separator font11px">|</span></td><td style="white-space:nowrap;"><a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_gdvPermitListtop4btnExport" class="ACA_SmLabel ACA_SmLabel_FontSize ACA_SmLabel_FontColor touch-target-24" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$gdvPermitListtop4btnExport&#39;,&#39;&#39;)">Download results</a></td>
+				</tr>
+			</table></div></td>
+		</tr><tr class="ACA_TabRow_Header ACA_TabRow_Header_FontSize">
+			<th class="ACA_AlignLeftOrRight" scope="col" style="width:20px;"><input class='aca_gridview_checkbox' type='checkbox' hidefocus='true' id='ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_HeaderButton_0' name='ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_HeaderButton_0'  onclick='CheckAll(this,"ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems");;' title='To select all records in current page.'></th><th class="ACA_AlignLeftOrRight" scope="col" style="width:60px;">
+                        <div style="margin-right: 5px;" class="ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkDateHeader" title="Date" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkDateHeader&#39;,&#39;&#39;)"><span>Date</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:110px;">
+                        <div class="ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkPermitNumberHeader" title="Permits Number" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkPermitNumberHeader&#39;,&#39;&#39;)"><span>Permits Number</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:130px;">
+                        <div class="ACA_CapListStyle ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkPermitTypeHeader" title="Permits Type" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkPermitTypeHeader&#39;,&#39;&#39;)"><span>Permits Type</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:100px;">
+                        <div class="ACA_CapListStyle ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkPermitSearchProjectNameHeader" title="Application Name" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkPermitSearchProjectNameHeader&#39;,&#39;&#39;)"><span>Application Name</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:130px;">
+                        <div class="ACA_CapListStyle ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkAddressHeader" title="Address" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkAddressHeader&#39;,&#39;&#39;)"><span>Address</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkStatusHeader" title="Status" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkStatusHeader&#39;,&#39;&#39;)"><span>Status</span></a>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle ACA_Header_Row">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkActionsHeader">Action</span>
+                        </div>
+                    </th><th class="ACA_AlignLeftOrRight" scope="col" style="width:110px;">
+                        <div class="ACA_CapListStyle ACA_Header_Row">
+                        <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkShortNoteHeader" title="Short Notes" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkShortNoteHeader&#39;,&#39;&#39;)"><span>Short Notes</span></a>
+                        </div>
+                    </th><th class="ACA_Hide" scope="col" style="width:0px;">
+                        <div class="ACA_CapListStyle ACA_Header_Row">
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl01_lnkPermitAddressHeader" title="" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl01$lnkPermitAddressHeader&#39;,&#39;&#39;)"><span></span></a>
+                        </div>
+                    </th>
+		</tr><tr class="ACA_TabRow_Odd ACA_TabRow_Odd_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_CB_0" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl02$CB_0" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/30/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02835&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblPermitNumber1">BU2026-03344</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02835" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblProjectName">D J PRESTON BUILDERS, INC.</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblAddress">12229 RICELAND WAY, AC, MIDLAND NC 28107</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblStatus">Pending</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblShortNote">Install Playground in Midland Crossing development</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl02_lblPermitAddress">12229 RICELAND WAY, AC, MIDLAND NC 28107</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Even ACA_TabRow_Even_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_CB_1" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl03$CB_1" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/28/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02802&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblPermitNumber1">BU2026-03307</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02802" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblProjectName">LANDMARK BUILDERS OF THE TRIAD, INC - SHALLOW BAY FLEX WAREHOUSE BLDG A</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblAddress">5542 LIPPARD LN, AC, HARRISBURG NC 28075</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblShortNote">SHALLOW BAY FLEX WAREHOUSE</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl03_lblPermitAddress">5542 LIPPARD LN, AC, HARRISBURG NC 28075</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Odd ACA_TabRow_Odd_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_CB_2" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl04$CB_2" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/28/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02799&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblPermitNumber1">BU2026-03303</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02799" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblProjectName">STEGALL CONTRACTING, LLC</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblAddress">900 GRACES RESERVE CIR, AC, KANNAPOLIS NC 28083</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblShortNote">EV Chargers</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl04_lblPermitAddress">900 GRACES RESERVE CIR, AC, KANNAPOLIS NC 28083</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Even ACA_TabRow_Even_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_CB_3" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl05$CB_3" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/27/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02784&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblPermitNumber1">BU2026-03286</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02784" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblProjectName">RECREATION AND DESIGN, LLC</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblAddress">555 IRON HORSE LN, AC, MIDLAND NC 28107</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblShortNote">20 x 24 Shelter</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl05_lblPermitAddress">555 IRON HORSE LN, AC, MIDLAND NC 28107</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Odd ACA_TabRow_Odd_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_CB_4" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl06$CB_4" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/26/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02777&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblPermitNumber1">BU2026-03276</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02777" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblProjectName">THE ROBINS &amp; MORTON GROUP</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblAddress">920 CHURCH ST N, AC, CONCORD NC 28025</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblShortNote">Renovation to expand the NICU department by 12 patient care spaces</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl06_lblPermitAddress">920 CHURCH ST N, AC, CONCORD NC 28025</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Even ACA_TabRow_Even_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_CB_5" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl07$CB_5" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/21/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02749&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblPermitNumber1">BU2026-03242</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02749" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblProjectName">LANDMARK BUILDERS OF THE TRIAD, INC</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblAddress">5542 LIPPARD LN, AC, HARRISBURG NC 28075</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblShortNote">SHALLOW BAY FLEX WAREHOUSE</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl07_lblPermitAddress">5542 LIPPARD LN, AC, HARRISBURG NC 28075</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Odd ACA_TabRow_Odd_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_CB_6" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl08$CB_6" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/16/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02720&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblPermitNumber1">BU2026-03200</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02720" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblProjectName">SHELCO, LLC.</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblAddress">3853 KANNAPOLIS PKWY, AC, KANNAPOLIS NC 28081</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblShortNote">New Cabarrus County High School</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl08_lblPermitAddress">3853 KANNAPOLIS PKWY, AC, KANNAPOLIS NC 28081</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Even ACA_TabRow_Even_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_CB_7" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl09$CB_7" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/15/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02714&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblPermitNumber1">BU2026-03194</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02714" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblProjectName">SPEEDWAY CONSULTING &amp; DESIGN, INC.</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblAddress">5131 MOREHEAD RD, CONCORD NC 28027</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblShortNote">Development entrance guardhouse</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl09_lblPermitAddress">5131 MOREHEAD RD, CONCORD NC 28027</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Odd ACA_TabRow_Odd_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_CB_8" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl10$CB_8" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/13/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02695&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblPermitNumber1">BU2026-03170</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02695" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblProjectName">RODGERS BUILDERS, INC.</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblAddress">11151 SUDBURY RD, AC, KANNAPOLIS NC 28036</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblShortNote">New 129,135 square foot elementary school for Cabarrus County Schools.</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl10_lblPermitAddress">11151 SUDBURY RD, AC, KANNAPOLIS NC 28036</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_TabRow_Even ACA_TabRow_Even_FontSize">
+			<td class="ACA_AlignLeftOrRightTop"><input id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_CB_9" type="checkbox" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl11$CB_9" onclick="Check(this,&#39;ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems&#39;);" class="aca_gridview_checkbox" title="To select one record in current page." /></td><td class="ACA_AlignLeftOrRightTop" style="width:60px;">
+                        <div style="margin-right: 5px;">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblUpdatedTime" CSS="ACA_SmLabel ACA_SmLabel_FontSize">10/08/2026</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div>
+                            <strong>
+                                </strong>
+                            <a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_hlPermitNumber" href="/CABARRUS/Cap/CapDetail.aspx?Module=Permits&amp;TabName=Permits&amp;capID1=26BLD&amp;capID2=00000&amp;capID3=02647&amp;agencyCode=CABARRUS&amp;IsToShowInspection=">
+                                <strong>
+                                    <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblPermitNumber1">BU2026-03113</span></strong>
+                            </a>
+                            <input type="hidden" ID="RecordId" value="26BLD-00000-02647" />
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblType">Building Commercial New</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblProjectName">MYERS &amp; CHAPMAN, INC.</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:130px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblAddress">7550 RUBEN LINKER RD NW, AC, CONCORD NC 28027</span>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_panelStatus">
+                                <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblStatus">Issued</span>
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_panelbtnRenewalDetail">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:100px;">
+                        <div style="white-space: nowrap;" class="ACA_CapListStyle">
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_Panel2">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_Panel3">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_Panel4">
+			</div>
+                            <div id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_Panel5">
+			</div>
+                        </div>
+                    </td><td class="ACA_AlignLeftOrRightTop" style="width:110px;">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblShortNote">Construction of sports fields and accessory buildings</span>
+                        </div>
+                    </td><td class="ACA_Hide">
+                        <div class="ACA_CapListStyle">
+                            <span id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl11_lblPermitAddress">7550 RUBEN LINKER RD NW, AC, CONCORD NC 28027</span>
+                        </div>
+                    </td>
+		</tr><tr class="ACA_Table_Pages ACA_Table_Pages_FontSize" align="center" valign="bottom">
+			<td colspan="10"><table class="aca_pagination" align="Center" role="presentation" border="0">
+				<tr>
+					<td class="ACA_Hide"><a id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_ctl13_lb4btnExport" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl13$lb4btnExport&#39;,&#39;&#39;)"></a></td><td class="aca_pagination_td aca_pagination_PrevNext"><span class="aca_simple_text font11px">&lt; Prev</span></td><td class="aca_pagination_td"><span class="SelectedPageButton font11px">1</span></td><td class="aca_pagination_td"><a href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl13$ctl03&#39;,&#39;&#39;)">2</a></td><td class="aca_pagination_td aca_pagination_PrevNext"><a class="aca_simple_text font11px" href="javascript:__doPostBack(&#39;ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$ctl13$ctl04&#39;,&#39;&#39;)">Next &gt;</a></td>
+				</tr>
+			</table></td>
+		</tr>
+	</table><input type="hidden" name="ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$hfSaveSelectedItems" id="ctl00_PlaceHolderMain_dgvPermitList_gdvPermitList_hfSaveSelectedItems" />
+</div>
+        <input name="ctl00$PlaceHolderMain$dgvPermitList$inpHideResumeConf" type="hidden" id="ctl00_PlaceHolderMain_dgvPermitList_inpHideResumeConf" />
+		</div>
+<div id="dvResumeConfLayerMask" class="ACA_MaskDiv" style="height: 79px; z-index: 999;display:none;">
+</div>
+<div id="dvResumeConfirmation" class="ACA_Dialog Resume_Dialog">
+    <div id="hidLink" tabindex="0"></div>
+    <div class="Resume_Dialog_cont">
+        <h1 class="ACA_Dialog_Title">
+            <span id="ctl00_PlaceHolderMain_dgvPermitList_lblSaveResumePageFlowStep">Resume Application: Select Application Page Flow Step</span>
+        </h1>
+        <div class="ACA_Dialog_Close_Div">
+            <a id="closeButton" href="#" title="Close" tabindex="0" onclick="ResumeConfirmationClose('ctl00_PlaceHolderMain_dgvPermitList_inpHideResumeConf');return false;" class="NotShowLoading" onkeydown="OverrideTabKey(event, true, 'buttonCancel')">
+                <img alt="Close" class="ACA_Dialog_Close_Image" src='/CABARRUS/app_themes/Default/assets/closepopup.png'>
+            </a>
+        </div>
+        <div class="ACA_MaskDiv ACA_Hide"></div>
+        <div class="Resume_Dialog_Clear"></div>
+    </div>
+    <div class="ACA_Dialog_Content">
+        <div class="Resume_Dialog_Row">
+            <input type="radio" id="rdoResume" title="Start from the beginning" name="resumeOptionFromstart"  tabindex="0" value="start">
+            <span id="ctl00_PlaceHolderMain_dgvPermitList_lblStartBeginning" onclick="$(&#39;#rdoResume&#39;).click()" class="ACA_New_Label font11px aca_checkbox aca_checkbox_fontsize">Start from the beginning</span>
+        </div>
+        <div class="Resume_Dialog_Row">
+            <input type="radio" id="rdoStart" title="Pick up where I left off" name="resumeOptionFromWhereLeftOff" tabindex="0" value="resume">
+            <span id="ctl00_PlaceHolderMain_dgvPermitList_lblPickUp" onclick="$(&#39;#rdoStart&#39;).click()" class="ACA_New_Label font11px aca_checkbox aca_checkbox_fontsize">Pick up where I left off</span>
+        </div>
+        <div class="Resume_Dialog_ButtonBar">
+            <div class="ACA_LgButton ACA_LgButton_FontSize ACA_Button_Text">
+                <a accesskey="3" href="#" title="OK" tabindex="0" onclick="ResumeConfirmationAction('ctl00_PlaceHolderMain_dgvPermitList_inpHideResumeConf');return false;">
+                    <span id="ctl00_PlaceHolderMain_dgvPermitList_linkOK">OK</span>
+                </a>
+                <a id="buttonCancel" accesskey="3" href="#" title="Close" class="Cancel_Button NotShowLoading" tabindex="0" onclick="ResumeConfirmationClose('ctl00_PlaceHolderMain_dgvPermitList_inpHideResumeConf');return false;"  onkeydown="OverrideTabKey(event, false, 'closeButton')" >
+                    <span id="ctl00_PlaceHolderMain_dgvPermitList_lblResumeCancel">Cancel</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+                        </div> 
+	</div>
+            </div>
+</div>
+            </div>
+        </div>
+    </div>
+    </td></tr>
+    </table>
+    <a name="PageResult" id="PageResult" href="#PageResult" tabindex="-1" aria-label="Page Results"></a>
+    <div id="divAdded"class="ACA_Loading_Message ACA_SmLabel ACA_SmLabel_FontSize">
+    </div>
+    <input type="hidden" name="ctl00$PlaceHolderMain$hfGridId" id="ctl00_PlaceHolderMain_hfGridId" />
+</div>
+                    </main>
+                    <!--
+                In Chorme and Opera 15, need add the div,
+                because when content div set float property, not hodler height in container
+                -->
+                    <div style="clear: both;"></div>
+                </div>
+                <div id="divLoadingTemplate" class="ACA_Loading_Message" style="width: auto">
+                    <img alt="Please wait..." src="/CABARRUS/app_themes/Default/assets/loading.gif" />
+                    <span id="ctl00_lblLoading" class="ACA_SmLabel ACA_SmLabel_FontSize">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div id="ctl00_UpdatePanel4Expression">
+                <input name="ctl00$HDExpressionParam" type="hidden" id="ctl00_HDExpressionParam" class="HDExpressionResultCss" />
+</div>
+        <input type="hidden" name="Submit" value="Submit" class="HiddenButton" onclick="return false;" />
+</form>
+    <noscript>Your browser does not support JavaScript.</noscript>
+</body>
+</html>

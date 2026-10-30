@@ -1,0 +1,218 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "globalIdFieldName": "",
+ "geometryType": "esriGeometryPolygon",
+ "spatialReference": {
+  "wkid": 102719,
+  "latestWkid": 2264
+ },
+ "fields": [
+  {
+   "name": "AKPAR",
+   "alias": "AKPAR",
+   "type": "esriFieldTypeString",
+   "length": 50
+  },
+  {
+   "name": "PIN",
+   "alias": "PIN",
+   "type": "esriFieldTypeString",
+   "length": 50
+  },
+  {
+   "name": "WHOLE_ADDRESS",
+   "alias": "WHOLE_ADDRESS",
+   "type": "esriFieldTypeString",
+   "length": 100
+  },
+  {
+   "name": "POSTAL",
+   "alias": "POSTAL",
+   "type": "esriFieldTypeString",
+   "length": 25
+  },
+  {
+   "name": "CURR_NAME1",
+   "alias": "CURR_NAME1",
+   "type": "esriFieldTypeString",
+   "length": 128
+  },
+  {
+   "name": "CURR_NAME2",
+   "alias": "CURR_NAME2",
+   "type": "esriFieldTypeString",
+   "length": 128
+  },
+  {
+   "name": "CURR_ADDR1",
+   "alias": "CURR_ADDR1",
+   "type": "esriFieldTypeString",
+   "length": 40
+  },
+  {
+   "name": "CURR_ADDR2",
+   "alias": "CURR_ADDR2",
+   "type": "esriFieldTypeString",
+   "length": 40
+  },
+  {
+   "name": "CURR_CITY",
+   "alias": "CURR_CITY",
+   "type": "esriFieldTypeString",
+   "length": 50
+  },
+  {
+   "name": "CURR_STATE",
+   "alias": "CURR_STATE",
+   "type": "esriFieldTypeString",
+   "length": 2
+  },
+  {
+   "name": "CURR_ZIPCODE",
+   "alias": "CURR_ZIPCODE",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "DEED_BOOK",
+   "alias": "DEED_BOOK",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "DEED_PAGE",
+   "alias": "DEED_PAGE",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "DEEDTYPE",
+   "alias": "DEEDTYPE",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "DESC1_DESC",
+   "alias": "DESC1_DESC",
+   "type": "esriFieldTypeString",
+   "length": 25
+  },
+  {
+   "name": "property_use",
+   "alias": "property_use",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "CALCAC",
+   "alias": "CALCAC",
+   "type": "esriFieldTypeDouble"
+  },
+  {
+   "name": "SQFT",
+   "alias": "SQFT",
+   "type": "esriFieldTypeDouble"
+  },
+  {
+   "name": "YEARBLT",
+   "alias": "YEARBLT",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "FMV_TOTAL",
+   "alias": "FMV_TOTAL",
+   "type": "esriFieldTypeDouble"
+  },
+  {
+   "name": "SALEDATE",
+   "alias": "SALEDATE",
+   "type": "esriFieldTypeDate",
+   "length": 8
+  },
+  {
+   "name": "SALESAMT",
+   "alias": "SALESAMT",
+   "type": "esriFieldTypeDouble"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "AKPAR": "126071",
+    "PIN": "3594-48-2825",
+    "WHOLE_ADDRESS": "408 BROOK ST",
+    "POSTAL": "BELMONT",
+    "CURR_NAME1": "SSI 408 BROOK NC PROPERTY LLC",
+    "CURR_NAME2": "",
+    "CURR_ADDR1": "ATTN: PRESIDENT",
+    "CURR_ADDR2": "71 COMMERCIAL STREET #266",
+    "CURR_CITY": "BOSTON",
+    "CURR_STATE": "MA",
+    "CURR_ZIPCODE": "02109",
+    "DEED_BOOK": "5673",
+    "DEED_PAGE": "0337",
+    "DEEDTYPE": "NWD",
+    "DESC1_DESC": "Industrial",
+    "property_use": "IND",
+    "CALCAC": 6.14,
+    "SQFT": 54600.0,
+    "YEARBLT": 2002,
+    "FMV_TOTAL": 3367310.0,
+    "SALEDATE": 1790654400000,
+    "SALESAMT": 0.0
+   }
+  },
+  {
+   "attributes": {
+    "AKPAR": "134310",
+    "PIN": "3578-58-7617",
+    "WHOLE_ADDRESS": "717 S MAIN ST",
+    "POSTAL": "STANLEY",
+    "CURR_NAME1": "LETCHOE JOHN",
+    "CURR_NAME2": "LETHCOE CANDI",
+    "CURR_ADDR1": "201 GENERAL JE JOHNSTON ST",
+    "CURR_ADDR2": "  ",
+    "CURR_CITY": "STANLEY",
+    "CURR_STATE": "NC",
+    "CURR_ZIPCODE": "281642154",
+    "DEED_BOOK": "4598",
+    "DEED_PAGE": "0415",
+    "DEEDTYPE": "WD",
+    "DESC1_DESC": "Office",
+    "property_use": "COM",
+    "CALCAC": 0.25,
+    "SQFT": 1492.0,
+    "YEARBLT": 1925,
+    "FMV_TOTAL": 133930.0,
+    "SALEDATE": 1329973200000,
+    "SALESAMT": 57000.0
+   }
+  },
+  {
+   "attributes": {
+    "AKPAR": "177364",
+    "PIN": "3587-79-5458",
+    "WHOLE_ADDRESS": "1627 CHARLES RAPER JONAS HWY",
+    "POSTAL": "MOUNT HOLLY",
+    "CURR_NAME1": "MOUNTAIN CANDY PROPERTIES LLC",
+    "CURR_NAME2": "",
+    "CURR_ADDR1": "702 HANNA WOODS",
+    "CURR_ADDR2": "",
+    "CURR_CITY": "CRAMERTON",
+    "CURR_STATE": "NC",
+    "CURR_ZIPCODE": "28032",
+    "DEED_BOOK": "5425",
+    "DEED_PAGE": "2029",
+    "DEEDTYPE": "SWD",
+    "DESC1_DESC": "Service Shop",
+    "property_use": "COM",
+    "CALCAC": 0.21,
+    "SQFT": 2400.0,
+    "YEARBLT": 1982,
+    "FMV_TOTAL": 79770.0,
+    "SALEDATE": 1690776000000,
+    "SALESAMT": 135000.0
+   }
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+name: Sandbox permits (Gaston EnerGov)
+
+# Manual only. Runs the sandbox permit pipeline and uploads the report as a
+# build artifact. Never commits, never touches data/seen.json, never opens issues.
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Look-back window in days"
+        default: "60"
+      max_details:
+        description: "Most permit detail records to fetch"
+        default: "500"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sandbox-permits
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Tests
+        run: python -m unittest discover tests
+
+      - name: Run sandbox pipeline
+        run: python -m sandbox.run_sandbox --days "${{ inputs.days }}" --max-details "${{ inputs.max_details }}"
+
+      - name: Show report
+        if: always()
+        run: cat sandbox/output/report.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sandbox-report
+          path: sandbox/output/

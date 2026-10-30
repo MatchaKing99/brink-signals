@@ -1,5 +1,1 @@
-Permit #,Issued,County,Address,Type,Occupancy,Description,Value,Sq Ft,Zoning,Contractor,Owner,Permit Status,Score,Signals,Status
-2025-134,2025-12-11,Mecklenburg,,,,Stuart Hair,,,ML-2(CD),,,Pen,2,industrial zoning,New
-2026-036,2026-05-15,Mecklenburg,,,,"Culp Road Materials, LLC",,,ML-2(CD),,,Pen,2,industrial zoning,New
-2026-034,2026-05-15,Mecklenburg,,,,"Sam's Mart, LLC",,,ML-1(CD),,,Pen,2,industrial zoning,New
-2026-008,2026-02-11,Mecklenburg,,,,COLLABDEV6 LLC,,,ML-1,,,Pen,2,industrial zoning,New
+Permit #,Issued,County,Address,Type,Occupancy,Description,Value,Sq Ft,Zoning,Contractor,Owner,Permit Status,Score,Signals,Status,Property

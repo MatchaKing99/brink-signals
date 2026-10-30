@@ -23,7 +23,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from signals import accela, config, energov, jobs, permits
+from signals import accela, config, energov, evolve, jobs, permits
 
 ROOT = Path(__file__).parent
 STATE = ROOT / "data" / "seen.json"
@@ -102,7 +102,8 @@ def run_arcgis(state, show_all, status):
 def run_portals(state, show_all, status):
     """Live permits from county permit portals; industrial ones only."""
     out = []
-    for module, sources in ((energov, config.ENERGOV_SOURCES), (accela, config.ACCELA_SOURCES)):
+    for module, sources in ((energov, config.ENERGOV_SOURCES), (accela, config.ACCELA_SOURCES),
+                            (evolve, config.EVOLVE_SOURCES)):
         for src in sources:
             label = f"{src['county']} permits (live portal)"
             try:

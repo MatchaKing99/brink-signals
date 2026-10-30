@@ -136,11 +136,23 @@ ACCELA_SOURCES = [
                "Permits/Kannapolis/Change in Use/NA", "Permits/Kannapolis/NonResidential Zoning Permit/NA"]},
 ]
 
+# Live permits from Evolve Public portals (public date-range search, no login).
+# Union's commercial report codes are 6xx; York tags each permit with a letter
+# (C commercial, S signs and land disturbance), and its detail adds contract
+# price and occupancy. Covers unincorporated areas plus the towns these
+# counties inspect for (Monroe and Waxhaw, and Rock Hill / Fort Mill, permit
+# separately).
+EVOLVE_SOURCES = [
+    {"county": "Union", "days": 21, "url": "https://ucinspect.unioncountync.gov/EvolvePublic/",
+     "search_menu": ["BL_Menu1", "1"], "types_rx": r"^6\d\d - (?!.*(trailer|alcoholic|pv\b))"},
+    {"county": "York", "days": 21, "url": "https://evolvepublic.yorkcountygov.com/",
+     "search_menu": ["BL_Menu", "2"], "types_rx": r"^[CS]$", "skip_rx": r"- Sign\b"},
+]
+
 # Counties whose permit systems have no open feed. Their weekly exports can be
 # dropped into inbox/ as <county>_<anything>.csv and get scored the same way.
 PORTAL_ONLY = {
-    "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately); commercial inspections are pulled live",
-    "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",
+    "Lincoln": "eTRAKiT (linc.csqrcloud.com) requires a login to search permits; rezonings come from the weekly sweep",
 }
 
 # Job-board search. Adzuna bills per call, so each county gets ONE search for

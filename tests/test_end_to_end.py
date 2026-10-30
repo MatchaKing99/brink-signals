@@ -17,7 +17,7 @@ import urllib.parse
 from pathlib import Path
 
 import run_weekly
-from signals import accela, config, energov, jobs, permits
+from signals import accela, config, energov, evolve, jobs, permits
 
 NOW = int(dt.datetime.now().timestamp() * 1000)
 DAY = 86_400_000
@@ -148,6 +148,32 @@ def accela_route(handler, path, q, form):
             page = ACA_LAST.replace("ACA_TabRow_", "x_")   # page 2: no further rows
     handler.wfile.write(page.encode())
 
+# Evolve Public portals (Union; York's older layout): real pages saved from the
+# live portals (Oct 2026), results trimmed to a few rows.
+EVOLVE = {c: {k: (FIX / f"{c}_{k}.html").read_text() for k in
+              ("home", "search", "daterange", "results", "detail_industrial", "detail_other")}
+          for c in ("union", "york")}
+EVOLVE_INDUSTRIAL = {"ItemsList$ctl501$LinkButton2", "GV_SearchResults$ctl264$LBT_ResultsDetails"}
+
+
+def evolve_route(handler, county, form):
+    pages = EVOLVE[county]
+    handler.send_response(200)
+    handler.end_headers()
+    target = (form or {}).get("__EVENTTARGET", "")
+    if form is None:
+        page = pages["home"]
+    elif target in ("BL_Menu1", "BL_Menu"):
+        page = pages["search"]
+    elif target == "DL_SearchType":
+        page = pages["daterange"]
+    elif target == "BT_Search" or form.get("BT_Search"):
+        assert form["DL_SearchType"] == "Date Range" and form["TB_SearchText1"] and form["TB_SearchText2"]
+        page = pages["results"]
+    else:
+        page = pages["detail_industrial" if target in EVOLVE_INDUSTRIAL else "detail_other"]
+    handler.wfile.write(page.encode())
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -220,6 +246,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         u = urllib.parse.urlparse(self.path)
         if u.path.startswith("/energov/"):
             return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
+        if u.path.startswith("/evolve/"):
+            return evolve_route(self, u.path.split("/")[2], None)
         if u.path.startswith("/aca/") or "CapDetail" in u.path:
             return accela_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         self.route(u.path, dict(urllib.parse.parse_qsl(u.query)))
@@ -228,6 +256,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         body = self.rfile.read(int(self.headers["Content-Length"])).decode()
         if self.path.startswith("/energov/"):
             return energov_route(self, self.path, {}, json.loads(body))
+        if self.path.startswith("/evolve/"):
+            return evolve_route(self, self.path.split("/")[2], dict(urllib.parse.parse_qsl(body)))
         if self.path.startswith("/aca/"):
             return accela_route(self, urllib.parse.urlparse(self.path).path, {}, dict(urllib.parse.parse_qsl(body)))
         self.route(self.path, dict(urllib.parse.parse_qsl(body)))
@@ -303,7 +333,12 @@ class EndToEnd(unittest.TestCase):
         config.ENERGOV_SOURCES = [{"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
                                    "api": base + "/energov/api",
                                    "parcels": {"url": base + "/energov/parcels/11", "fields": "gaston"}}]
-        energov.PAUSE = accela.PAUSE = 0
+        energov.PAUSE = accela.PAUSE = evolve.PAUSE = 0
+        config.EVOLVE_SOURCES = [
+            {"county": "Union", "days": 21, "url": base + "/evolve/union/", "search_menu": ["BL_Menu1", "1"],
+             "types_rx": r"^6\d\d - (?!.*(trailer|alcoholic|pv\b))"},
+            {"county": "York", "days": 21, "url": base + "/evolve/york/", "search_menu": ["BL_Menu", "2"],
+             "types_rx": r"^[CS]$", "skip_rx": r"- Sign\b"}]
         config.ACCELA_SOURCES = [{"county": "Cabarrus", "days": 21, "base": base + "/aca/CABARRUS",
                                   "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Upfit"]}]
         config.INSPECTION_SOURCES = [{"county": "Union", "days": 120,
@@ -382,6 +417,17 @@ class EndToEnd(unittest.TestCase):
         for junk in ("RICELAND", "GRACES RESERVE", "IRON HORSE", "SUDBURY"):
             self.assertNotIn(junk, d)
         self.assertIn("| Cabarrus permits (live portal) | 🟢 10 permits, 10 commercial, 2 industrial, 2 new |", d)
+        # Union live permits: 39,120 SF flex shell in (owner, GC, zoning from the detail);
+        # a dental office out.
+        self.assertIn("| Union | 4121 Indian Trail Fairview Rd, Indian Trail | SF GROUP LLC |", d)
+        self.assertIn("New 39,120 sf flex multi use shell building", d)
+        self.assertNotIn("3719 S Providence", d)
+        # York live permits: $890K Schaeffler racking install in; signs skipped.
+        self.assertIn("| York | 194 SPRINGHILL FARM RD | SL8 CLASS A INDUSTRIAL LP | $890,465 |", d)
+        self.assertIn("selective racking", d)
+        self.assertNotIn("1860 HIGHWAY 160", d)
+        self.assertNotIn("Union permits (portal)", d)
+        self.assertIn("| Lincoln permits (portal) |", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

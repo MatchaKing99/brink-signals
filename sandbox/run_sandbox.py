@@ -32,6 +32,7 @@ PORTAL = "https://selfservice.gastongov.com/energov_prod/selfservice"
 SOS_SEARCH = "https://www.sosnc.gov/online_services/search/by_title/_Business_Registration"
 NEW_WORK = re.compile(r"new building|new construction|shell|foundation|erosion|site plan|grading|\bnew\b", re.I)
 UPFIT = re.compile(r"alteration|remodel|upfit|up-fit|change in use|tenant|interior", re.I)
+DEAD = re.compile(r"void|withdrawn|cancel|denied|expired", re.I)
 ADDITION = re.compile(r"addition|expansion", re.I)
 
 
@@ -128,12 +129,13 @@ def run(base=PORTAL, parcels_url=parcels.GASTON_PARCELS, days=60, out_dir=ROOT /
     for r in recs:
         r["parcel_facts"] = pmap.get(r["parcel"])
 
-    tagged = [r for r in recs if r["score"] >= 0 and permits.is_industrial(r)]
+    live = [r for r in recs if not DEAD.search(r["status"])]
+    tagged = [r for r in live if r["score"] >= 0 and permits.is_industrial(r)]
     industrial = [r for r in tagged if r["score"] >= config.PERMIT_MIN_SCORE]
     below = [r for r in tagged if r["score"] < config.PERMIT_MIN_SCORE]
     # Commercial work on parcels the county classes as industrial that the keyword scorer didn't tag.
     tagged_ids = {id(r) for r in tagged}
-    on_ind_parcel = [r for r in recs if id(r) not in tagged_ids and r["score"] >= 0 and r["parcel_facts"]
+    on_ind_parcel = [r for r in live if id(r) not in tagged_ids and r["score"] >= 0 and r["parcel_facts"]
                      and "industrial" in (r["parcel_facts"]["land_use"] + r["parcel_facts"]["use_class"]).lower()]
     for group in (industrial, below, on_ind_parcel):
         group.sort(key=lambda r: (r["score"], r["value"] or 0, r["sqft"] or 0), reverse=True)

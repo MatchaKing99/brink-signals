@@ -155,7 +155,8 @@ def standardize(row, detail=None, portal="https://selfservice.gastongov.com/ener
     detail = detail or {}
     cf = custom_values(detail)
     contacts = detail.get("Contacts") or []
-    sqft = detail.get("SquareFeet") or cf.get("total building area") or None
+    # "Total Building Area" is the whole building; the work area is what the job covers.
+    sqft = detail.get("SquareFeet") or cf.get("project work area") or cf.get("total building area") or None
     value = detail.get("ValuationValue") or None
     occ = " / ".join(str(cf[k]) for k in ("OccupancyClassificationPrimary", "OccupancyClassificationSecondary")
                      if cf.get(k))

@@ -118,7 +118,10 @@ def parse_rows(page, base):
 
 def _text(page):
     t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", page, flags=re.S)
-    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", t))).strip()
+    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    t = re.sub(r"<[^>]+>", " ", t)   # some fields hold escaped markup (phone/fax wrappers)
+    t = re.sub(r"\b(?:Fax|Home Phone|Work Phone|Mobile Phone):\s*000-000-0000\b", " ", t)
+    return re.sub(r"\s+", " ", t).strip()
 
 
 def _after(text, label, stops):

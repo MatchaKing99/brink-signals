@@ -17,7 +17,7 @@ import urllib.parse
 from pathlib import Path
 
 import run_weekly
-from signals import accela, config, energov, evolve, jobs, permits
+from signals import accela, agendas, config, energov, evolve, jobs, permits
 
 NOW = int(dt.datetime.now().timestamp() * 1000)
 DAY = 86_400_000
@@ -179,6 +179,17 @@ LINCOLN_PENDING = (FIX / "lincoln_pending.html").read_text().replace(
     "2026-Closed-Applications", f"{dt.date.today().year}-Closed-Applications")
 LINCOLN_CLOSED = (FIX / "lincoln_closed.html").read_text()
 
+# Fort Mill AgendaCenter listing and the Oct 20, 2026 Planning Commission agenda text (real).
+FORTMILL_CENTER = (FIX / "fortmill_agendacenter.html").read_text().replace(
+    "_10202026-617", f"_{dt.date.today():%m%d%Y}-617")
+FORTMILL_AGENDA = (FIX / "fortmill_pc_agenda.txt").read_text()
+# An industrial item in the same layout, to exercise the positive path.
+FORTMILL_AGENDA_IND = FORTMILL_AGENDA.replace("ADJOURN", """2. Annexation/Zoning Map Amendment Request: 1200 Logistics Way
+     An ordinance annexing a parcel containing approximately 42.5 acres +/- with a proposed
+     zoning designation of Light Industrial (LI) for a 300,000 square foot distribution warehouse.
+
+ADJOURN""", 1)
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -253,6 +264,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         if u.path.startswith("/evolve/"):
             return evolve_route(self, u.path.split("/")[2], None)
+        if u.path == "/fortmill/AgendaCenter":
+            self.send_response(200)
+            self.end_headers()
+            return self.wfile.write(FORTMILL_CENTER.encode())
+        if u.path.startswith("/fortmill/AgendaCenter/ViewFile/"):
+            self.send_response(200)
+            self.end_headers()
+            return self.wfile.write(b"%PDF-1.7 fixture")
         if u.path.endswith("Pending-Applications") or u.path.endswith("-Closed-Applications"):
             self.send_response(200)
             self.end_headers()
@@ -343,6 +362,10 @@ class EndToEnd(unittest.TestCase):
                                    "api": base + "/energov/api",
                                    "parcels": {"url": base + "/energov/parcels/11", "fields": "gaston"}}]
         energov.PAUSE = accela.PAUSE = evolve.PAUSE = 0
+        config.AGENDA_SOURCES = [{"county": "York", "town": "Fort Mill", "base": base + "/fortmill", "days": 30,
+                                  "boards": ["Planning Commission"]}]
+        agendas.PAUSE = 0
+        agendas.pdf_text = lambda data, pages=3: FORTMILL_AGENDA_IND   # no pdftotext needed in tests
         config.CIVIC_TABLE_SOURCES = [{"county": "Lincoln", "url": base + "/371/Pending-Applications"}]
         config.EVOLVE_SOURCES = [
             {"county": "Union", "days": 21, "url": base + "/evolve/union/", "search_menu": ["BL_Menu1", "1"],
@@ -454,6 +477,11 @@ class EndToEnd(unittest.TestCase):
         for junk in ("ZMA #795", "ZMA #784", "ZMA #776", "SUP #533", "ZMA #790"):
             self.assertNotIn(junk, d)
         self.assertIn("| Lincoln planning (rezoning cases) | 🟢", d)
+        # Fort Mill agendas: industrial annexation in (with the requested LI zoning);
+        # the residential R-25 annexation on the same agenda out.
+        self.assertIn("1200 Logistics Way · → LI", d)
+        self.assertNotIn("Fairway Drive and Banks Road", d)
+        self.assertIn("| York planning (Fort Mill agendas) | 🟢 3 agenda items, 1 industrial, 1 new |", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

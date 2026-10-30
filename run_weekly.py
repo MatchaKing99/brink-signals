@@ -23,7 +23,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from signals import accela, civic_tables, config, energov, evolve, jobs, permits
+from signals import accela, agendas, civic_tables, config, energov, evolve, jobs, permits
 
 ROOT = Path(__file__).parent
 STATE = ROOT / "data" / "seen.json"
@@ -143,6 +143,28 @@ def run_tables(state, show_all, status):
                     out.append(r)
                     new += 1
             status.append((label, f"🟢 {listed} cases, {len(ind)} industrial, {new} new"))
+        except Exception as e:
+            traceback.print_exc()
+            status.append((label, f"🔴 failed: {str(e)[:120]}"))
+    return out
+
+
+def run_agendas(state, show_all, status):
+    """Industrial zoning items from town agendas; industrial ones only."""
+    out = []
+    for src in config.AGENDA_SOURCES:
+        label = f"{src['county']} planning ({src['town']} agendas)"
+        try:
+            read, items = agendas.pull(src)
+            ind = [r for r in items if r["industrial"]]
+            new = 0
+            for r in ind:
+                k = permit_key(src["county"], r)
+                if show_all or k not in state["planning"]:
+                    state["planning"].setdefault(k, TODAY)
+                    out.append(r)
+                    new += 1
+            status.append((label, f"🟢 {read} agenda items, {len(ind)} industrial, {new} new"))
         except Exception as e:
             traceback.print_exc()
             status.append((label, f"🔴 failed: {str(e)[:120]}"))
@@ -371,7 +393,8 @@ def main():
     portal_permits, portal_planning = run_portals(state, args.all, status).values()
     permit_rows = found["permits"] + portal_permits + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
-    planning_rows = found["planning"] + portal_planning + run_tables(state, args.all, status)
+    planning_rows = (found["planning"] + portal_planning + run_tables(state, args.all, status)
+                     + run_agendas(state, args.all, status))
     if args.no_jobs or not jobs.provider():
         status.append(("Job postings (all 7 counties)", "⚪ skipped — add the SERPAPI_API_KEY secret (free)"))
         job_rows = []

@@ -114,6 +114,14 @@ CIVIC_TABLE_SOURCES = [
     {"county": "Lincoln", "url": "https://www.lincolncountync.gov/371/Pending-Applications"},
 ]
 
+# Town agendas published through CivicPlus AgendaCenter: industrial zoning,
+# annexation, site-plan and conditional-use items from each board's agendas
+# over the last `days` (the agenda PDF's first pages; needs pdftotext).
+AGENDA_SOURCES = [
+    {"county": "York", "town": "Fort Mill", "base": "https://www.fortmillsc.gov", "days": 30,
+     "boards": ["Planning Commission", "Town Council"]},
+]
+
 # Live permits from Tyler EnerGov Citizen Self Service portals (public search,
 # no login). Only commercial/industrial permit types are fetched in detail;
 # owners come from the parcel layer since portal contacts are private. 21 days

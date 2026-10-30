@@ -1,0 +1,25 @@
+name: Probe county GIS
+
+on:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: "Space-separated ArcGIS REST roots or service URLs"
+        required: true
+        default: >-
+          https://maps.iredellcountync.gov/server/rest/services/Planning/Development_Activity_Countywide/MapServer
+          https://maps.iredellcountync.gov/server/rest/services
+          https://gis.rowancountync.gov/arcgis/rest/services
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/probe.py ${{ inputs.targets }}

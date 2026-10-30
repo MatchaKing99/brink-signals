@@ -71,7 +71,8 @@ def adzuna_results(where, what):
     if where.startswith("Charlotte"):
         return ([base(i, "Staffmark", "Charlotte", "Mecklenburg", "Forklift Operator") for i in range(4)] +
                 [base(i, "Walmart", "Charlotte", "Mecklenburg", "Forklift Associate") for i in range(3)] +
-                [base(9, "Solo Co", "Charlotte", "Mecklenburg", "Forklift Operator")])
+                [base(9, "Solo Co", "Charlotte", "Mecklenburg", "Forklift Operator")] +
+                [base(i, "Bank Co", "Charlotte", "Mecklenburg", "Distribution Analyst") for i in range(5)])
     return []
 
 
@@ -95,7 +96,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def route(self, path, q):
         if path.startswith("/adzuna/"):
-            return self._send({"results": adzuna_results(q["where"], q["what"])})
+            assert "what" not in q, "one combined what_or search per county"
+            return self._send({"results": adzuna_results(q["where"], q["what_or"])})
         if path == "/cab/MapServer":
             return self._send({"layers": [{"id": 33, "name": "Permits 2015"},
                                           {"id": 41, "name": "Permits 2026"},
@@ -169,6 +171,7 @@ class EndToEnd(unittest.TestCase):
         self.assertIn("new facility", d)
         self.assertIn("staffing — find the employer", d)
         self.assertNotIn("Solo Co", d)
+        self.assertNotIn("Bank Co", d)  # office roles dropped by the title filter
         self.assertLess(d.index("Acme Packaging"), d.index("Staffmark"))
 
     def test_second_run_reports_nothing_new(self):

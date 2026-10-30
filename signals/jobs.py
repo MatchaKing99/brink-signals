@@ -50,29 +50,33 @@ def _get(params, page, tries=3):
             time.sleep(5 * (i + 1))
 
 
-def fetch_postings(counties, terms, days=7, pages=3, app_id=None, app_key=None):
-    """Postings from the last `days` for every term in every county, keyed by
-    Adzuna job id so the same posting found by two terms counts once."""
+def fetch_postings(counties, words, title_rx, days=7, pages=4, app_id=None, app_key=None):
+    """Postings from the last `days` matching any of `words`, one combined
+    search per county (Adzuna bills per call, so ~7-28 calls a run). Titles
+    are then filtered to operator-type roles with `title_rx`."""
     app_id = app_id or os.environ.get("ADZUNA_APP_ID")
     app_key = app_key or os.environ.get("ADZUNA_APP_KEY")
     if not (app_id and app_key):
         raise RuntimeError("ADZUNA_APP_ID / ADZUNA_APP_KEY not set")
-    seen = {}
+    keep = re.compile(title_rx, re.I)
+    seen, calls = {}, 0
     for county, cfg in counties.items():
-        for term in terms:
-            for page in range(1, pages + 1):
-                data = _get({"app_id": app_id, "app_key": app_key, "what": term,
-                             "where": cfg["jobs_where"], "distance": 25, "max_days_old": days,
-                             "results_per_page": 50, "sort_by": "date",
-                             "content-type": "application/json"}, page)
-                results = data.get("results", [])
-                for j in results:
-                    j["_county"] = in_market(j, counties) or county
-                    j["_term"] = term
-                    seen.setdefault(str(j.get("id")), j)
-                if len(results) < 50:
-                    break
-                time.sleep(0.5)
+        for page in range(1, pages + 1):
+            data = _get({"app_id": app_id, "app_key": app_key, "what_or": " ".join(words),
+                         "where": cfg["jobs_where"], "distance": 25, "max_days_old": days,
+                         "results_per_page": 50, "sort_by": "date",
+                         "content-type": "application/json"}, page)
+            calls += 1
+            results = data.get("results", [])
+            for j in results:
+                if not keep.search(j.get("title", "")):
+                    continue
+                j["_county"] = in_market(j, counties) or county
+                seen.setdefault(str(j.get("id")), j)
+            if len(results) < 50:
+                break
+            time.sleep(0.5)
+    print(f"  adzuna: {calls} calls", file=sys.stderr)
     return list(seen.values())
 
 

@@ -106,7 +106,7 @@ def run_inbox(state, show_all, status):
 
 def run_jobs(state, show_all, status):
     try:
-        postings = jobs.fetch_postings(config.COUNTIES, config.JOB_TERMS)
+        postings = jobs.fetch_postings(config.COUNTIES, config.JOB_WORDS, config.JOB_TITLE_RX)
     except Exception as e:
         traceback.print_exc()
         status.append(("Job postings (all 7 counties)", f"🔴 {str(e)[:120]}"))

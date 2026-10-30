@@ -34,7 +34,7 @@ Tune any of this in `signals/permits.py`. Thresholds live in `signals/config.py`
 
 ## Hiring clusters
 
-- **Searches:** forklift operator, material handler, warehouse associate, order picker, reach truck, shipping/receiving, production associate, machine operator, distribution center and warehouse supervisor, within 25 km of each county seat, posted in the last 7 days.
+- **Searches:** one search per county (Adzuna bills per call) for postings in the last 7 days within 25 km of the county seat mentioning forklift, warehouse, picker, packer, loader, handler, shipping, receiving, distribution, production or assembler. Only operations-type titles are kept (forklift, order picker, material handler, warehouse associate, machine operator, shipping/receiving …), so "Distribution Analyst" and similar office roles drop out. About 7–28 calls a week.
 - **Grouping:** postings are grouped by employer and city.
 - **Ranking:** clusters rank higher for size and for expansion language ("new facility", "launch team", "2nd/3rd shift", "grand opening").
 - **Labels:** staffing agencies are marked *find the employer*, and retailers are marked *likely store roles*.
@@ -42,7 +42,7 @@ Tune any of this in `signals/permits.py`. Thresholds live in `signals/config.py`
 
 ## Setup (one time)
 
-1. **Adzuna key:** sign up free at <https://developer.adzuna.com>. In this repo, go to **Settings → Secrets and variables → Actions → New repository secret** and add `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
+1. **Adzuna key:** sign up at <https://developer.adzuna.com>. The free tier is only 25 test calls (one or two runs); weekly use needs the "API Access" plan, £8/month (~$10). Everything except the hiring signal runs without a key. In this repo, go to **Settings → Secrets and variables → Actions → New repository secret** and add `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
 2. **Email:** make sure GitHub emails you for issues. Settings → Notifications → "Participating, @mentions and custom" → Email. The digest issue is assigned to you, so it lands in your inbox.
 3. **First run:** **Actions → Weekly signals → Run workflow** to run it now instead of waiting for Monday.
 

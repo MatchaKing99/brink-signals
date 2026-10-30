@@ -48,13 +48,15 @@ PORTAL_ONLY = {
     "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",
 }
 
-# Job-board search terms: the hourly roles that ramp up when an operator adds
-# capacity. One Adzuna query per term per county.
-JOB_TERMS = [
-    "forklift operator", "material handler", "warehouse associate", "order picker",
-    "reach truck", "shipping receiving", "production associate", "machine operator",
-    "distribution center", "warehouse supervisor",
-]
+# Job-board search. Adzuna bills per call, so each county gets ONE search for
+# any of these words (`what_or`), then titles are kept only if they look like
+# hourly operations roles.
+JOB_WORDS = ["forklift", "warehouse", "picker", "packer", "loader", "handler",
+             "shipping", "receiving", "distribution", "production", "assembler"]
+JOB_TITLE_RX = (r"forklift|reach truck|order (picker|selector)|picker|packer|loader|"
+                r"material handler|warehouse (associate|worker|operator|lead|supervisor)|"
+                r"shipping|receiving|distribution center|production (associate|worker|operator)|"
+                r"machine operator|assembler|dock")
 
 # Thresholds for the weekly digest.
 PERMIT_MIN_SCORE = 5

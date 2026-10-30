@@ -13,7 +13,9 @@ import sys
 import urllib.parse
 import urllib.request
 
-INTEREST = re.compile(r"permit|plan|develop|energov|zon|site|subdiv|case|project|build|inspect", re.I)
+INTEREST = re.compile(r"permit|plan|develop|energov|zon|site|subdiv|case|project|build|inspect|parcel|tax|land", re.I)
+# Code-like fields worth listing every distinct value of (zoning, land use).
+CODES = re.compile(r"^(zone|zoning|zonecode|zone_class|landuse|land_use|luc|use_?code|usecode|class|admin)$", re.I)
 DATE_HINT = re.compile(r"date|issued|created|applied|submitted|approved", re.I)
 
 
@@ -49,6 +51,15 @@ def show_layer(url):
     except Exception as e:
         n = f"count failed: {e}"
     print(f"    records: {n}")
+    for f in fields:
+        if CODES.match(f["name"]) and f.get("type") == "esriFieldTypeString":
+            try:
+                rows = get(url + "/query", where="1=1", outFields=f["name"], returnDistinctValues="true",
+                           returnGeometry="false").get("features", [])
+                vals = sorted({str(r["attributes"].get(f["name"])) for r in rows})
+                print(f"    distinct {f['name']} ({len(vals)}): {', '.join(vals[:120])}")
+            except Exception as e:
+                print(f"    distinct {f['name']} failed: {e}")
     dates = [f["name"] for f in fields if f.get("type") == "esriFieldTypeDate"] or \
             [f["name"] for f in fields if DATE_HINT.search(f["name"])]
     params = {"where": "1=1", "outFields": "*", "returnGeometry": "false", "resultRecordCount": 3}

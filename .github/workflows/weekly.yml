@@ -1,0 +1,49 @@
+name: Weekly signals
+
+on:
+  schedule:
+    - cron: "37 10 * * 1"   # Mondays ~6:37am Eastern
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+  push:
+    paths: ["inbox/**"]     # dropping a permit export in inbox/ runs it right away
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: weekly-signals
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pull signals
+        env:
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+        run: python run_weekly.py
+
+      - name: Save results
+        run: |
+          git config user.name "brink-signals bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A output data inbox
+          git diff --cached --quiet || git commit -m "Signals $(date +%F)"
+          git push
+
+      - name: Post digest as an issue (emails you)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Signals — week of $(date +%F)" \
+            --body-file output/latest-digest.md \
+            --assignee "${{ github.repository_owner }}"

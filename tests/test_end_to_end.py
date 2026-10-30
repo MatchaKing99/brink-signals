@@ -79,6 +79,10 @@ ROWAN_ZONING = [{"OBJECTID": 1, "CASE_": "Z 07-26", "ZONING": "IND", "COMMENTS":
                  "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
                 {"OBJECTID": 4, "CASE_": "Z 05-26", "ZONING": "IND", "COMMENTS": "Kannapolis ETJ Relinquishment",
                  "APPROVAL": "September 21, 2026", "created_date": NOW - 10 * DAY}]
+GASTON_REZ = [{"OBJECTID": 1, "ZRNO": "REZ-26-01", "DATE": NOW - 30 * DAY, "LOCATION": "1 Logistics Pkwy",
+               "PROPSDZONE": "CD/I-2", "REZONEAC": 40.0},
+              {"OBJECTID": 2, "ZRNO": "REZ-26-02", "DATE": NOW - 30 * DAY, "LOCATION": "315 W Chestnut St",
+               "PROPSDZONE": "R-8", "REZONEAC": 1.6}]
 _meet = (dt.date.today() - dt.timedelta(days=20)).strftime("%B %d, %Y") + " at 6:00"
 IREDELL_HEARINGS = [{"OBJECTID": 1, "Case_": "Case: 2610-1", "Meeting_Time": _meet,
                      "Location_Site": "195 Ostwalt Amity", "Applicant": "Encased Power, LLC",
@@ -100,6 +104,7 @@ LAYERS = {
     "/cab/MapServer/41": (CABARRUS_2026, "issuedate"),
     "/union/ok/0": (UNION_OK, "inspection_date"),
     "/rowan/6": (ROWAN, "dIssued"),
+    "/gaston/rez/0": (GASTON_REZ, "DATE"),
     "/rowan/zoning/18": (ROWAN_ZONING, "created_date"),
     "/iredell/hearings/0": (IREDELL_HEARINGS, "no-date-field"),
     "/union/not/6": (UNION_NOT, "inspection_date"),
@@ -221,6 +226,7 @@ class EndToEnd(unittest.TestCase):
             {"county": "Rowan", "kind": "permits", "days": 45, "url": base + "/rowan/6",
              "type_rx": r"commercial|\bCOM-", "min_score": 2},
             {"county": "Rowan", "kind": "planning", "days": 120, "url": base + "/rowan/zoning/18"},
+            {"county": "Gaston", "kind": "planning", "days": 3650, "url": base + "/gaston/rez/0"},
             {"county": "Iredell", "kind": "planning", "days": 365, "url": base + "/iredell/hearings/0"},
             {"county": "Stale", "kind": "permits", "days": 30,
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
@@ -271,6 +277,9 @@ class EndToEnd(unittest.TestCase):
         self.assertEqual(d.count("Z 07-26"), 1)
         self.assertNotIn("Z 08-26", d)
         self.assertNotIn("Z 05-26", d)   # administrative boundary change
+        # Gaston rezonings: conditional industrial zoning recognized, residential dropped.
+        self.assertIn("REZ-26-01", d)
+        self.assertNotIn("REZ-26-02", d)
         # Iredell hearings: recent industrial rezoning in, 2021 hearing out (text dates parsed).
         self.assertIn("Case: 2610-1", d)
         self.assertIn("Encased Power", d)

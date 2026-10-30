@@ -16,13 +16,13 @@ import urllib.request
 # spaces and punctuation, so "Issued Date", "ISSUED_DATE" and "issueddate" all
 # match "issueddate". Set an exact name here if the guess is wrong.
 FIELD_MAP = {
-    "permit_no":  ["permitnum", "spermitnum", "permitnumber", "permitno", "permit", "casenumber",
+    "permit_no":  ["permitnum", "spermitnum", "b1altid", "zrno", "permitnumber", "permitno", "permit", "casenumber",
                    "caseno", "case", "projectnumber", "projectid", "devnumber"],
     "issue_date": ["issuedate", "dateissued", "issueddate", "issued", "approvaldate", "approveddate",
                    "dateapproved", "applieddate", "applicationdate", "submitteddate", "datesubmitted",
-                   "dissued", "meetingtime",
+                   "dissued", "b1filedd", "meetingtime",
                    "date", "createddate"],
-    "type":       ["permittype", "worktype", "type", "casetype", "devtype", "developmenttype",
+    "type":       ["permittype", "reviewtype", "worktype", "type", "casetype", "devtype", "developmenttype",
                    "projecttype"],
     "occupancy":  ["occupancy", "usegroup", "occupancytype", "proposeduse", "usage", "landuse", "use"],
     "desc":       ["projectname", "projname", "description", "workdesc", "workdescription", "projdesc",
@@ -33,12 +33,13 @@ FIELD_MAP = {
                    "location", "streetaddress", "locationsite"],
     "value":      ["buildingcost", "bldgcost", "constcost", "valuation", "jobvalue", "projectvalue", "cost", "value"],
     "sqft":       ["squarefeet", "sqft", "ssqfeet", "totalsqft", "buildingsqft", "comsqft", "grossarea", "area"],
-    "zoning":     ["zoningcode", "zonecode", "zoning", "zone", "zoningdistrict"],
+    "zoning":     ["zoningcode", "zonecode", "zoning", "zone", "zoningdistrict", "propsdzone",
+                   "proposedzoning"],
     "contractor": ["contractor", "contractorname", "scompanynameparc", "gc", "applicant",
                    "applicantname", "developer",
                    "engineer"],
     "owner":      ["owner", "ownername", "ownname", "propertyowner"],
-    "status":     ["permitstatus", "permitstat", "status", "casestatus", "devstatus", "approvalstatus"],
+    "status":     ["permitstatus", "permitstat", "b1applstatus", "status", "casestatus", "devstatus", "approvalstatus"],
 }
 
 # Signal keywords. Score = sum of matched tier weights + value/zoning bonuses.
@@ -155,7 +156,8 @@ def score(rec):
     for w in MEDIUM:
         if has(w, text):
             hits.append(w); s += 1
-    if rec.get("zoning") and INDUSTRIAL_ZONING.match(str(rec["zoning"]).strip()):
+    zones = re.split(r"[/,;\s]+", str(rec.get("zoning") or ""))
+    if any(INDUSTRIAL_ZONING.match(z) for z in zones if z):
         hits.append("industrial zoning"); s += 2
     if rec.get("occupancy") and INDUSTRIAL_OCCUPANCY.match(str(rec["occupancy"])):
         hits.append("industrial occupancy"); s += 3

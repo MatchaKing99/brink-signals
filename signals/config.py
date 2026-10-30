@@ -61,10 +61,30 @@ ARCGIS_SOURCES = [
         "url": "https://maps.iredellcountync.gov/server/rest/services/Planning/Development_Activity_Countywide/MapServer/5",
     },
     {
-        "county": "Cabarrus", "kind": "permits", "days": 30,
+        # Accela plan reviews (permit applications). Newest filing seen Oct 2026
+        # was April 2025, so this may stay quiet until the county refreshes it.
+        "county": "Cabarrus", "kind": "permits", "days": 60, "name": "Accela plan reviews",
+        "url": "https://location.cabarruscounty.us/arcgisservices/rest/services/Current_Accela_Permits/Plan_Reviews/MapServer/0",
+        # Only review types are published (no description), so require an
+        # industrial word in the type itself.
+        "type_rx": r"commercial|industrial|shell|warehouse|upfit", "min_score": 1,
+        "require_industrial": True,
+    },
+    {
+        "county": "Gaston", "kind": "planning", "days": 3650, "name": "county rezonings",
+        "url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/CountyZoningReviewCases/FeatureServer/0",
+    },
+    {
+        "county": "Gaston", "kind": "planning", "days": 3650, "name": "municipal rezonings",
+        "url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/MunicipalZoningReviewCases/FeatureServer/1",
+    },
+    {
+        # Rock Hill publishes one commercial-permit layer per year; newest seen
+        # was 2023. Reported as "nothing current" until a newer year appears.
+        "county": "York", "kind": "permits", "days": 60, "name": "Rock Hill commercial",
         "discover": {
-            "service": "https://location.cabarruscounty.us/arcgisservices/rest/services/opendata/MapServer",
-            "name": r"^permits\b",
+            "service": "https://crh-vmw-gisvdr1.cityofrockhillsc.gov/arcgis/rest/services/permitting_data/permitting/MapServer",
+            "name": r"^commercial - \d{4}$",
         },
     },
 ]

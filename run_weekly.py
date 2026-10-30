@@ -23,7 +23,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from signals import accela, config, energov, evolve, jobs, permits
+from signals import accela, civic_tables, config, energov, evolve, jobs, permits
 
 ROOT = Path(__file__).parent
 STATE = ROOT / "data" / "seen.json"
@@ -121,6 +121,28 @@ def run_portals(state, show_all, status):
             except Exception as e:
                 traceback.print_exc()
                 status.append((label, f"🔴 failed: {str(e)[:120]}"))
+    return out
+
+
+def run_tables(state, show_all, status):
+    """Rezoning cases listed in HTML tables on county pages; industrial ones only."""
+    out = []
+    for src in config.CIVIC_TABLE_SOURCES:
+        label = f"{src['county']} planning (rezoning cases)"
+        try:
+            listed, items = civic_tables.pull(src)
+            ind = [r for r in items if r["industrial"]]
+            new = 0
+            for r in ind:
+                k = permit_key(src["county"], r)
+                if show_all or k not in state["planning"]:
+                    state["planning"].setdefault(k, TODAY)
+                    out.append(r)
+                    new += 1
+            status.append((label, f"🟢 {listed} cases, {len(ind)} industrial, {new} new"))
+        except Exception as e:
+            traceback.print_exc()
+            status.append((label, f"🔴 failed: {str(e)[:120]}"))
     return out
 
 
@@ -345,7 +367,7 @@ def main():
     found = run_arcgis(state, args.all, status)
     permit_rows = found["permits"] + run_portals(state, args.all, status) + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
-    planning_rows = found["planning"]
+    planning_rows = found["planning"] + run_tables(state, args.all, status)
     if args.no_jobs or not jobs.provider():
         status.append(("Job postings (all 7 counties)", "⚪ skipped — add the SERPAPI_API_KEY secret (free)"))
         job_rows = []

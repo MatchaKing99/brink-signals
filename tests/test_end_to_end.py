@@ -174,6 +174,11 @@ def evolve_route(handler, county, form):
         page = pages["detail_industrial" if target in EVOLVE_INDUSTRIAL else "detail_other"]
     handler.wfile.write(page.encode())
 
+# Lincoln County's Pending Applications and 2026 Closed Applications pages (Oct 2026).
+LINCOLN_PENDING = (FIX / "lincoln_pending.html").read_text().replace(
+    "2026-Closed-Applications", f"{dt.date.today().year}-Closed-Applications")
+LINCOLN_CLOSED = (FIX / "lincoln_closed.html").read_text()
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -248,6 +253,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         if u.path.startswith("/evolve/"):
             return evolve_route(self, u.path.split("/")[2], None)
+        if u.path.endswith("Pending-Applications") or u.path.endswith("-Closed-Applications"):
+            self.send_response(200)
+            self.end_headers()
+            return self.wfile.write((LINCOLN_PENDING if "Pending" in u.path else LINCOLN_CLOSED).encode())
         if u.path.startswith("/aca/") or "CapDetail" in u.path:
             return accela_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         self.route(u.path, dict(urllib.parse.parse_qsl(u.query)))
@@ -334,6 +343,7 @@ class EndToEnd(unittest.TestCase):
                                    "api": base + "/energov/api",
                                    "parcels": {"url": base + "/energov/parcels/11", "fields": "gaston"}}]
         energov.PAUSE = accela.PAUSE = evolve.PAUSE = 0
+        config.CIVIC_TABLE_SOURCES = [{"county": "Lincoln", "url": base + "/371/Pending-Applications"}]
         config.EVOLVE_SOURCES = [
             {"county": "Union", "days": 21, "url": base + "/evolve/union/", "search_menu": ["BL_Menu1", "1"],
              "types_rx": r"^6\d\d - (?!.*(trailer|alcoholic|pv\b))"},
@@ -428,6 +438,15 @@ class EndToEnd(unittest.TestCase):
         self.assertNotIn("1860 HIGHWAY 160", d)
         self.assertNotIn("Union permits (portal)", d)
         self.assertIn("| Lincoln permits (portal) |", d)
+        # Lincoln rezonings: pending industrial case and this year's approvals in (address
+        # kept whole through "N.C."); rezonings away from industrial and dog kennels out.
+        self.assertIn("**ZMA #798: A request to rezone a 16.29-acre parcel from B-G", d)
+        self.assertIn("2585 N. N.C. 16 Business Highway · → I-G", d)
+        self.assertIn("CZ #2026-4 (approved)", d)
+        self.assertIn("Blum, Inc.", d)
+        for junk in ("ZMA #795", "ZMA #784", "ZMA #776", "SUP #533", "ZMA #790"):
+            self.assertNotIn(junk, d)
+        self.assertIn("| Lincoln planning (rezoning cases) | 🟢", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

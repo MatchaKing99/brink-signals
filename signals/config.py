@@ -107,6 +107,13 @@ INSPECTION_SOURCES = [
      ]},
 ]
 
+# Rezoning cases from county pages that list them in an HTML table (pending
+# plus this year's closed cases, found in the page's navigation). A case is
+# reported when filed and again when decided.
+CIVIC_TABLE_SOURCES = [
+    {"county": "Lincoln", "url": "https://www.lincolncountync.gov/371/Pending-Applications"},
+]
+
 # Live permits from Tyler EnerGov Citizen Self Service portals (public search,
 # no login). Only commercial/industrial permit types are fetched in detail;
 # owners come from the parcel layer since portal contacts are private. 21 days

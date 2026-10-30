@@ -43,8 +43,23 @@
   "Union|98943|under construction": "2026-10-30"
  },
  "jobs": {},
- "permits": {},
+ "permits": {
+  "Rowan|COMM-04-26-135364|371 PIT RD|Building Shell": "2026-10-30",
+  "Rowan|COMM-09-26-141732|1200 RUSHER FARMS DR|Remodel": "2026-10-30",
+  "Rowan|COMM-09-26-141899|1000 N LONG ST|Re Roof": "2026-10-30",
+  "Rowan|COMM-09-26-141915|1935 W JAKE ALEXANDER BLVD|Remodel": "2026-10-30",
+  "Rowan|COMM-09-26-142261|122 S MAIN St|Upfit": "2026-10-30",
+  "Rowan|COMM-09-26-142537|1075 DAYTONA Way|.New": "2026-10-30",
+  "Rowan|COMM-10-26-143507|1045 INTEGRITY Dr|.New": "2026-10-30"
+ },
  "planning": {
-  "Gaston|||FAIRVIEW INDUSTRIAL": "2026-10-30"
+  "Gaston|||FAIRVIEW INDUSTRIAL": "2026-10-30",
+  "Iredell|1066568.0||Davis | Mixed use development with retai": "2026-10-30",
+  "Iredell|1192176.0||Corvid Expansion | Industrial developmen": "2026-10-30",
+  "Iredell|632679.0||Spectrum Lake Norman | Mixed use develop": "2026-10-30",
+  "Iredell|866675.0||Talbert/150 | Mixed use development with": "2026-10-30",
+  "Iredell|918633.0||Cadia Mooresville": "2026-10-30",
+  "Iredell|Case: 2602-1|Taylorsville Hwy, PIN: 4715093707|This is a request to rezone a parcel of ": "2026-10-30",
+  "Rowan|Z 05-26||Kannapolis ETJ Relinquishment": "2026-10-30"
  }
 }

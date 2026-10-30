@@ -64,7 +64,7 @@ def run_arcgis(state, show_all, status):
                     status.append((label, f"⚪ newest published layer is \"{layer_name}\" — nothing current"))
                     continue
                 note = f" (layer: {layer_name})"
-            records, _ = permits.pull_arcgis(url, src["days"])
+            records, _ = permits.pull_arcgis(url, src["days"], src.get("fields"))
             # Some layers mix every trade (electrical, signs, homes); keep the
             # types this source cares about. Future-dated rows are data-entry typos.
             horizon = (dt.date.today() + dt.timedelta(days=30)).isoformat()
@@ -261,7 +261,8 @@ def digest(permit_rows, planning_rows, job_rows, status, inspection_rows=()):
         for r in planning_rows[:20]:
             desc = re.sub(r"\s+", " ", r["desc"] or "Unnamed")
             desc = desc if len(desc) <= 160 else desc[:157] + "…"
-            where = " · ".join(str(x).strip() for x in (r["county"], r["address"], r["type"], r["status"],
+            zone = f"→ {r['zoning']}" if r.get("zoning") else ""
+            where = " · ".join(str(x).strip() for x in (r["county"], r["address"], zone, r["type"], r["status"],
                                                           r["contractor"], r["issue_date"]) if x and str(x).strip())
             case = f"{r['permit_no']}: " if r.get("permit_no") else ""
             L.append(f"- **{case}{desc}** — {where} · _{r['signals']}_")

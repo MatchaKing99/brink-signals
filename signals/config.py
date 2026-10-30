@@ -77,6 +77,16 @@ ARCGIS_SOURCES = [
         "require_industrial": True,
     },
     {
+        # Charlotte rezoning petitions still in process (~80 at a time). Only
+        # requests INTO industrial zoning (ML-1/ML-2, old I-1/I-2) or with an
+        # industrial proposed use make the digest; rezonings away from
+        # industrial don't.
+        "county": "Mecklenburg", "kind": "planning", "days": 365, "name": "Charlotte rezonings",
+        "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Rezonings/MapServer/0",
+        "fields": {"permit_no": "Petition", "issue_date": "Received", "zoning": "ReqZone",
+                   "desc": ["Petitioner", "Propluse"], "type": None, "contractor": None},
+    },
+    {
         "county": "Gaston", "kind": "planning", "days": 3650, "name": "county rezonings",
         "url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/CountyZoningReviewCases/FeatureServer/0",
     },

@@ -65,7 +65,7 @@ EXCLUDE = ["self storage", "self-storage", "mini storage", "mini-storage", "gara
 NON_INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(R|U|A|E|I)-?\d?\s", re.I)
 RESIDENTIAL = ["single family", "single-family", "residential", "dwelling", "townhome",
                "townhouse", "duplex", "deck", "pool", "subdivision"]
-INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|LI|HI|ML|MH|IND|BP|CBI|OFC-IND|M-?\d)", re.I)
+INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|LI|HI|ML|MH|IND|BP|CBI|OFC-IND|M-?\d|I-?[GL]\b|PD-I\b)", re.I)
 # Some counties split the address across columns (Rowan: number / direction /
 # street / suffix).
 ADDRESS_PARTS = ["saddress1", "spredirection", "saddress2", "sstreett"]
@@ -299,12 +299,14 @@ def describe_service(layer_url):
     return "\n".join(lines) + "\nRe-run --inspect with the --url of the right layer."
 
 
-def pull_arcgis(url, days):
-    """Yield mapped records issued within `days` from an ArcGIS layer."""
+def pull_arcgis(url, days, fields=None):
+    """Yield mapped records issued within `days` from an ArcGIS layer.
+    `fields` overrides the guessed mapping, e.g. {"zoning": "ReqZone"}."""
     meta = fetch_json(url, {"f": "json"})
     if not meta.get("fields"):
         raise RuntimeError(f"{url} returned no fields; is it a layer URL?")
     fmap = resolve_fields([f["name"] for f in meta["fields"]])
+    fmap.update(fields or {})
     cutoff = dt.date.today() - dt.timedelta(days=days)
     return list(rows_from_arcgis(url, fmap, meta, cutoff)), fmap
 

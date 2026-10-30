@@ -91,6 +91,17 @@ IREDELL_HEARINGS = [{"OBJECTID": 1, "Case_": "Case: 2610-1", "Meeting_Time": _me
                      "Location_Site": "1 Old Rd", "Applicant": "Old Co",
                      "Request": "Rezone to Heavy Industrial for a warehouse."}]
 
+# Charlotte's PLN/Rezonings layer (field names as seen live Oct 2026).
+CLT_REZ = [{"OBJECTID": 1, "Petition": "2026-081", "Petitioner": "Crossroads Logistics LLC",
+            "ExistZone": "N1-A", "ReqZone": "ML-1(CD)", "Type": "CD", "PetAcres": 42.5,
+            "Propluse": "Warehouse distribution", "Status": "Pending", "Received": NOW - 20 * DAY},
+           {"OBJECTID": 2, "Petition": "2026-076", "Petitioner": "Greg Smith", "ExistZone": "ML-2",
+            "ReqZone": "N1-C", "Type": "CV", "PetAcres": 0.28, "Propluse": None, "Status": "Pending",
+            "Received": NOW - 20 * DAY},
+           {"OBJECTID": 3, "Petition": "2026-077", "Petitioner": "Keen Homecrafters LLC",
+            "ExistZone": "N1-A", "ReqZone": "N1-B(CD)", "Type": "CD", "PetAcres": 0.79, "Propluse": None,
+            "Status": "Pending", "Received": NOW - 20 * DAY}]
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -107,6 +118,7 @@ LAYERS = {
     "/gaston/rez/0": (GASTON_REZ, "DATE"),
     "/rowan/zoning/18": (ROWAN_ZONING, "created_date"),
     "/iredell/hearings/0": (IREDELL_HEARINGS, "no-date-field"),
+    "/clt/rez/0": (CLT_REZ, "Received"),
     "/union/not/6": (UNION_NOT, "inspection_date"),
     "/stale/MapServer/33": ([meck(98, 3000, "S1", "old", 1)], "issuedate"),
 }
@@ -228,6 +240,9 @@ class EndToEnd(unittest.TestCase):
             {"county": "Rowan", "kind": "planning", "days": 120, "url": base + "/rowan/zoning/18"},
             {"county": "Gaston", "kind": "planning", "days": 3650, "url": base + "/gaston/rez/0"},
             {"county": "Iredell", "kind": "planning", "days": 365, "url": base + "/iredell/hearings/0"},
+            {"county": "Mecklenburg", "kind": "planning", "days": 365, "url": base + "/clt/rez/0",
+             "fields": {"permit_no": "Petition", "issue_date": "Received", "zoning": "ReqZone",
+                        "desc": ["Petitioner", "Propluse"], "type": None, "contractor": None}},
             {"county": "Stale", "kind": "permits", "days": 30,
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
@@ -284,6 +299,12 @@ class EndToEnd(unittest.TestCase):
         self.assertIn("Case: 2610-1", d)
         self.assertIn("Encased Power", d)
         self.assertNotIn("Case: 2102-1", d)
+        # Charlotte rezonings: only requests into industrial zoning; away-from-industrial
+        # and residential petitions dropped. Requested zoning shown.
+        self.assertIn("2026-081: Crossroads Logistics LLC", d)
+        self.assertIn("→ ML-1(CD)", d)
+        self.assertNotIn("2026-076", d)
+        self.assertNotIn("2026-077", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

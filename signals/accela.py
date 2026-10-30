@@ -149,7 +149,9 @@ def parse_detail(page):
             "occupancy": _after(t, "Occupancy:", stops), "jurisdiction": _after(t, "Jurisdiction:", stops),
             "value": permits.to_num(cost.replace(",", "")) if cost else 0,
             "sqft": permits.to_num(sqft.replace(",", "")) if sqft else 0,
-            "parcel": (re.search(r"Parcel Number:\s*(\d+)", t) or [None, ""])[1]}
+            "parcel": (re.search(r"Parcel Number:\s*(\d+)", t) or [None, ""])[1],
+            "location": _after(t, "Work Location", ["*", "Record Details", "Permits Details", "Planning Details",
+                                                    "Applicant:", "Project Description:"])}
 
 
 def pull(src, days):
@@ -174,7 +176,7 @@ def pull(src, days):
         contact = ", ".join(x for x in (det.get("applicant"), det.get("applicant_email"),
                                         det.get("contractor_phone") and f"ph {det['contractor_phone']}") if x)
         rec = {"permit_no": r["permit_no"], "issue_date": d.isoformat() if d else "", "type": r["type"],
-               "desc": desc, "address": r["address"], "value": det.get("value") or 0, "sqft": det.get("sqft") or 0,
+               "desc": desc, "address": r["address"] or det.get("location") or "", "value": det.get("value") or 0, "sqft": det.get("sqft") or 0,
                "status": r["status"], "occupancy": det.get("occupancy") or None, "zoning": None,
                "contractor": _name(det.get("contractor")) or None, "owner": _name(det.get("owner")),
                "property": "; ".join(x for x in (det.get("occupancy"), det.get("jurisdiction"),

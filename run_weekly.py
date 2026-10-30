@@ -100,24 +100,27 @@ def run_arcgis(state, show_all, status):
 
 
 def run_portals(state, show_all, status):
-    """Live permits from county permit portals; industrial ones only."""
-    out = []
+    """Live permits (and planning cases) from county portals; industrial ones only.
+    Returns (permit rows, planning rows)."""
+    out = {"permits": [], "planning": []}
     for module, sources in ((energov, config.ENERGOV_SOURCES), (accela, config.ACCELA_SOURCES),
                             (evolve, config.EVOLVE_SOURCES)):
         for src in sources:
-            label = f"{src['county']} permits (live portal)"
+            kind = src.get("kind", "permits")
+            label = f"{src['county']} {kind} (live portal{', ' + src['name'] if src.get('name') else ''})"
             try:
                 pulled, items = module.pull(src, src["days"])
                 ind = [r for r in items if r["industrial"]]
                 new = 0
                 for r in ind:
                     k = permit_key(src["county"], r)
-                    if show_all or k not in state["permits"]:
-                        state["permits"].setdefault(k, TODAY)
+                    if show_all or k not in state[kind]:
+                        state[kind].setdefault(k, TODAY)
                         r["county"] = src["county"]
-                        out.append(r)
+                        out[kind].append(r)
                         new += 1
-                status.append((label, f"🟢 {pulled} permits, {len(items)} commercial, {len(ind)} industrial, {new} new"))
+                what = "permits" if kind == "permits" else "cases"
+                status.append((label, f"🟢 {pulled} {what}, {len(items)} commercial, {len(ind)} industrial, {new} new"))
             except Exception as e:
                 traceback.print_exc()
                 status.append((label, f"🔴 failed: {str(e)[:120]}"))
@@ -365,9 +368,10 @@ def main():
     state = load_state()
     status = []
     found = run_arcgis(state, args.all, status)
-    permit_rows = found["permits"] + run_portals(state, args.all, status) + run_inbox(state, args.all, status)
+    portal_permits, portal_planning = run_portals(state, args.all, status).values()
+    permit_rows = found["permits"] + portal_permits + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
-    planning_rows = found["planning"] + run_tables(state, args.all, status)
+    planning_rows = found["planning"] + portal_planning + run_tables(state, args.all, status)
     if args.no_jobs or not jobs.provider():
         status.append(("Job postings (all 7 counties)", "⚪ skipped — add the SERPAPI_API_KEY secret (free)"))
         job_rows = []

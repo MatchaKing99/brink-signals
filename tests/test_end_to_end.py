@@ -350,7 +350,10 @@ class EndToEnd(unittest.TestCase):
             {"county": "York", "days": 21, "url": base + "/evolve/york/", "search_menu": ["BL_Menu", "2"],
              "types_rx": r"^[CS]$", "skip_rx": r"- Sign\b"}]
         config.ACCELA_SOURCES = [{"county": "Cabarrus", "days": 21, "base": base + "/aca/CABARRUS",
-                                  "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Upfit"]}]
+                                  "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Upfit"]},
+                                 {"county": "Cabarrus", "kind": "planning", "name": "rezonings & site plans",
+                                  "days": 30, "base": base + "/aca/CABARRUS", "module": "Planning",
+                                  "types": ["Permits/Building/Commercial/New"]}]
         config.INSPECTION_SOURCES = [{"county": "Union", "days": 120,
                                       "urls": [base + "/union/ok/0", base + "/union/not/6"]}]
         jobs.API = base + "/adzuna/{page}"
@@ -427,6 +430,10 @@ class EndToEnd(unittest.TestCase):
         for junk in ("RICELAND", "GRACES RESERVE", "IRON HORSE", "SUDBURY"):
             self.assertNotIn(junk, d)
         self.assertIn("| Cabarrus permits (live portal) | 🟢 10 permits, 10 commercial, 2 industrial, 2 new |", d)
+        # Cabarrus planning module: same connector, results land in the planning section.
+        planning = d[d.index("## 📐"):d.index("## 🏗️")]
+        self.assertIn("SHALLOW BAY FLEX WAREHOUSE", planning)
+        self.assertIn("| Cabarrus planning (live portal, rezonings & site plans) | 🟢", d)
         # Union live permits: 39,120 SF flex shell in (owner, GC, zoning from the detail);
         # a dental office out.
         self.assertIn("| Union | 4121 Indian Trail Fairview Rd, Indian Trail | SF GROUP LLC |", d)

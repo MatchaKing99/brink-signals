@@ -141,6 +141,13 @@ ACCELA_SOURCES = [
                "Permits/Building/Commercial/Upfit", "Permits/Building/Commercial/Addition",
                "Permits/Building/Commercial/Footing Foundation", "Permits/Building/Commercial/Existing CO",
                "Permits/Kannapolis/Change in Use/NA", "Permits/Kannapolis/NonResidential Zoning Permit/NA"]},
+    # Planning module: rezonings (county, Kannapolis) and site-plan reviews (county,
+    # Concord, Harrisburg, Kannapolis), months ahead of building permits.
+    {"county": "Cabarrus", "kind": "planning", "name": "rezonings & site plans", "days": 30,
+     "base": "https://aca-prod.accela.com/CABARRUS", "module": "Planning",
+     "types": ["Planning/Rezoning/Conventional/NA", "Planning/Kannapolis/Zoning Map Amendment/NA",
+               "Planning/Kannapolis/Cond Zoning Map Amendment/NA", "Planning/Plan Review/Site/NA",
+               "Planning/Kannapolis/Plan Review/Minor Site", "Planning/Special Use Permit/NA/NA"]},
 ]
 
 # Live permits from Evolve Public portals (public date-range search, no login).

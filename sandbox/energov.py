@@ -198,7 +198,10 @@ def pull(client, days=60, today=None, max_details=500, log=print):
     commercial = [r for r in rows.values() if is_commercial(r)]
     commercial.sort(key=lambda r: (not is_primary(r), r.get("CaseNumber") or ""))
     details, problems = {}, []
-    for r in commercial[:max_details]:
+    log(f"  commercial: {len(commercial)}; fetching up to {max_details} detail records")
+    for i, r in enumerate(commercial[:max_details], 1):
+        if i % 25 == 0:
+            log(f"  details {i}/{min(len(commercial), max_details)}")
         try:
             details[r["CaseId"]] = client.permit(r["CaseId"])
         except RuntimeError as e:

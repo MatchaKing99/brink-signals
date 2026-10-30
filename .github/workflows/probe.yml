@@ -10,6 +10,10 @@ on:
           https://maps.iredellcountync.gov/server/rest/services/Planning/Development_Activity_Countywide/MapServer
           https://maps.iredellcountync.gov/server/rest/services
           https://gis.rowancountync.gov/arcgis/rest/services
+      search:
+        description: "Optional comma-separated words: list records containing them instead of surveying"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -24,4 +28,7 @@ jobs:
           python-version: "3.12"
       - env:
           TARGETS: ${{ inputs.targets }}
-        run: python tools/probe.py $TARGETS
+          SEARCH: ${{ inputs.search }}
+        run: |
+          if [ -n "$SEARCH" ]; then python tools/probe.py --search "$SEARCH" $TARGETS
+          else python tools/probe.py $TARGETS; fi

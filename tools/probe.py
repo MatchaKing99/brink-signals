@@ -6,6 +6,9 @@ counts and the newest few records. Run from GitHub Actions (Actions → Probe
 county GIS) since many county servers block other networks.
 
   python3 tools/probe.py <server-root-or-service-url> [...]
+  python3 tools/probe.py --search "AWNING,SKATE" <layer-or-service-url> [...]
+
+--search lists every record whose text fields contain any of the terms.
 """
 import json
 import re
@@ -72,7 +75,27 @@ def show_layer(url):
         print(f"    sample failed: {e}")
 
 
-def probe(target):
+def search_layer(url, terms):
+    try:
+        fields = [f["name"] for f in get(url).get("fields") or [] if f.get("type") == "esriFieldTypeString"]
+    except Exception as e:
+        print(f"    !! {e}")
+        return
+    if not fields:
+        return
+    where = " OR ".join(f"UPPER({f}) LIKE '%{t.upper()}%'" for f in fields for t in terms)
+    try:
+        feats = get(url + "/query", where=where, outFields="*", returnGeometry="false",
+                    resultRecordCount=50).get("features", [])
+    except Exception as e:
+        print(f"    search failed: {e}")
+        return
+    print(f"    matches: {len(feats)}")
+    for feat in feats:
+        print("    hit: " + json.dumps(feat.get("attributes"), default=str)[:900])
+
+
+def probe(target, terms=None):
     print(f"\n######## {target}")
     if re.search(r"/(MapServer|FeatureServer)(/\d+)?/?$", target):
         targets = [(target, None)]
@@ -82,7 +105,7 @@ def probe(target):
     for svc, _ in targets:
         if re.search(r"/\d+/?$", svc):
             print(f"\n== layer {svc}")
-            show_layer(svc)
+            search_layer(svc, terms) if terms else show_layer(svc)
             continue
         try:
             meta = get(svc)
@@ -93,12 +116,19 @@ def probe(target):
         print(f"\n== {svc}  ({len(layers)} layers)")
         for l in layers:
             print(f"  [{l['id']}] {l['name']}")
-            show_layer(f"{svc}/{l['id']}")
+            if terms:
+                search_layer(f"{svc}/{l['id']}", terms)
+            else:
+                show_layer(f"{svc}/{l['id']}")
 
 
 if __name__ == "__main__":
-    for t in sys.argv[1:]:
+    args, terms = sys.argv[1:], None
+    if args[:1] == ["--search"]:
+        terms = [t.strip() for t in args[1].split(",") if t.strip()]
+        args = args[2:]
+    for t in args:
         try:
-            probe(t)
+            probe(t, terms)
         except Exception as e:
             print(f"!! {t}: {e}")

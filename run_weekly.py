@@ -106,7 +106,11 @@ def run_inbox(state, show_all, status):
 
 def run_jobs(state, show_all, status):
     try:
-        postings = jobs.fetch_postings(config.COUNTIES, config.JOB_WORDS, config.JOB_TITLE_RX)
+        if jobs.provider() == "serpapi":
+            postings = jobs.fetch_postings_serpapi(config.COUNTIES, config.SERPAPI_QUERIES,
+                                                   config.JOB_TITLE_RX)
+        else:
+            postings = jobs.fetch_postings(config.COUNTIES, config.JOB_WORDS, config.JOB_TITLE_RX)
     except Exception as e:
         traceback.print_exc()
         status.append(("Job postings (all 7 counties)", f"🔴 {str(e)[:120]}"))
@@ -231,8 +235,8 @@ def main():
     permit_rows = found["permits"] + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
     planning_rows = found["planning"]
-    if args.no_jobs or not os.environ.get("ADZUNA_APP_ID"):
-        status.append(("Job postings (all 7 counties)", "⚪ skipped — add ADZUNA_APP_ID / ADZUNA_APP_KEY secrets"))
+    if args.no_jobs or not jobs.provider():
+        status.append(("Job postings (all 7 counties)", "⚪ skipped — add the SERPAPI_API_KEY secret (free)"))
         job_rows = []
     else:
         job_rows = run_jobs(state, args.all, status)

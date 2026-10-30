@@ -4,13 +4,20 @@
 # job-board search; `areas` are the county names job boards return, used to
 # keep only postings inside the market.
 COUNTIES = {
-    "Mecklenburg": {"state": "NC", "jobs_where": "Charlotte, NC"},
-    "Gaston":      {"state": "NC", "jobs_where": "Gastonia, NC"},
-    "Cabarrus":    {"state": "NC", "jobs_where": "Concord, NC"},
-    "Union":       {"state": "NC", "jobs_where": "Monroe, NC"},
-    "Iredell":     {"state": "NC", "jobs_where": "Statesville, NC"},
-    "Rowan":       {"state": "NC", "jobs_where": "Salisbury, NC"},
-    "York":        {"state": "SC", "jobs_where": "Rock Hill, SC"},
+    "Mecklenburg": {"state": "NC", "jobs_where": "Charlotte, NC",
+                    "serpapi_location": "Charlotte, North Carolina, United States"},
+    "Gaston":      {"state": "NC", "jobs_where": "Gastonia, NC",
+                    "serpapi_location": "Gastonia, North Carolina, United States"},
+    "Cabarrus":    {"state": "NC", "jobs_where": "Concord, NC",
+                    "serpapi_location": "Concord, North Carolina, United States"},
+    "Union":       {"state": "NC", "jobs_where": "Monroe, NC",
+                    "serpapi_location": "Monroe, North Carolina, United States"},
+    "Iredell":     {"state": "NC", "jobs_where": "Statesville, NC",
+                    "serpapi_location": "Statesville, North Carolina, United States"},
+    "Rowan":       {"state": "NC", "jobs_where": "Salisbury, NC",
+                    "serpapi_location": "Salisbury, North Carolina, United States"},
+    "York":        {"state": "SC", "jobs_where": "Rock Hill, SC",
+                    "serpapi_location": "Rock Hill, South Carolina, United States"},
 }
 
 # Live ArcGIS sources pulled every week.
@@ -57,6 +64,10 @@ JOB_TITLE_RX = (r"forklift|reach truck|order (picker|selector)|picker|packer|loa
                 r"material handler|warehouse (associate|worker|operator|lead|supervisor)|"
                 r"shipping|receiving|distribution center|production (associate|worker|operator)|"
                 r"machine operator|assembler|dock")
+
+# Google Jobs (SerpApi) searches per county. 2 queries x 2 pages x 7 counties
+# = 28 searches a week, inside the free 250/month.
+SERPAPI_QUERIES = ["warehouse forklift jobs", "production machine operator jobs"]
 
 # Thresholds for the weekly digest.
 PERMIT_MIN_SCORE = 5

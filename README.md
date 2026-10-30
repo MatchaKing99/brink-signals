@@ -8,7 +8,7 @@ Every Monday morning this repo checks seven Charlotte-region counties for signs 
 
 | Signal | Lead time | Source | Counties |
 |---|---|---|---|
-| 🔥 **Hiring clusters**: 3+ forklift / warehouse / production postings from one employer in one city | 12–18 months | Adzuna job search API | All 7 |
+| 🔥 **Hiring clusters**: 3+ forklift / warehouse / production postings from one employer in one city | 12–18 months | Google Jobs via SerpApi (free) | All 7 |
 | 📐 **Planning filings**: proposed and approved developments | 6–9 months | County GIS | Gaston (more as found) |
 | 🏗️ **Permits**: industrial upfits, additions, racking, dock work | 0–6 months | County GIS, or exports dropped in `inbox/` | Mecklenburg, Cabarrus (live) · Gaston, Union, Iredell, Rowan, York (inbox) |
 
@@ -34,7 +34,7 @@ Tune any of this in `signals/permits.py`. Thresholds live in `signals/config.py`
 
 ## Hiring clusters
 
-- **Searches:** one search per county (Adzuna bills per call) for postings in the last 7 days within 25 km of the county seat mentioning forklift, warehouse, picker, packer, loader, handler, shipping, receiving, distribution, production or assembler. Only operations-type titles are kept (forklift, order picker, material handler, warehouse associate, machine operator, shipping/receiving …), so "Distribution Analyst" and similar office roles drop out. About 7–28 calls a week.
+- **Searches:** Google Jobs through SerpApi, which pulls in Indeed, LinkedIn, ZipRecruiter and company career sites. Two searches per county ("warehouse forklift jobs", "production machine operator jobs"), 2 pages each: 28 searches a week, about 120 a month, inside SerpApi's **free 250/month**. Only postings from the last 7 days with operations-type titles are kept (forklift, order picker, material handler, warehouse associate, machine operator, shipping/receiving …), so office roles drop out. Adzuna is supported as a fallback if you ever prefer it.
 - **Grouping:** postings are grouped by employer and city.
 - **Ranking:** clusters rank higher for size and for expansion language ("new facility", "launch team", "2nd/3rd shift", "grand opening").
 - **Labels:** staffing agencies are marked *find the employer*, and retailers are marked *likely store roles*.
@@ -42,7 +42,7 @@ Tune any of this in `signals/permits.py`. Thresholds live in `signals/config.py`
 
 ## Setup (one time)
 
-1. **Adzuna key:** sign up at <https://developer.adzuna.com>. The free tier is only 25 test calls (one or two runs); weekly use needs the "API Access" plan, £8/month (~$10). Everything except the hiring signal runs without a key. In this repo, go to **Settings → Secrets and variables → Actions → New repository secret** and add `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
+1. **SerpApi key (free):** sign up at <https://serpapi.com> (free plan, no card; 250 searches/month). Copy your API key from the dashboard, then in this repo go to **Settings → Secrets and variables → Actions → New repository secret**. Name: `SERPAPI_API_KEY`, value: the key. Everything except the hiring signal runs without it.
 2. **Email:** make sure GitHub emails you for issues. Settings → Notifications → "Participating, @mentions and custom" → Email. The digest issue is assigned to you, so it lands in your inbox.
 3. **First run:** **Actions → Weekly signals → Run workflow** to run it now instead of waiting for Monday.
 
@@ -68,4 +68,4 @@ Step-by-step for Gaston: [`docs/gaston-county.md`](docs/gaston-county.md).
 | `data/seen.json` | What's already been reported, so each digest is only new items |
 | `docs/` | Material handling outreach kit, Airtable setup, Gaston guide |
 
-Run locally with `python3 run_weekly.py` (add `--no-jobs` without an Adzuna key, `--all` to re-list everything). Tests: `python3 -m unittest discover tests`.
+Run locally with `python3 run_weekly.py` (add `--no-jobs` to skip the job search, `--all` to re-list everything). Tests: `python3 -m unittest discover tests`.

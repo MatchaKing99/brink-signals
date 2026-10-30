@@ -27,6 +27,7 @@ jobs:
 
       - name: Pull signals
         env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
         run: python run_weekly.py

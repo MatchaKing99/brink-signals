@@ -76,6 +76,24 @@ def adzuna_results(where, what):
     return []
 
 
+def serp_results(q):
+    """Two pages for Gastonia warehouse searches, nothing elsewhere."""
+    if not (q["location"].startswith("Gastonia") and "warehouse" in q["q"]):
+        return {"error": "Google hasn't returned any results for this query."}
+    job = lambda i, co, title, posted, loc="Gastonia, NC": {
+        "job_id": f"{co}{i}", "title": title, "company_name": co, "location": loc,
+        "via": "Indeed", "description": "Now hiring for our new facility, 2nd shift",
+        "detected_extensions": {"posted_at": posted},
+        "share_link": f"https://example.test/{co}/{i}"}
+    if "next_page_token" not in q:
+        return {"jobs_results": [job(i, "Acme Packaging", "Forklift Operator", "2 days ago") for i in range(3)]
+                + [job(9, "Old Co", "Forklift Operator", "3 weeks ago")],
+                "serpapi_pagination": {"next_page_token": "p2"}}
+    return {"jobs_results": [job(3, "Acme Packaging", "Order Picker", "5 days ago",
+                                 "Gastonia, NC (+2 others)"),
+                             job(4, "Acme Packaging", "HR Generalist", "1 day ago")]}
+
+
 class Handler(http.server.BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
@@ -95,6 +113,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.route(self.path, dict(urllib.parse.parse_qsl(body)))
 
     def route(self, path, q):
+        if path == "/serp":
+            assert q["engine"] == "google_jobs"
+            return self._send(serp_results(q))
         if path.startswith("/adzuna/"):
             assert "what" not in q, "one combined what_or search per county"
             return self._send({"results": adzuna_results(q["where"], q["what_or"])})
@@ -192,3 +213,27 @@ class EndToEnd(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SerpApiProvider(EndToEnd):
+    """Same pipeline with the free Google Jobs provider instead of Adzuna."""
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        jobs.SERPAPI = f"http://127.0.0.1:{cls.srv.server_port}/serp"
+        os.environ["SERPAPI_API_KEY"] = "test"
+
+    @classmethod
+    def tearDownClass(cls):
+        os.environ.pop("SERPAPI_API_KEY", None)
+        super().tearDownClass()
+
+    def test_first_run_finds_real_signals_only(self):
+        d = self.run_once()
+        self.assertIn("Acme Packaging", d)
+        self.assertIn("| Gastonia, Gaston | [4]", d)   # 3 + page-2 picker; HR role dropped
+        self.assertIn("new facility", d)
+        self.assertNotIn("Old Co", d)                  # older than 7 days
+        self.assertIn("FAIRVIEW INDUSTRIAL", d)
+
+    test_inbox_export_is_scored_and_archived = None

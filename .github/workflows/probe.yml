@@ -22,4 +22,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python tools/probe.py ${{ inputs.targets }}
+      - env:
+          TARGETS: ${{ inputs.targets }}
+        run: python tools/probe.py $TARGETS

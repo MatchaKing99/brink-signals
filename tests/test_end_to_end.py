@@ -191,6 +191,39 @@ FORTMILL_AGENDA_IND = FORTMILL_AGENDA.replace("ADJOURN", """2. Annexation/Zoning
 ADJOURN""", 1)
 
 
+RECENT = (dt.date.today() - dt.timedelta(days=5)).isoformat()
+# CivicClerk (town portal JSON API): one planning board meeting with an
+# industrial rezoning, a residential one, an incentive hearing and minutes;
+# a parks committee meeting that should never be opened.
+CIVICCLERK = {
+    "/civicclerk/Events": {"value": [
+        {"id": 11, "eventName": "Planning Board", "agendaId": 1, "startDateTime": RECENT + "T18:00:00Z"},
+        {"id": 12, "eventName": "Parks and Recreation Committee", "agendaId": 2, "startDateTime": RECENT + "T18:00:00Z"}]},
+    "/civicclerk/Meetings/1": {"items": [{"id": 1, "agendaObjectItemName": "Meeting Items", "childItems": [
+        {"id": 2, "agendaObjectItemOutlineNumber": "4.", "agendaObjectItemName": "<strong>Approval of Minutes - August 5, 2026</strong>"},
+        {"id": 3, "agendaObjectItemOutlineNumber": "5.", "agendaObjectItemName":
+            "<strong>Planning Board is requested to consider a zoning map amendment to rezone the property located at "
+            "900 Distribution Pkwy and further identified as tax parcel 09-001-001 from Regional Corridor Mixed-Use "
+            "(RC-MX) to Light Industrial (LI) for a 220,000 SF warehouse.</strong>"},
+        {"id": 4, "agendaObjectItemOutlineNumber": "6.", "agendaObjectItemName":
+            "<strong>Planning Board is requested to consider a zoning map amendment to rezone the property located at "
+            "124 Baucom Deese Road from Light Industrial (LI) to Residential Low Density (RLD).</strong>"},
+        {"id": 5, "agendaObjectItemOutlineNumber": "7.", "agendaObjectItemName": "Request for Public Hearing: Incentive Request for Project Tribe"},
+    ]}]},
+}
+# Legistar (Charlotte web API): a business meeting with an incentive grant and a
+# paving contract; a housing committee meeting that's skipped.
+LEGISTAR = {
+    "/legistar/events": [
+        {"EventId": 7, "EventBodyName": "City Council Business Meeting", "EventDate": RECENT + "T00:00:00",
+         "EventInSiteURL": "https://charlottenc.legistar.com/MeetingDetail.aspx?LEGID=7"},
+        {"EventId": 8, "EventBodyName": "Housing Council Committee", "EventDate": RECENT + "T00:00:00"}],
+    "/legistar/events/7/eventitems": [
+        {"EventItemId": 70, "EventItemAgendaNumber": "12", "EventItemTitle": "Public Hearing and Decision on Averitt Express, Inc. Business Investment Grant"},
+        {"EventItemId": 71, "EventItemAgendaNumber": "13", "EventItemTitle": "Resurfacing Contract for Neighborhood Streets"}],
+}
+
+
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
              ("esriFieldTypeOID" if k.lower() == "objectid" else "esriFieldTypeString")} for k in rows[0]]
@@ -264,6 +297,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         if u.path.startswith("/evolve/"):
             return evolve_route(self, u.path.split("/")[2], None)
+        if u.path in CIVICCLERK or u.path in LEGISTAR:
+            assert u.path != "/civicclerk/Meetings/2", "committee meetings aren't opened"
+            assert u.path != "/legistar/events/8/eventitems", "only the matching boards are opened"
+            return self._send(CIVICCLERK.get(u.path) or LEGISTAR[u.path])
         if u.path == "/fortmill/AgendaCenter":
             self.send_response(200)
             self.end_headers()
@@ -363,7 +400,11 @@ class EndToEnd(unittest.TestCase):
                                    "parcels": {"url": base + "/energov/parcels/11", "fields": "gaston"}}]
         energov.PAUSE = accela.PAUSE = evolve.PAUSE = 0
         config.AGENDA_SOURCES = [{"county": "York", "town": "Fort Mill", "base": base + "/fortmill", "days": 30,
-                                  "boards": ["Planning Commission"]}]
+                                  "boards": ["Planning Commission"]},
+                                 {"county": "Union", "town": "Monroe", "civicclerk": "monroenc", "days": 30,
+                                  "api": base + "/civicclerk"},
+                                 {"county": "Mecklenburg", "town": "Charlotte", "legistar": "charlottenc", "days": 30,
+                                  "bodies": r"business meeting", "api": base + "/legistar"}]
         agendas.PAUSE = 0
         agendas.pdf_text = lambda data, pages=3: FORTMILL_AGENDA_IND   # no pdftotext needed in tests
         config.CIVIC_TABLE_SOURCES = [{"county": "Lincoln", "url": base + "/371/Pending-Applications"}]
@@ -482,6 +523,16 @@ class EndToEnd(unittest.TestCase):
         self.assertIn("1200 Logistics Way · → LI", d)
         self.assertNotIn("Fairway Drive and Banks Road", d)
         self.assertIn("| York planning (Fort Mill agendas) | 🟢 3 agenda items, 1 industrial, 1 new |", d)
+        # CivicClerk (Monroe): industrial rezoning and incentive hearing in; the
+        # rezoning away from LI and the minutes out.
+        self.assertIn("900 Distribution Pkwy · → LI", d)
+        self.assertIn("Incentive Request for Project Tribe", d)
+        self.assertNotIn("Baucom Deese", d)
+        self.assertIn("| Union planning (Monroe agendas) | 🟢 4 agenda items, 2 industrial, 2 new |", d)
+        # Legistar (Charlotte): the incentive grant in, the paving contract out.
+        self.assertIn("Averitt Express, Inc. Business Investment Grant", d)
+        self.assertNotIn("Resurfacing", d)
+        self.assertIn("| Mecklenburg planning (Charlotte agendas) | 🟢 2 agenda items, 1 industrial, 1 new |", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

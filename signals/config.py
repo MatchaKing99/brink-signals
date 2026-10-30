@@ -114,12 +114,33 @@ CIVIC_TABLE_SOURCES = [
     {"county": "Lincoln", "url": "https://www.lincolncountync.gov/371/Pending-Applications"},
 ]
 
-# Town agendas published through CivicPlus AgendaCenter: industrial zoning,
-# annexation, site-plan and conditional-use items from each board's agendas
-# over the last `days` (the agenda PDF's first pages; needs pdftotext).
+# Town and county meeting agendas: industrial zoning, annexation, site-plan and
+# conditional-use items, plus economic-development incentive hearings, from
+# meetings in the last `days`.
+# - CivicPlus AgendaCenter (`base` + `boards`): the agenda PDF's first pages;
+#   needs pdftotext.
+# - CivicClerk (`civicclerk` tenant): the portal's public JSON API. Mooresville,
+#   Waxhaw and Pineville have tenants that hold no real meetings yet.
+# - Legistar (`legistar` client + `bodies` regex): the public web API.
 AGENDA_SOURCES = [
     {"county": "York", "town": "Fort Mill", "base": "https://www.fortmillsc.gov", "days": 30,
      "boards": ["Planning Commission", "Town Council"]},
+    {"county": "Union", "town": "Indian Trail", "base": "https://www.indiantrail.org", "days": 30,
+     "boards": ["Planning and Zoning Board/Tree Board", "Town Council"]},
+    {"county": "Union", "town": "Monroe", "civicclerk": "monroenc", "days": 30},
+    {"county": "Mecklenburg", "town": "Huntersville", "civicclerk": "huntersvillenc", "days": 30},
+    {"county": "Mecklenburg", "town": "Davidson", "civicclerk": "davidsonnc", "days": 30},
+    {"county": "Mecklenburg", "town": "Charlotte", "legistar": "charlottenc", "days": 30,
+     "bodies": r"business meeting|economic development"},
+    {"county": "Mecklenburg", "town": "Mecklenburg County", "legistar": "mecklenburg", "days": 30,
+     "bodies": r"board of commissioners"},
+    {"county": "Cabarrus", "town": "Kannapolis", "civicclerk": "kannapolisnc", "days": 30},
+    {"county": "Cabarrus", "town": "Harrisburg", "civicclerk": "harrisburgnc", "days": 30},
+    {"county": "Lincoln", "town": "Lincolnton", "civicclerk": "lincolntonnc", "days": 30},
+    {"county": "Gaston", "town": "Mount Holly", "civicclerk": "mounthollync", "days": 30},
+    {"county": "Gaston", "town": "Bessemer City", "civicclerk": "bessemercitync", "days": 30},
+    {"county": "Rowan", "town": "Rowan County", "civicclerk": "rowancountync", "days": 30},
+    {"county": "Stanly", "town": "Locust", "civicclerk": "locustnc", "days": 30},
 ]
 
 # Live permits from Tyler EnerGov Citizen Self Service portals (public search,

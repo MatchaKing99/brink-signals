@@ -65,7 +65,7 @@ EXCLUDE = ["self storage", "self-storage", "mini storage", "mini-storage", "gara
 NON_INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(R|U|A|E|I)-?\d?\s", re.I)
 RESIDENTIAL = ["single family", "single-family", "residential", "dwelling", "townhome",
                "townhouse", "duplex", "deck", "pool", "subdivision"]
-INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|LI|HI|ML|MH|IND|BP|CBI|OFC-IND|M-?\d|I-?[GL]\b|PD-I\b)", re.I)
+INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|LI|HI|ML|MH|IND|BP|CBI|OFC-IND|M-?\d|I-?[GL]\b|G-?I\b|PD-I\b)", re.I)
 # Some counties split the address across columns (Rowan: number / direction /
 # street / suffix).
 ADDRESS_PARTS = ["saddress1", "spredirection", "saddress2", "sstreett"]

@@ -76,7 +76,7 @@ def your_move(rec, p):
         moves.append("An upfit usually means a new occupant or an expansion. Ask the GC or owner who the user is; "
                      "the space that user is leaving may come up for sublease or sale.")
     elif NEW_WORK.search(t):
-        moves.append(f"New construction or site work. Call {who} (and {rec['contractor'] or 'the GC'}) now: "
+        moves.append(f"New construction or site work. Call {who} now: "
                      "is it spec or build-to-suit, and is the leasing assignment open?")
     else:
         moves.append("The operator is spending money on the building (power, HVAC, fire). Find out when the lease "
@@ -155,7 +155,7 @@ def run(base=PORTAL, parcels_url=parcels.GASTON_PARCELS, days=60, out_dir=ROOT /
 
 def write_csv(path, recs):
     cols = ["permit_no", "issue_date", "apply_date", "type", "occupancy", "desc", "address", "value", "sqft",
-            "contractor", "owner", "status", "score", "signals", "parcel", "parcel_owner", "land_use", "acres", "url"]
+            "status", "score", "signals", "parcel", "parcel_owner", "land_use", "acres", "url"]
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
@@ -177,8 +177,8 @@ def card(r, seen_addrs, star=False):
              f"{', occupancy ' + r['occupancy'] if r['occupancy'] else ''}"
              f"{', site work ' + r['site_acres'] if r['site_acres'] else ''}. "
              f"Score {r['score']} ({r['signals'] or 'no keywords'})"]
-    who = [f"{role}: {name}" for role, name in r["contacts"] if role.lower() != "municipal contact"]
-    lines.append(f"- **Who:** {'; '.join(who) or 'no contacts listed'}")
+    lines.append(f"- **Who:** owner of record {(p or {}).get('owner') or 'unknown'}. The GC and applicant "
+                 "aren't public on this portal, so ask the owner or check the job-site sign.")
     if p:
         lines.append(f"- **Property:** PIN {p['pin']}, {p['land_use'] or '?'} land use, {p['acres']} ac"
                      f"{', ' + format(int(p['bldg_sqft']), ',') + ' SF building' if p['bldg_sqft'] else ''}"
@@ -189,8 +189,7 @@ def card(r, seen_addrs, star=False):
                      f"{' for ' + money(p['sale_amount']) if p.get('sale_amount') else ''}.")
     else:
         lines.append(f"- **Property:** no parcel match for {r['parcel'] or 'a blank parcel number'}")
-    ents = parcels.entities((p or {}).get("owner"), r["owner"], r["contractor"],
-                            *[n for role, n in r["contacts"] if role.lower().startswith(("applicant", "owner", "financial"))])
+    ents = parcels.entities((p or {}).get("owner"))
     if ents:
         lines.append(f"- **Look up at NC SOS:** {', '.join(ents)}")
     if r["address"].split(" NC ")[0].upper() in seen_addrs:

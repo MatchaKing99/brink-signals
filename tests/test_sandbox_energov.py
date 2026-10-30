@@ -26,6 +26,7 @@ TODAY = dt.date(2026, 10, 30)
 
 class Portal(http.server.BaseHTTPRequestHandler):
     searches = []
+    forbidden = []
 
     def log_message(self, *a):
         pass
@@ -43,9 +44,12 @@ class Portal(http.server.BaseHTTPRequestHandler):
         path = urllib.parse.urlparse(self.path).path
         if path.endswith("/api/energov/search/criteria"):
             return self._send(CRITERIA)
-        if "/api/energov/permits/permit/" in path:
+        if "/api/energov/permits/permit/" in path:   # restricted contacts endpoint: must never be called
+            Portal.forbidden.append(path)
+            return self._send({"Success": False, "StatusCode": 412}, 412)
+        if "/api/energov/permits/" in path:
             cid = path.rsplit("/", 1)[1]
-            return self._send(PERMITS[cid]) if cid in PERMITS else self._send({"Success": False}, 404)
+            return self._send(PERMITS[cid]["permit"]) if cid in PERMITS else self._send({"Success": False}, 404)
         self._send({}, 404)
 
     def do_POST(self):
@@ -60,6 +64,9 @@ class Portal(http.server.BaseHTTPRequestHandler):
             if c["PageNumber"] > 1:
                 return self._send({**SEARCH, "Result": {**SEARCH["Result"], "EntityResults": []}})
             return self._send(SEARCH)
+        if path.endswith("/api/energov/customfields/data/"):
+            cid = json.loads(body)["EntityId"]
+            return self._send(PERMITS[cid]["customfields"]) if cid in PERMITS else self._send({"Success": False}, 404)
         if path.endswith("/FeatureServer/11/query"):
             where = urllib.parse.parse_qs(body)["where"][0]
             ids = set(where[where.index("(") + 1:-1].replace("'", "").split(","))
@@ -81,11 +88,12 @@ class SandboxEnerGovTest(unittest.TestCase):
 
     def test_standardize_real_detail(self):
         row = next(r for r in SEARCH["Result"]["EntityResults"] if r["CaseNumber"] == "BLDC-26-10-28-03193")
-        rec = energov.standardize(row, PERMITS[row["CaseId"]]["Result"])
+        fix = PERMITS[row["CaseId"]]
+        rec = energov.standardize(row, {"detail": fix["permit"]["Result"], "info": fix["customfields"]["Result"]})
         self.assertEqual(rec["value"], 96100.0)
-        self.assertEqual(rec["sqft"], 550.0)                 # from the Total Building Area custom field
-        self.assertEqual(rec["occupancy"], "S-2 Storage")    # resolved from the pick list
-        self.assertEqual(rec["contractor"], "Pinnix General Con")
+        self.assertEqual(rec["sqft"], 550.0)                 # Project Work Area, from the public More Info tab
+        self.assertEqual(rec["occupancy"], "S-2 Storage")    # also from More Info
+        self.assertEqual(rec["contractor"], "")              # contacts are restricted; never fetched
         self.assertEqual(rec["issue_date"], "2026-10-30")
         self.assertTrue(energov.is_commercial(row) and energov.is_primary(row))
 
@@ -115,6 +123,7 @@ class SandboxEnerGovTest(unittest.TestCase):
         self.assertEqual(stats["details"], 3)
         self.assertEqual(stats["parcels_matched"], 3)
         self.assertEqual(problems, [])
+        self.assertEqual(Portal.forbidden, [])
         # The 408 Brook St erosion permit is on an industrial parcel; the S-2 remodel is tagged but small.
         self.assertIn("SSI 408 BROOK NC PROPERTY LLC", report)
         self.assertIn("Industrial land use, 6.14 ac", report)

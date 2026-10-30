@@ -6,8 +6,15 @@ Shapes below were read off Gaston County's live portal (Oct 2026):
 
   GET  {base}/api/energov/search/criteria        blank search model
   POST {base}/api/energov/search/search          the search itself
-  GET  {base}/api/energov/permits/permit/{id}    one permit: valuation, sqft,
-                                                 contacts, custom fields
+  GET  {base}/api/energov/permits/{id}           one permit's public page: valuation,
+                                                 description, layout ids
+  POST {base}/api/energov/customfields/data/     its public "More Info" tab: work
+                                                 area, occupancy group, acreage
+
+Contacts (GC, applicant, owner) are restricted: the portal's contacts call answers
+412 "You must be a contact on this record". Another endpoint
+(permits/permit/{id}, used by the apply flow) returns them anyway, which would get
+around the county's rule, so it is never used. Owners come from the parcel layer.
 
 Every call needs the headers tenantId and Tyler-TenantUrl (Gaston: 1 / home).
 The search only honours the date filters with SearchModule=2 and FilterModule=2
@@ -36,11 +43,6 @@ PRIMARY_TYPE = re.compile(
     r"building permit request: commercial|new building \(commercial\)|shell building|foundation only|"
     r"erosion (industrial|commercial)|zoning commercial\)|zoning - (commercial|change in use)|"
     r"demolition \(commercial\)", re.I)
-
-# Contact roles, most useful first.
-BUILDER_ROLES = ("contractor (gc)", "builder", "general contractor", "contractor")
-OWNER_ROLES = ("owner", "property owner", "financial responsible party")
-
 
 class EnerGov:
     def __init__(self, base, tenant_id="1", tenant_url="home", delay=1.0, retries=4):
@@ -105,7 +107,14 @@ class EnerGov:
             page += 1
 
     def permit(self, case_id):
-        return self._req(f"/api/energov/permits/permit/{case_id}")["Result"]
+        """The permit's public page plus its public More Info fields."""
+        detail = self._req(f"/api/energov/permits/{case_id}")["Result"] or {}
+        info = {}
+        if detail.get("LayoutId") or detail.get("OnlineLayoutId"):
+            info = self._req("/api/energov/customfields/data/", {
+                "EntityId": case_id, "ModuleId": 1, "LayoutId": detail.get("LayoutId"),
+                "OnlineLayoutId": detail.get("OnlineLayoutId")})["Result"] or {}
+        return {"detail": detail, "info": info}
 
 
 def is_residential(row):
@@ -121,43 +130,28 @@ def is_primary(row):
     return bool(PRIMARY_TYPE.search(row.get("CaseType") or ""))
 
 
-def custom_values(detail):
-    """{FieldName: value} and {label: value} for filled custom fields, resolving
-    pick lists. Field names differ by permit layout (BuildingArea2, ...), labels don't."""
+def custom_values(info):
+    """{FieldName: value} and {label: value} from the public More Info fields.
+    Field names differ by permit layout (BuildingArea2, ...), labels mostly don't."""
     out = {}
-    for cf in (detail or {}).get("CustomFields") or []:
-        v = cf.get("Value")
-        if v in (None, ""):
-            continue
-        picks = {p.get("CustomFieldPickListItemID"): p.get("Value") for p in cf.get("PickListItems") or []}
-        v = picks.get(v, v)
-        out.setdefault(cf.get("FieldName"), v)
-        out.setdefault(" ".join((cf.get("Label") or "").split()).lower(), v)
+    for group in (info or {}).get("CustomGroups") or []:
+        for cf in group.get("CustomFields") or []:
+            v = cf.get("Value")
+            if v in (None, "") or not cf.get("FieldName"):
+                continue
+            out.setdefault(cf["FieldName"], v)
+            out.setdefault(" ".join((cf.get("Label") or "").split()).lower(), v)
     return out
 
 
-def _contact_name(c):
-    org = (c.get("GlobalEntityName") or "").strip()
-    person = " ".join(x for x in ((c.get("FirstName") or "").strip(), (c.get("LastName") or "").strip()) if x)
-    return org or person
-
-
-def pick_contact(contacts, roles):
-    for role in roles:
-        for c in contacts:
-            if (c.get("ContactTypeName") or "").strip().lower().startswith(role) and _contact_name(c):
-                return _contact_name(c)
-    return ""
-
-
-def standardize(row, detail=None, portal="https://selfservice.gastongov.com/energov_prod/selfservice"):
-    """One search row (+ optional detail) -> the bot's permit record shape, plus extras."""
-    detail = detail or {}
-    cf = custom_values(detail)
-    contacts = detail.get("Contacts") or []
-    # "Total Building Area" is the whole building; the work area is what the job covers.
-    sqft = detail.get("SquareFeet") or cf.get("project work area") or cf.get("total building area") or None
-    value = detail.get("ValuationValue") or None
+def standardize(row, permit=None, portal="https://selfservice.gastongov.com/energov_prod/selfservice"):
+    """One search row (+ its public permit page) -> the bot's permit record shape, plus extras."""
+    detail = (permit or {}).get("detail") or {}
+    cf = custom_values((permit or {}).get("info"))
+    # Building Area is the whole building; the work area is what the job covers.
+    sqft = (cf.get("project work area") or cf.get("building area") or cf.get("total building area")
+            or (detail.get("SquareFeet") if detail.get("ShowSquareFeet") else None) or None)
+    value = detail.get("Value") if detail.get("ShowValue", True) else None
     occ = " / ".join(str(cf[k]) for k in ("OccupancyClassificationPrimary", "OccupancyClassificationSecondary")
                      if cf.get(k))
     desc_parts = [row.get("ProjectName") or cf.get("project name"), row.get("Description") or detail.get("Description")]
@@ -172,11 +166,10 @@ def standardize(row, detail=None, portal="https://selfservice.gastongov.com/ener
         "address": row.get("AddressDisplay") or "",
         "value": float(value) if value else None,
         "sqft": float(sqft) if sqft else None,
-        "contractor": pick_contact(contacts, BUILDER_ROLES) or pick_contact(contacts, ("applicant",)),
-        "owner": pick_contact(contacts, OWNER_ROLES),
+        "contractor": "",   # restricted on the portal; see the module docstring
+        "owner": "",
         "status": row.get("CaseStatus") or "",
         "parcel": row.get("MainParcel") or "",
-        "contacts": [(c.get("ContactTypeName") or "", _contact_name(c)) for c in contacts if _contact_name(c)],
         "work": cf.get("DWA1") or "",
         "site_acres": f"{site} disturbed" if " of " in site else site,
         "case_id": row.get("CaseId") or "",

@@ -19,7 +19,7 @@ The GitHub workflow **Sandbox permits (Gaston EnerGov)** runs the same thing man
   - The date filters only work with `SearchModule: 2, FilterModule: 2`.
   - `PermitTypeId` and `PermitStatusId` must be the string `"none"`. A null makes the server return 500.
   - Page size 100 works. The response has `TotalPages`, `PermitsFound` and `EntityResults[]`, where each row has `CaseNumber`, `CaseType`, `CaseWorkclass`, `CaseStatus`, `IssueDate`, `ApplyDate`, `AddressDisplay`, `MainParcel` and `Description`.
-- `GET api/energov/permits/permit/{CaseId}` returns `ValuationValue`, `SquareFeet` (usually 0), `Contacts[]` (owner, GC, applicant, trades) and `CustomFields[]`. The custom fields hold Total Building Area, the occupancy group (e.g. "S-1 Storage") and the construction type, plus project name and acreage on erosion permits. Pick-list values are GUIDs that resolve through each field's `PickListItems`.
+- `GET api/energov/permits/{CaseId}` (the public permit page) returns `Value` and the layout ids, and `POST api/energov/customfields/data/` (the public More Info tab) returns work area, occupancy group and acreage. Contacts are restricted: the portal's contacts call answers 412 "You must be a contact on this record", so they are never fetched. Another endpoint (`permits/permit/{id}`) leaks them; it is deliberately not used.
 - `MainParcel` is the county GIS `AKPAR`/`PID`, not the dashed PIN. The parcels layer is `PublicGIS/Parcels/FeatureServer/11`.
 - The NC Secretary of State business search (sosnc.gov) answers 403 with a Cloudflare "Just a moment..." bot challenge. LLCs are listed for a manual lookup and are never scraped.
 - The proxy or portal sometimes drops a TLS connection mid-request. The client retries with backoff.

@@ -59,6 +59,32 @@ UNION_OK = [insp(1, 501, "Comm Building Footing", 20, "100 Industrial Dr  Monroe
 UNION_NOT = [insp(9, 501, "Comm Plumbing Rough In", 8, "100 Industrial Dr  Monroe")]
 
 
+def rowan(i, num, ptype, work, sqft, days_ago, company):
+    return {"OBJECTID": i, "TypeName": "Permit", "dIssued": NOW - days_ago * DAY, "sPermitNum": num,
+            "sCompanyName_Parc": company, "sAddress1": str(100 + i), "sPreDirection": "",
+            "sAddress2": "UNITY CHURCH", "sStreetT": "RD", "sName_Workclass": work, "sSqFeet": sqft,
+            "sName": "Active", "PermitType": ptype}
+
+
+ROWAN = [rowan(1, "COM-10-26-1", "Commercial", "New Warehouse", 120000, 3, "Big GC Inc"),
+         rowan(2, "COM-10-26-2", "Commercial", "Upfit", 1200, 4, "Small GC"),
+         rowan(3, "ELEC-10-26-3", "Electrical", "Conditional Power", 0, 2, "Sparky"),
+         rowan(4, "COM-10-47-4", "Commercial", "New Warehouse", 90000, -7000, "Typo Date")]
+ROWAN_ZONING = [{"OBJECTID": 1, "CASE_": "Z 07-26", "ZONING": "IND", "COMMENTS": "Rezone for distribution center",
+                 "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
+                {"OBJECTID": 2, "CASE_": "Z 07-26", "ZONING": "IND", "COMMENTS": "Rezone for distribution center",
+                 "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY},
+                {"OBJECTID": 3, "CASE_": "Z 08-26", "ZONING": "RS", "COMMENTS": "Single family subdivision",
+                 "APPROVAL": "October 1, 2026", "created_date": NOW - 10 * DAY}]
+_meet = (dt.date.today() - dt.timedelta(days=20)).strftime("%B %d, %Y") + " at 6:00"
+IREDELL_HEARINGS = [{"OBJECTID": 1, "Case_": "Case: 2610-1", "Meeting_Time": _meet,
+                     "Location_Site": "195 Ostwalt Amity", "Applicant": "Encased Power, LLC",
+                     "Request": "This is a request to rezone from RA to Heavy Industrial (HI) for manufacturing."},
+                    {"OBJECTID": 2, "Case_": "Case: 2102-1", "Meeting_Time": "February 3, 2021 at 7:00",
+                     "Location_Site": "1 Old Rd", "Applicant": "Old Co",
+                     "Request": "Rezone to Heavy Industrial for a warehouse."}]
+
+
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
              ("esriFieldTypeOID" if k.lower() == "objectid" else "esriFieldTypeString")} for k in rows[0]]
@@ -70,6 +96,9 @@ LAYERS = {
     "/cab/MapServer/33": ([meck(99, 3000, "S1", "old", 1)], "issuedate"),
     "/cab/MapServer/41": (CABARRUS_2026, "issuedate"),
     "/union/ok/0": (UNION_OK, "inspection_date"),
+    "/rowan/6": (ROWAN, "dIssued"),
+    "/rowan/zoning/18": (ROWAN_ZONING, "created_date"),
+    "/iredell/hearings/0": (IREDELL_HEARINGS, "no-date-field"),
     "/union/not/6": (UNION_NOT, "inspection_date"),
     "/stale/MapServer/33": ([meck(98, 3000, "S1", "old", 1)], "issuedate"),
 }
@@ -186,6 +215,10 @@ class EndToEnd(unittest.TestCase):
             {"county": "Gaston", "kind": "planning", "days": 3650, "url": base + "/gaston/2"},
             {"county": "Cabarrus", "kind": "permits", "days": 30,
              "discover": {"service": base + "/cab/MapServer", "name": r"^permits\b"}},
+            {"county": "Rowan", "kind": "permits", "days": 45, "url": base + "/rowan/6",
+             "type_rx": r"commercial|\bCOM-", "min_score": 2},
+            {"county": "Rowan", "kind": "planning", "days": 120, "url": base + "/rowan/zoning/18"},
+            {"county": "Iredell", "kind": "planning", "days": 365, "url": base + "/iredell/hearings/0"},
             {"county": "Stale", "kind": "permits", "days": 30,
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
@@ -225,6 +258,19 @@ class EndToEnd(unittest.TestCase):
         # Planning: industrial yes, subdivision no.
         self.assertIn("FAIRVIEW INDUSTRIAL", d)
         self.assertNotIn("LOWELL WOODS", d)
+        # Rowan: big commercial job, split address joined; small upfit, trades, typo dates dropped.
+        self.assertIn("| Rowan | 101 UNITY CHURCH RD | ", d)
+        self.assertIn("120000", (self.tmp / "output" / dt.date.today().isoformat() / "permits.csv").read_text())
+        for junk in ("Small GC", "Sparky", "Typo Date", "102 UNITY", "103 UNITY", "104 UNITY"):
+            self.assertNotIn(junk, d)
+        self.assertIn("types seen: Commercial 2, Electrical 1", d)
+        # Rowan rezonings: industrial case once (not once per parcel); residential dropped.
+        self.assertEqual(d.count("Z 07-26"), 1)
+        self.assertNotIn("Z 08-26", d)
+        # Iredell hearings: recent industrial rezoning in, 2021 hearing out (text dates parsed).
+        self.assertIn("Case: 2610-1", d)
+        self.assertIn("Encased Power", d)
+        self.assertNotIn("Case: 2102-1", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

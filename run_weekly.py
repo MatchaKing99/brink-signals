@@ -17,6 +17,7 @@ import csv
 import datetime as dt
 import json
 import os
+import re
 import shutil
 import sys
 import traceback
@@ -49,7 +50,7 @@ def run_arcgis(state, show_all, status):
     found = {"permits": [], "planning": []}
     for src in config.ARCGIS_SOURCES:
         county, kind = src["county"], src["kind"]
-        label = f"{county} {kind}"
+        label = f"{county} {kind}" + (f" ({src['name']})" if src.get("name") else "")
         try:
             url = src.get("url")
             note = ""
@@ -64,8 +65,21 @@ def run_arcgis(state, show_all, status):
                     continue
                 note = f" (layer: {layer_name})"
             records, _ = permits.pull_arcgis(url, src["days"])
-            min_score = config.PERMIT_MIN_SCORE if kind == "permits" else config.PLANNING_MIN_SCORE
-            scored = permits.score_records(records, min_score)
+            # Some layers mix every trade (electrical, signs, homes); keep the
+            # types this source cares about. Future-dated rows are data-entry typos.
+            horizon = (dt.date.today() + dt.timedelta(days=30)).isoformat()
+            records = [r for r in records if not r["issue_date"] or r["issue_date"] <= horizon]
+            pulled = len(records)
+            if src.get("type_rx"):
+                types = {}
+                for r in records:
+                    types[r["type"]] = types.get(r["type"], 0) + 1
+                keep = re.compile(src["type_rx"], re.I)
+                records = [r for r in records if keep.search(f"{r['type']} {r['permit_no']}")]
+                top = ", ".join(f"{t} {n}" for t, n in sorted(types.items(), key=lambda x: -x[1])[:6])
+                note += f" · types seen: {top}"
+            default = config.PERMIT_MIN_SCORE if kind == "permits" else config.PLANNING_MIN_SCORE
+            scored = permits.score_records(records, src.get("min_score", default))
             new = []
             for r in scored:
                 k = permit_key(county, r)
@@ -74,7 +88,7 @@ def run_arcgis(state, show_all, status):
                     r["county"] = county
                     new.append(r)
             found[kind] += new
-            status.append((label, f"🟢 {len(records)} records, {len(scored)} scored, {len(new)} new{note}"))
+            status.append((label, f"🟢 {pulled} records, {len(scored)} scored, {len(new)} new{note}"))
         except Exception as e:
             traceback.print_exc()
             status.append((label, f"🔴 failed: {str(e)[:120]}"))
@@ -241,8 +255,12 @@ def digest(permit_rows, planning_rows, job_rows, status, inspection_rows=()):
     L.append("## 📐 Planning & development filings (6–9 months ahead)")
     if planning_rows:
         for r in planning_rows[:20]:
-            L.append(f"- **{r['desc'] or 'Unnamed'}** — {r['county']} · {r['type'] or ''} · "
-                     f"{r['status'] or ''} · {r['issue_date'] or ''} · _{r['signals']}_")
+            desc = re.sub(r"\s+", " ", r["desc"] or "Unnamed")
+            desc = desc if len(desc) <= 160 else desc[:157] + "…"
+            where = " · ".join(str(x).strip() for x in (r["county"], r["address"], r["type"], r["status"],
+                                                          r["contractor"], r["issue_date"]) if x and str(x).strip())
+            case = f"{r['permit_no']}: " if r.get("permit_no") else ""
+            L.append(f"- **{case}{desc}** — {where} · _{r['signals']}_")
         L.append("\n*You:* who's developing it, and is it spec or build-to-suit? "
                  "*Partner:* future tenants need fit-out.\n")
     else:
@@ -250,12 +268,12 @@ def digest(permit_rows, planning_rows, job_rows, status, inspection_rows=()):
 
     L.append("## 🏗️ Permits (work is happening now)")
     if permit_rows:
-        L.append("| Score | County | Address | Owner | Value | What | Signals |")
+        L.append("| Score | County | Address | Owner / contractor | Value | What | Signals |")
         L.append("|---|---|---|---|---|---|---|")
         for r in permit_rows[:30]:
             what = (r["desc"] or "").split(" | ")[0][:70]
             L.append(f"| {r['score']} | {r['county']} | {(r['address'] or '').strip()} | "
-                     f"{r['owner'] or '—'} | {_money(r['value'])} | {what} | {r['signals']} |")
+                     f"{r['owner'] or r['contractor'] or '—'} | {_money(r['value'])} | {what} | {r['signals']} |")
         L.append("\n*You:* if this is a new address, what building did they leave? That's a "
                  "backfill or sublease lead. *Partner:* racking, dock and forklift needs at this address.\n")
     else:

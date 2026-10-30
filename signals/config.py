@@ -39,6 +39,28 @@ ARCGIS_SOURCES = [
         "url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Developments/FeatureServer/2",
     },
     {
+        # Every trade's permits (141K); commercial building permits carry no
+        # description or value, so size (sq ft) does the scoring.
+        "county": "Rowan", "kind": "permits", "days": 45, "name": "all permits",
+        "url": "https://gis.rowancountync.gov/arcgis/rest/services/Public/Building_Permits/MapServer/6",
+        "type_rx": r"commercial|\bCOM-", "min_score": 2,
+    },
+    {
+        # Rezoning cases; one row per parcel, so a case can repeat by parcel.
+        "county": "Rowan", "kind": "planning", "days": 120, "name": "rezonings",
+        "url": "https://gis.rowancountync.gov/arcgis/rest/services/Energov/Energov_main_10_4_s077/MapServer/18",
+    },
+    {
+        # Planning Board hearings: rezoning and special-use requests with the
+        # applicant and the full request text. Small layer, no date filter.
+        "county": "Iredell", "kind": "planning", "days": 365, "name": "planning board hearings",
+        "url": "https://maps.iredellcountync.gov/server/rest/services/PublicViewer_Planning/Board_Public_Hearings/FeatureServer/0",
+    },
+    {
+        "county": "Iredell", "kind": "planning", "days": 3650, "name": "Mooresville projects under construction",
+        "url": "https://maps.iredellcountync.gov/server/rest/services/Planning/Development_Activity_Countywide/MapServer/5",
+    },
+    {
         "county": "Cabarrus", "kind": "permits", "days": 30,
         "discover": {
             "service": "https://location.cabarruscounty.us/arcgisservices/rest/services/opendata/MapServer",
@@ -64,8 +86,7 @@ INSPECTION_SOURCES = [
 PORTAL_ONLY = {
     "Gaston":  "Tyler EnerGov Citizen Self Service (see docs/gaston-county.md)",
     "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately); commercial inspections are pulled live",
-    "Iredell": "eTRAKiT (Mooresville permits separately at mooresvillepermits.com)",
-    "Rowan":   "No public online search found — Salisbury zoning, county building permits",
+    "Iredell": "eTRAKiT (Mooresville permits separately at mooresvillepermits.com); planning hearings and Mooresville projects pulled live",
     "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",
 }
 

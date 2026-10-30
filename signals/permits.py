@@ -16,23 +16,26 @@ import urllib.request
 # spaces and punctuation, so "Issued Date", "ISSUED_DATE" and "issueddate" all
 # match "issueddate". Set an exact name here if the guess is wrong.
 FIELD_MAP = {
-    "permit_no":  ["permitnum", "permitnumber", "permitno", "permit", "casenumber", "caseno",
-                   "projectnumber", "devnumber"],
+    "permit_no":  ["permitnum", "spermitnum", "permitnumber", "permitno", "permit", "casenumber",
+                   "caseno", "case", "projectnumber", "projectid", "devnumber"],
     "issue_date": ["issuedate", "dateissued", "issueddate", "issued", "approvaldate", "approveddate",
                    "dateapproved", "applieddate", "applicationdate", "submitteddate", "datesubmitted",
+                   "dissued", "meetingtime",
                    "date", "createddate"],
     "type":       ["permittype", "worktype", "type", "casetype", "devtype", "developmenttype",
                    "projecttype"],
     "occupancy":  ["occupancy", "usegroup", "occupancytype", "proposeduse", "usage", "landuse", "use"],
     "desc":       ["projectname", "projname", "description", "workdesc", "workdescription", "projdesc",
-                   "permitdesc", "usdcdesc", "typeofbldg", "devname", "developmentname", "name",
-                   "project"],
+                   "permitdesc", "usdcdesc", "typeofbldg", "snameworkclass", "devname",
+                   "developmentname", "name", "project", "notes", "comments", "request",
+                   "requestcontinued"],
     "address":    ["projectaddress", "projadd", "address", "siteaddress", "fulladdress", "mainaddress",
-                   "location", "streetaddress"],
+                   "location", "streetaddress", "locationsite"],
     "value":      ["buildingcost", "bldgcost", "constcost", "valuation", "jobvalue", "projectvalue", "cost", "value"],
-    "sqft":       ["squarefeet", "sqft", "totalsqft", "buildingsqft", "grossarea", "area"],
+    "sqft":       ["squarefeet", "sqft", "ssqfeet", "totalsqft", "buildingsqft", "comsqft", "grossarea", "area"],
     "zoning":     ["zoningcode", "zonecode", "zoning", "zone", "zoningdistrict"],
-    "contractor": ["contractor", "contractorname", "gc", "applicant", "applicantname", "developer",
+    "contractor": ["contractor", "contractorname", "scompanynameparc", "gc", "applicant",
+                   "applicantname", "developer",
                    "engineer"],
     "owner":      ["owner", "ownername", "ownname", "propertyowner"],
     "status":     ["permitstatus", "permitstat", "status", "casestatus", "devstatus", "approvalstatus"],
@@ -56,7 +59,10 @@ EXCLUDE = ["self storage", "self-storage", "mini storage", "mini-storage", "gara
 NON_INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(R|U|A|E|I)-?\d?\s", re.I)
 RESIDENTIAL = ["single family", "single-family", "residential", "dwelling", "townhome",
                "townhouse", "duplex", "deck", "pool", "subdivision"]
-INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|ML|MH|IND|BP|OFC-IND|M-?\d)", re.I)
+INDUSTRIAL_ZONING = re.compile(r"^(I-?\d|LI|HI|ML|MH|IND|BP|CBI|OFC-IND|M-?\d)", re.I)
+# Some counties split the address across columns (Rowan: number / direction /
+# street / suffix).
+ADDRESS_PARTS = ["saddress1", "spredirection", "saddress2", "sstreett"]
 # Building-code occupancy groups: F = factory, S = storage/warehouse, H = high hazard.
 # Mecklenburg writes these like "S1     * STORAGE - MODERATE HAZARD".
 INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(F|S|H)-?\d", re.I)
@@ -90,6 +96,9 @@ def resolve_fields(field_names):
     # Exports often split text across "Project Name" and "Description"; keep every
     # match so the keyword scoring sees all of it.
     fmap["desc"] = [names[norm(c)] for c in FIELD_MAP["desc"] if norm(c) in names] or None
+    if not fmap["address"]:
+        parts = [names[p] for p in ADDRESS_PARTS if p in names]
+        fmap["address"] = parts or None
     return fmap
 
 
@@ -99,6 +108,12 @@ def to_date(v):
     if isinstance(v, (int, float)):  # ArcGIS epoch ms
         return dt.datetime.fromtimestamp(v / 1000, dt.timezone.utc).date()
     s = str(v).strip()
+    m = re.match(r"([A-Z][a-z]+ \d{1,2}, \d{4})", s)
+    if m:
+        try:
+            return dt.datetime.strptime(m.group(1), "%B %d, %Y").date()
+        except ValueError:
+            pass
     for fmt, n in (("%Y-%m-%dT%H:%M:%S", 19), ("%Y-%m-%d", 10), ("%m/%d/%Y", 10),
                    ("%m/%d/%y", 8), ("%Y%m%d", 8)):
         try:
@@ -143,6 +158,11 @@ def score(rec):
         hits.append("industrial zoning"); s += 2
     if rec.get("occupancy") and INDUSTRIAL_OCCUPANCY.match(str(rec["occupancy"])):
         hits.append("industrial occupancy"); s += 3
+    sqft = rec.get("sqft") or 0
+    if sqft >= 50_000:
+        s += 3; hits.append("50k+ SF")
+    elif sqft >= 10_000:
+        s += 2; hits.append("10k+ SF")
     val = rec.get("value") or 0
     if val >= 1_000_000:
         s += 3; hits.append("$1M+")
@@ -155,7 +175,12 @@ def score(rec):
 
 def build_rec(attrs, fmap, cutoff):
     """Map one source row to our columns. Returns None if it's older than cutoff."""
-    rec = {k: (attrs.get(v) if v else None) for k, v in fmap.items() if k != "desc"}
+    rec = {k: (attrs.get(v) if v else None) for k, v in fmap.items() if k not in ("desc", "address")}
+    addr = fmap["address"]
+    if isinstance(addr, list):
+        rec["address"] = " ".join(str(attrs.get(c) or "").strip() for c in addr if attrs.get(c))
+    else:
+        rec["address"] = attrs.get(addr) if addr else None
     parts = [str(attrs.get(c) or "").strip() for c in (fmap["desc"] or [])]
     rec["desc"] = " | ".join(dict.fromkeys(p for p in parts if p))
     d = to_date(rec["issue_date"])

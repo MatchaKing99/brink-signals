@@ -19,6 +19,8 @@ import urllib.request
 from signals import permits
 
 PAUSE = 1.0   # seconds between calls; these are county servers
+BUDGET = 600  # seconds per portal; a slow county must not hold up the weekly run
+_deadline = None
 
 # Permit types worth a look. Trade-only and sign permits never mean a user moving.
 COMMERCIAL = re.compile(r"commercial|industrial|shell", re.I)
@@ -41,9 +43,11 @@ def _headers(src):
 def call(url, headers, body=None, tries=5):
     data = json.dumps(body).encode() if body is not None else None
     for attempt in range(tries):
+        if _deadline and time.monotonic() > _deadline:
+            raise TimeoutError(f"portal still answering slowly after {BUDGET}s; skipped this week")
         try:
             req = urllib.request.Request(url, data=data, headers=headers, method="POST" if data else "GET")
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=30) as r:
                 return json.load(r)
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
             if isinstance(e, urllib.error.HTTPError) and e.code < 500 or attempt == tries - 1:
@@ -102,6 +106,8 @@ def property_note(p):
 def pull(src, days):
     """Returns (permits issued, commercial records). Each record carries
     `industrial` and the permit table's usual fields plus `property`."""
+    global _deadline
+    _deadline = time.monotonic() + BUDGET
     h, api = _headers(src), src["api"]
     rows = recent_permits(src, days)
     items = []

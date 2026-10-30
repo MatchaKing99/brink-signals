@@ -1,6 +1,6 @@
 # Gaston County: How to Pull Permits
 
-> **In brink-signals:** the developments layer is pulled automatically every Monday. For permits, save the Citizen Self Service export as `gaston_<date>.csv` and upload it to `inbox/`. The `pull_permits.py` commands below are from the standalone version and still work the same way.
+> **In brink-signals (Oct 2026):** permits are now pulled **live** every Monday from Citizen Self Service's public search (`signals/energov.py`, `ENERGOV_SOURCES` in `signals/config.py`), with owner, building and sale facts from the parcel layer. No export needed. The manual steps below remain as a fallback if the portal changes; the `pull_permits.py` commands are from the standalone version.
 
 Gaston works differently from Mecklenburg. There's no open permit dataset to pull from. There are **two sources**, and together they give you an earlier and a later signal.
 

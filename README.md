@@ -1,8 +1,10 @@
 # Brink Signals
 
-Every Monday morning this repo checks seven Charlotte-region counties for signs that an industrial operator is about to need space, and emails a digest of **what's new since last week**.
+Every Monday morning this repo checks eight Charlotte-region counties for signs that an industrial operator is about to need space, and saves a digest of **what's new since last week**. A scheduled Claude task then researches each item (who's behind it, move or expansion, who to call, the material-handling angle) and emails Nate the result, and sweeps the places with no feed (York, Union and Mecklenburg-town rezonings, news, economic-development announcements).
 
-**Counties:** Mecklenburg · Gaston · Cabarrus · Union · Iredell · Rowan · York (SC)
+**Counties:** Mecklenburg · Gaston · Cabarrus · Union · Iredell · Rowan · Lincoln · York (SC)
+
+Live permit portals rate-limit themselves (about one request a second) and are capped at 10 minutes each, so a slow county shows 🔴 in the Coverage table instead of holding up the run. Nothing here logs in anywhere; every source is a public search.
 
 ## The signals, earliest first
 

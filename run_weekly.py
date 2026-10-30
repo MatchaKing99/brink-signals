@@ -58,7 +58,10 @@ def run_arcgis(state, show_all, status):
                 if not hit:
                     status.append((label, "⚪ no matching layer published"))
                     continue
-                url, layer_name = hit
+                url, layer_name, year = hit
+                if year and year < dt.date.today().year - 1:
+                    status.append((label, f"⚪ newest published layer is \"{layer_name}\" — nothing current"))
+                    continue
                 note = f" (layer: {layer_name})"
             records, _ = permits.pull_arcgis(url, src["days"])
             min_score = config.PERMIT_MIN_SCORE if kind == "permits" else config.PLANNING_MIN_SCORE

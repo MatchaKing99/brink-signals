@@ -55,6 +55,7 @@ LAYERS = {
     "/gaston/2": (GASTON, "DATE"),
     "/cab/MapServer/33": ([meck(99, 3000, "S1", "old", 1)], "issuedate"),
     "/cab/MapServer/41": (CABARRUS_2026, "issuedate"),
+    "/stale/MapServer/33": ([meck(98, 3000, "S1", "old", 1)], "issuedate"),
 }
 
 
@@ -119,6 +120,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path.startswith("/adzuna/"):
             assert "what" not in q, "one combined what_or search per county"
             return self._send({"results": adzuna_results(q["where"], q["what_or"])})
+        if path == "/stale/MapServer":
+            return self._send({"layers": [{"id": 33, "name": "Permits 2015"}]})
         if path == "/cab/MapServer":
             return self._send({"layers": [{"id": 33, "name": "Permits 2015"},
                                           {"id": 41, "name": "Permits 2026"},
@@ -153,6 +156,8 @@ class EndToEnd(unittest.TestCase):
             {"county": "Gaston", "kind": "planning", "days": 3650, "url": base + "/gaston/2"},
             {"county": "Cabarrus", "kind": "permits", "days": 30,
              "discover": {"service": base + "/cab/MapServer", "name": r"^permits\b"}},
+            {"county": "Stale", "kind": "permits", "days": 30,
+             "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
         jobs.API = base + "/adzuna/{page}"
         os.environ["ADZUNA_APP_ID"] = os.environ["ADZUNA_APP_KEY"] = "test"
@@ -184,6 +189,7 @@ class EndToEnd(unittest.TestCase):
         for junk in ("Owner 3", "Owner 4", "Owner 5", "Owner 6", "Owner 99"):
             self.assertNotIn(junk, d)
         self.assertIn("Permits 2026", d)
+        self.assertIn('newest published layer is "Permits 2015"', d)
         # Planning: industrial yes, subdivision no.
         self.assertIn("FAIRVIEW INDUSTRIAL", d)
         self.assertNotIn("LOWELL WOODS", d)

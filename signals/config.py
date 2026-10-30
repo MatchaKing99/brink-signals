@@ -27,7 +27,9 @@ COUNTIES = {
 # one layer per year.
 ARCGIS_SOURCES = [
     {
-        "county": "Mecklenburg", "kind": "permits", "days": 30,
+        # 60 days: the county's GIS copy runs a few weeks behind, and seen.json
+        # stops anything from being reported twice.
+        "county": "Mecklenburg", "kind": "permits", "days": 60,
         # FeatureServer (not MapServer) is the endpoint that serves records; see
         # github.com/AnthonyMutt/charlotte-development-analysis
         "url": "https://meckgis.mecklenburgcountync.gov/server/rest/services/BuildingPermits/FeatureServer/0",

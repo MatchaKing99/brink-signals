@@ -204,8 +204,9 @@ def find_ids(url, meta, fmap, cutoff, recent_cap=20000, verbose=False):
                 continue
             if verbose:
                 print(f"  date filter {where!r} -> {len(ids)} records")
-            if ids:
-                return oid_f, sorted(ids), "date filter"
+            # A filter the server accepted is the answer, even if it's empty;
+            # only fall back to "newest by ID" when every filter is rejected.
+            return oid_f, sorted(ids), "date filter"
     oid_f, ids = query_ids(url, "1=1")
     if verbose:
         print(f"  all records -> {len(ids)} IDs")
@@ -287,7 +288,7 @@ def discover_layer(service_url, name_pattern):
         years = [int(y) for y in re.findall(r"(?:19|20)\d\d", l["name"])]
         return (max(years) if years else 0, l["id"])
     best = max(hits, key=key)
-    return f"{service_url.rstrip('/')}/{best['id']}", best["name"]
+    return f"{service_url.rstrip('/')}/{best['id']}", best["name"], key(best)[0]
 
 
 def score_records(records, min_score):

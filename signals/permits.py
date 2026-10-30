@@ -57,7 +57,9 @@ EXCLUDE = ["self storage", "self-storage", "mini storage", "mini-storage", "gara
            "retaining wall", "boat", "pier", "church", "school", "restaurant",
            "storage facility", "climate controlled", "tank farm", "automotive", "auto repair",
            "car wash", "trash room", "fuel", "re roof", "re-roof", "reroof", "roof replacement",
-           "home sales", "relinquishment", "etj", "multifamily", "multi-family", "townhome"]
+           "home sales", "relinquishment", "etj", "multifamily", "multi-family", "townhome",
+           "(mf)", "apartments", "hospital", "medical center", "publix", "college", "university",
+           "pre-wire", "prewire", "low voltage", "fire training"]
 # Occupancy groups that are never industrial users: R = residential, U = utility/misc,
 # A = assembly, E = educational, I = institutional.
 NON_INDUSTRIAL_OCCUPANCY = re.compile(r"^\s*(R|U|A|E|I)-?\d?\s", re.I)
@@ -140,7 +142,8 @@ def fmt_num(v):
 
 def has(word, text):
     # match at word start: "rack" hits "racking" but not mid-word
-    return re.search(r"\b" + re.escape(word), text) is not None
+    lead = r"\b" if word[0].isalnum() else ""   # "(mf)" starts with punctuation
+    return re.search(lead + re.escape(word), text) is not None
 
 
 def score(rec):

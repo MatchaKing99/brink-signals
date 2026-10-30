@@ -188,51 +188,50 @@ def query_ids(url, where):
     return data.get("objectIdFieldName"), data.get("objectIds") or []
 
 
-def find_ids(url, meta, fmap, cutoff, recent_cap=20000, verbose=False):
-    """Object IDs to fetch. Asks for IDs (no paging needed, which some county
-    servers don't support) filtered by date; if no date filter works, takes the
-    newest records by object ID and filters by date afterwards."""
+def pick_where(url, meta, fmap, cutoff):
+    """WHERE clause for 'issued since cutoff' that this server accepts.
+    Returns "1=1" for layers without a date field, None if every date filter
+    is rejected (the caller then falls back to the newest records by ID)."""
     date_f = fmap["issue_date"]
-    if date_f:
-        ftype = next((f.get("type") for f in meta["fields"] if f["name"] == date_f), None)
-        for where in date_wheres(date_f, ftype, cutoff):
-            try:
-                oid_f, ids = query_ids(url, where)
-            except Exception as e:
-                if verbose:
-                    print(f"  date filter failed: {where}  ({e})")
-                continue
-            if verbose:
-                print(f"  date filter {where!r} -> {len(ids)} records")
-            # A filter the server accepted is the answer, even if it's empty;
-            # only fall back to "newest by ID" when every filter is rejected.
-            return oid_f, sorted(ids), "date filter"
-    oid_f, ids = query_ids(url, "1=1")
-    if verbose:
-        print(f"  all records -> {len(ids)} IDs")
-    return oid_f, sorted(ids)[-recent_cap:], "newest by ID"
+    if not date_f:
+        return "1=1"
+    ftype = next((f.get("type") for f in meta["fields"] if f["name"] == date_f), None)
+    for where in date_wheres(date_f, ftype, cutoff):
+        try:
+            query(url, {"where": where, "returnCountOnly": "true", "f": "json"})
+            return where
+        except Exception:
+            continue
+    return None
 
 
-def fetch_by_ids(url, oid_f, ids, batch):
+def fetch_by_ids(url, ids, batch):
     for i in range(0, len(ids), batch):
         chunk = ids[i:i + batch]
         data = query(url, {"objectIds": ",".join(map(str, chunk)), "outFields": "*",
                            "returnGeometry": "false", "f": "json"}, post=True)
         yield from (feat["attributes"] for feat in data.get("features", []))
-        if len(ids) > batch:
-            print(f"  …fetched {min(i + batch, len(ids))}/{len(ids)}", file=sys.stderr)
 
 
-def rows_from_arcgis(url, fmap, meta, cutoff):
-    oid_f, ids, how = find_ids(url, meta, fmap, cutoff)
-    if not fmap["issue_date"]:
-        print("No date field found — pulling every record (fine for small layers like "
-              "developments; set FIELD_MAP['issue_date'] if this layer is large).", file=sys.stderr)
-    print(f"Fetching {len(ids)} records ({how})…", file=sys.stderr)
-    batch = min(int(meta.get("maxRecordCount") or 1000), 1000)
+def rows_from_arcgis(url, fmap, meta, cutoff, recent_cap=20000):
+    """Download matching records with pyesridump (github.com/openaddresses/pyesridump),
+    which handles paging, ID-range and retry quirks across ArcGIS servers."""
+    from esridump.dumper import EsriDumper
+
+    where = pick_where(url, meta, fmap, cutoff)
+    if where is not None:
+        print(f"  where: {where}", file=sys.stderr)
+        dump = EsriDumper(url, extra_query_args={"where": where}, request_geometry=False,
+                          timeout=60, pause_seconds=1, requests_to_pause=20)
+        attrs = (feat.get("properties") or {} for feat in dump)  # GeoJSON features
+    else:
+        # No date filter accepted: newest records by object ID, dated client-side.
+        print(f"  no date filter accepted; scanning newest {recent_cap} by ID", file=sys.stderr)
+        _, ids = query_ids(url, "1=1")
+        attrs = fetch_by_ids(url, sorted(ids)[-recent_cap:], 1000)
     use_cutoff = cutoff if fmap["issue_date"] else None
-    for attrs in fetch_by_ids(url, oid_f, ids, batch):
-        rec = build_rec(attrs, fmap, use_cutoff)
+    for a in attrs:
+        rec = build_rec(a, fmap, use_cutoff)
         if rec is not None:
             yield rec
 

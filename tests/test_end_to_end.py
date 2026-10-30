@@ -128,21 +128,35 @@ class Handler(http.server.BaseHTTPRequestHandler):
                                           {"id": 5, "name": "Parcels"}]})
         layer = path[:-len("/query")] if path.endswith("/query") else path
         rows, date_f = LAYERS[layer]
-        if not path.endswith("/query"):
-            return self._send({"name": layer, "maxRecordCount": 2, "fields": fields(rows, date_f)})
-        if "objectIds" in q:
-            want = set(map(int, q["objectIds"].split(",")))
-            assert len(want) <= 2, "batching must respect maxRecordCount"
-            oid = next(k for k in rows[0] if k.lower() == "objectid")
-            return self._send({"features": [{"attributes": r} for r in rows if r[oid] in want]})
-        m = re.search(r"DATE '(\d{4}-\d\d-\d\d)'", q["where"])
         oid = next(k for k in rows[0] if k.lower() == "objectid")
+        if not path.endswith("/query"):
+            # Mecklenburg's real FeatureServer pages with resultOffset; the
+            # others exercise pyesridump's object-ID-range path.
+            return self._send({"name": layer, "maxRecordCount": 2, "fields": fields(rows, date_f),
+                               "supportsPagination": layer == "/meck/0"})
+        if "objectIds" in q:  # our fallback batch fetch
+            want = set(map(int, q["objectIds"].split(",")))
+            return self._send({"features": [{"attributes": r} for r in rows if r[oid] in want]})
+        hits = rows
+        where = q.get("where", "1=1")
+        m = re.search(r"DATE '(\d{4}-\d\d-\d\d)'", where)
         if m:
             cut = dt.datetime.strptime(m.group(1), "%Y-%m-%d").timestamp() * 1000
-            ids = [r[oid] for r in rows if r[date_f] >= cut]
-        else:
-            ids = [r[oid] for r in rows]
-        return self._send({"objectIdFieldName": oid, "objectIds": ids})
+            hits = [r for r in hits if r[date_f] >= cut]
+        elif where not in ("1=1",) and not re.search(rf"{oid} >= \d+", where):
+            return self._send({"error": {"code": 400, "message": "Unable to complete operation."}})
+        m = re.search(rf"{oid} >= (\d+) AND {oid} <= (\d+)", where)
+        if m:
+            lo, hi = int(m.group(1)), int(m.group(2))
+            hits = [r for r in hits if lo <= r[oid] <= hi]
+        if q.get("returnCountOnly") == "true":
+            return self._send({"count": len(hits)})
+        if q.get("returnIdsOnly") == "true":
+            return self._send({"objectIdFieldName": oid, "objectIds": [r[oid] for r in hits]})
+        if "resultOffset" in q:
+            off, n = int(q["resultOffset"]), int(q["resultRecordCount"])
+            hits = hits[off:off + n]
+        return self._send({"features": [{"attributes": r} for r in hits]})
 
 
 class EndToEnd(unittest.TestCase):

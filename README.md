@@ -62,10 +62,10 @@ Step-by-step for Gaston: [`docs/gaston-county.md`](docs/gaston-county.md).
 |---|---|
 | `run_weekly.py` | The weekly run |
 | `signals/config.py` | Counties, sources, search terms, thresholds |
-| `signals/permits.py` | County GIS access and permit scoring |
+| `signals/permits.py` | County GIS access (downloads via [pyesridump](https://github.com/openaddresses/pyesridump)) and permit scoring |
 | `signals/jobs.py` | Job-board pull and clustering |
 | `output/<date>/` | `digest.md` plus Airtable-ready `permits.csv`, `planning.csv`, `jobs.csv` |
 | `data/seen.json` | What's already been reported, so each digest is only new items |
 | `docs/` | Material handling outreach kit, Airtable setup, Gaston guide |
 
-Run locally with `python3 run_weekly.py` (add `--no-jobs` to skip the job search, `--all` to re-list everything). Tests: `python3 -m unittest discover tests`.
+Run locally with `pip install -r requirements.txt` then `python3 run_weekly.py` (add `--no-jobs` to skip the job search, `--all` to re-list everything). Tests: `python3 -m unittest discover tests`.

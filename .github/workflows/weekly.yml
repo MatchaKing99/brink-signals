@@ -25,6 +25,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install
+        run: pip install -r requirements.txt
+
       - name: Pull signals
         env:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}

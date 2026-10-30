@@ -1,8 +1,3 @@
 Permit #,Issued,County,Address,Type,Occupancy,Description,Value,Sq Ft,Zoning,Contractor,Owner,Permit Status,Score,Signals,Status
-Z 05-26,2026-10-09,Rowan,,,,Kannapolis ETJ Relinquishment,,,MHP,,,,2,industrial zoning,New
-Case: 2602-1,2026-02-04,Iredell,"Taylorsville Hwy, PIN: 4715093707",,,"This is a request to rezone a parcel of land along Taylorsville Hwy, approximately 42.65 acres, from Light Manufacturing (M-1) back to Residential Agricultural (RA). | This is a conventional request, with no additional agreed upon conditions at this time.",,,,"Amanda Huffman, Anchor Management Team, LLC",,,3,"manufactur, addition",New
-1192176.0,,Iredell,,Industrial,,"Corvid Expansion | Industrial development, light manufacturing",,205465,HLI,,,Active Applications,8,"manufactur, industrial, expansion, 50k+ SF",New
-918633.0,,Iredell,,Mixed-Use,,Cadia Mooresville,,397300,"CM, RLI",,,Active Applications,3,50k+ SF,New
-632679.0,,Iredell,,Mixed-Use,,Spectrum Lake Norman | Mixed use development with retail/commercial and multifamily,,25500,CZ,,,Under Construction,2,10k+ SF,New
-1066568.0,,Iredell,,Mixed-Use,,"Davis | Mixed use development with retail/commercial outparcel, C-store and multifamily",,12000,RLS,,,Active Applications,2,10k+ SF,New
-866675.0,,Iredell,,Mixed-Use,,Talbert/150 | Mixed use development with retail/commercial and multifamily,,15000,C-CM,,,Entitled/By Right Reviews,2,10k+ SF,New
+1192176,,Iredell,,Industrial,,"Corvid Expansion | Industrial development, light manufacturing",,205465,HLI,,,Active Applications,8,"manufactur, industrial, expansion, 50k+ SF",New
+,2024-05-14,Gaston,122 EASON RD,,,,,,I-2,,,,2,industrial zoning,New

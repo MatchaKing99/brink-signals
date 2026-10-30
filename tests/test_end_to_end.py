@@ -301,7 +301,8 @@ class EndToEnd(unittest.TestCase):
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
         config.ENERGOV_SOURCES = [{"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
-                                   "api": base + "/energov/api", "parcels": base + "/energov/parcels/11"}]
+                                   "api": base + "/energov/api",
+                                   "parcels": {"url": base + "/energov/parcels/11", "fields": "gaston"}}]
         energov.PAUSE = accela.PAUSE = 0
         config.ACCELA_SOURCES = [{"county": "Cabarrus", "days": 21, "base": base + "/aca/CABARRUS",
                                   "types": ["Permits/Building/Commercial/New", "Permits/Building/Commercial/Upfit"]}]
@@ -373,6 +374,7 @@ class EndToEnd(unittest.TestCase):
             self.assertNotIn(junk, d)
         self.assertIn("| Gaston permits (live portal) | 🟢 5 permits, 4 commercial, 1 industrial, 1 new |", d)
         self.assertNotIn("Gaston permits (portal)", d)
+        self.assertNotIn("Iredell permits (portal)", d)
         # Cabarrus live permits: spec flex warehouse in with owner, contractor, cost and SF from
         # the detail page; Building B (flex warehouse) in too; schools, EV chargers, shelters out.
         self.assertIn("| Cabarrus | 5542 LIPPARD LN, AC, HARRISBURG NC 28075 | LIPPARD LANE OWNER LLC | $4,393,440 |", d)

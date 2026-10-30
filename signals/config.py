@@ -114,7 +114,15 @@ INSPECTION_SOURCES = [
 ENERGOV_SOURCES = [
     {"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
      "api": "https://selfservice.gastongov.com/energov_prod/selfservice/api/energov",
-     "parcels": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Parcels/FeatureServer/11"},
+     "parcels": {"url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Parcels/FeatureServer/11",
+                 "fields": "gaston"}},
+    # Iredell's portal covers the county, Statesville, Troutman and Harmony
+    # (Mooresville permits separately).
+    {"county": "Iredell", "days": 21, "tenant_id": 1, "tenant_name": "Iredell County, NC",
+     "api": "https://selfservice.iredellcountync.gov/energov_prod/selfservice/api/energov",
+     "types_rx": r"commercial|industrial|shell|upfit|erosion control - major|change (of|in) use",
+     "parcels": {"url": "https://maps.iredellcountync.gov/server/rest/services/Data/TaxSQL_Parcels/FeatureServer/0",
+                 "fields": "iredell"}},
 ]
 
 # Live permits from Accela Citizen Access portals (public search, no login).
@@ -132,7 +140,6 @@ ACCELA_SOURCES = [
 # dropped into inbox/ as <county>_<anything>.csv and get scored the same way.
 PORTAL_ONLY = {
     "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately); commercial inspections are pulled live",
-    "Iredell": "eTRAKiT (Mooresville permits separately at mooresvillepermits.com); planning hearings and Mooresville projects pulled live",
     "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",
 }
 

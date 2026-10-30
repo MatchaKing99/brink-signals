@@ -1,12 +1,17 @@
 # Brink Signals — week of 2026-10-30
 
-**0 new signals.** Earliest-stage first: hiring → planning → permits.
+**4 new signals.** Earliest-stage first: hiring → planning → permits.
 
 ## 🔥 Hiring clusters (12–18 months ahead of a move)
 _None new this week._
 
 ## 📐 Planning & development filings (6–9 months ahead)
-_None new this week._
+- **2025-134: Stuart Hair** — Mecklenburg · → ML-2(CD) · Pen · 2025-12-11 · _industrial zoning_
+- **2026-036: Culp Road Materials, LLC** — Mecklenburg · → ML-2(CD) · Pen · 2026-05-15 · _industrial zoning_
+- **2026-034: Sam's Mart, LLC** — Mecklenburg · → ML-1(CD) · Pen · 2026-05-15 · _industrial zoning_
+- **2026-008: COLLABDEV6 LLC** — Mecklenburg · → ML-1 · Pen · 2026-02-11 · _industrial zoning_
+
+*You:* who's developing it, and is it spec or build-to-suit? *Partner:* future tenants need fit-out.
 
 ## 🏗️ Permits (work is happening now)
 _None new this week._
@@ -25,6 +30,7 @@ _None new this week._
 | Iredell planning (planning board hearings) | 🟢 23 records, 1 scored, 0 new |
 | Iredell planning (Mooresville projects under construction) | 🟢 76 records, 1 scored, 0 new |
 | Cabarrus permits (Accela plan reviews) | 🟢 0 records, 0 scored, 0 new · types seen:  |
+| Mecklenburg planning (Charlotte rezonings) | 🟢 58 records, 7 scored, 4 new |
 | Gaston planning (county rezonings) | 🟢 38 records, 0 scored, 0 new |
 | Gaston planning (municipal rezonings) | 🟢 20 records, 1 scored, 0 new |
 | York permits (Rock Hill commercial) | ⚪ newest published layer is "Commercial - 2023" — nothing current |

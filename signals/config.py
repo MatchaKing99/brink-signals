@@ -35,6 +35,12 @@ ARCGIS_SOURCES = [
         "url": "https://meckgis.mecklenburgcountync.gov/server/rest/services/BuildingPermits/FeatureServer/0",
     },
     {
+        # The county's newer Accela permit system (all trades): work
+        # descriptions, construction cost, occupancy group, owner.
+        "county": "Mecklenburg", "kind": "permits", "days": 60, "name": "Accela",
+        "url": "https://meckgis.mecklenburgcountync.gov/server/rest/services/AccelaAllPermits/FeatureServer/0",
+    },
+    {
         "county": "Gaston", "kind": "planning", "days": 3650,
         "url": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Developments/FeatureServer/2",
     },

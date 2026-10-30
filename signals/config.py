@@ -117,10 +117,19 @@ INSPECTION_SOURCES = [
      ]},
 ]
 
+# Live permits from Tyler EnerGov Citizen Self Service portals (public search,
+# no login). Only commercial/industrial permit types are fetched in detail;
+# owners come from the parcel layer since portal contacts are private. 21 days
+# overlaps last week's run; seen.json keeps each permit to one report.
+ENERGOV_SOURCES = [
+    {"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
+     "api": "https://selfservice.gastongov.com/energov_prod/selfservice/api/energov",
+     "parcels": "https://gis.gastoncountync.gov/publicgis/rest/services/PublicGIS/Parcels/FeatureServer/11"},
+]
+
 # Counties whose permit systems have no open feed. Their weekly exports can be
 # dropped into inbox/ as <county>_<anything>.csv and get scored the same way.
 PORTAL_ONLY = {
-    "Gaston":  "Tyler EnerGov Citizen Self Service (see docs/gaston-county.md)",
     "Union":   "Evolve portal — ucinspect.unioncountync.gov/EvolvePublic (Monroe & Waxhaw permit separately); commercial inspections are pulled live",
     "Iredell": "eTRAKiT (Mooresville permits separately at mooresvillepermits.com); planning hearings and Mooresville projects pulled live",
     "York":    "Evolve Public Portal (unincorporated); Rock Hill / Fort Mill permit separately",

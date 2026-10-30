@@ -23,7 +23,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from signals import config, jobs, permits
+from signals import config, energov, jobs, permits
 
 ROOT = Path(__file__).parent
 STATE = ROOT / "data" / "seen.json"
@@ -97,6 +97,29 @@ def run_arcgis(state, show_all, status):
             traceback.print_exc()
             status.append((label, f"🔴 failed: {str(e)[:120]}"))
     return found
+
+
+def run_energov(state, show_all, status):
+    """Live permits from EnerGov portals; industrial ones only."""
+    out = []
+    for src in config.ENERGOV_SOURCES:
+        label = f"{src['county']} permits (live portal)"
+        try:
+            pulled, items = energov.pull(src, src["days"])
+            ind = [r for r in items if r["industrial"]]
+            new = 0
+            for r in ind:
+                k = permit_key(src["county"], r)
+                if show_all or k not in state["permits"]:
+                    state["permits"].setdefault(k, TODAY)
+                    r["county"] = src["county"]
+                    out.append(r)
+                    new += 1
+            status.append((label, f"🟢 {pulled} permits, {len(items)} commercial, {len(ind)} industrial, {new} new"))
+        except Exception as e:
+            traceback.print_exc()
+            status.append((label, f"🔴 failed: {str(e)[:120]}"))
+    return out
 
 
 def run_inbox(state, show_all, status):
@@ -197,7 +220,7 @@ def run_jobs(state, show_all, status):
 
 PERMIT_COLS = ["Permit #", "Issued", "County", "Address", "Type", "Occupancy", "Description",
                "Value", "Sq Ft", "Zoning", "Contractor", "Owner", "Permit Status", "Score",
-               "Signals", "Status"]
+               "Signals", "Status", "Property"]
 
 
 def write_permits_csv(path, rows):
@@ -208,7 +231,7 @@ def write_permits_csv(path, rows):
             w.writerow([r["permit_no"], r["issue_date"], r["county"], (r["address"] or "").strip(),
                         r["type"], r["occupancy"], r["desc"], permits.fmt_num(r["value"]),
                         permits.fmt_num(r["sqft"]), r["zoning"], r["contractor"], r["owner"],
-                        r["status"], r["score"], r["signals"], "New"])
+                        r["status"], r["score"], r["signals"], "New", r.get("property") or ""])
 
 
 def write_inspections_csv(path, rows):
@@ -273,12 +296,13 @@ def digest(permit_rows, planning_rows, job_rows, status, inspection_rows=()):
 
     L.append("## 🏗️ Permits (work is happening now)")
     if permit_rows:
-        L.append("| Score | County | Address | Owner / contractor | Value | What | Signals |")
-        L.append("|---|---|---|---|---|---|---|")
+        L.append("| Score | County | Address | Owner / contractor | Value | What | Signals | Property |")
+        L.append("|---|---|---|---|---|---|---|---|")
         for r in permit_rows[:30]:
-            what = (r["desc"] or "").split(" | ")[0][:70]
+            what = (r["desc"] or "").split(" | ")[0][:110]
             L.append(f"| {r['score']} | {r['county']} | {(r['address'] or '').strip()} | "
-                     f"{r['owner'] or r['contractor'] or '—'} | {_money(r['value'])} | {what} | {r['signals']} |")
+                     f"{r['owner'] or r['contractor'] or '—'} | {_money(r['value'])} | {what} | {r['signals']} | "
+                     f"{r.get('property') or '—'} |")
         L.append("\n*You:* if this is a new address, what building did they leave? That's a "
                  "backfill or sublease lead. *Partner:* racking, dock and forklift needs at this address.\n")
     else:
@@ -317,7 +341,7 @@ def main():
     state = load_state()
     status = []
     found = run_arcgis(state, args.all, status)
-    permit_rows = found["permits"] + run_inbox(state, args.all, status)
+    permit_rows = found["permits"] + run_energov(state, args.all, status) + run_inbox(state, args.all, status)
     permit_rows.sort(key=lambda r: r["score"], reverse=True)
     planning_rows = found["planning"]
     if args.no_jobs or not jobs.provider():

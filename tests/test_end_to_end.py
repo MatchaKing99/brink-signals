@@ -17,7 +17,7 @@ import urllib.parse
 from pathlib import Path
 
 import run_weekly
-from signals import config, jobs, permits
+from signals import config, energov, jobs, permits
 
 NOW = int(dt.datetime.now().timestamp() * 1000)
 DAY = 86_400_000
@@ -102,6 +102,24 @@ CLT_REZ = [{"OBJECTID": 1, "Petition": "2026-081", "Petitioner": "Crossroads Log
             "ExistZone": "N1-A", "ReqZone": "N1-B(CD)", "Type": "CD", "PetAcres": 0.79, "Propluse": None,
             "Status": "Pending", "Received": NOW - 20 * DAY}]
 
+# Gaston EnerGov portal: real records saved from the live search (Oct 2026).
+EG = json.loads((Path(__file__).parent / "fixtures" / "gaston_energov.json").read_text())
+EG_ROWS = [dict(r, IssueDate=f"{dt.date.today()}T00:00:00") for r in EG["rows"]]
+
+
+def energov_route(handler, path, q, body):
+    if path.endswith("/search/criteria"):
+        return handler._send({"Result": EG["criteria"]})
+    if path.endswith("/search/search"):
+        assert body["SortBy"] == "IssueDate" and body["FilterModule"] == 2
+        return handler._send({"Result": {"EntityResults": EG_ROWS if body["PageNumber"] == 1 else []}})
+    if "/permits/" in path:
+        cid = path.rsplit("/", 1)[1]
+        return handler._send({"Result": EG["kyle_detail"] if cid == EG["kyle_detail"]["PermitId"] else {"Value": 0}})
+    if path.endswith("/query"):   # parcel layer
+        hit = EG["kyle_parcel"] if str(EG["kyle_parcel"]["PID"]) in q.get("where", "") else None
+        return handler._send({"features": [{"attributes": hit}] if hit else []})
+
 
 def fields(rows, date_field):
     return [{"name": k, "type": "esriFieldTypeDate" if k == date_field else
@@ -172,10 +190,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         u = urllib.parse.urlparse(self.path)
+        if u.path.startswith("/energov/"):
+            return energov_route(self, u.path, dict(urllib.parse.parse_qsl(u.query)), None)
         self.route(u.path, dict(urllib.parse.parse_qsl(u.query)))
 
     def do_POST(self):
         body = self.rfile.read(int(self.headers["Content-Length"])).decode()
+        if self.path.startswith("/energov/"):
+            return energov_route(self, self.path, {}, json.loads(body))
         self.route(self.path, dict(urllib.parse.parse_qsl(body)))
 
     def route(self, path, q):
@@ -246,6 +268,9 @@ class EndToEnd(unittest.TestCase):
             {"county": "Stale", "kind": "permits", "days": 30,
              "discover": {"service": base + "/stale/MapServer", "name": r"^permits\b"}},
         ]
+        config.ENERGOV_SOURCES = [{"county": "Gaston", "days": 21, "tenant_id": 1, "tenant_name": "Gaston County, NC",
+                                   "api": base + "/energov/api", "parcels": base + "/energov/parcels/11"}]
+        energov.PAUSE = 0
         config.INSPECTION_SOURCES = [{"county": "Union", "days": 120,
                                       "urls": [base + "/union/ok/0", base + "/union/not/6"]}]
         jobs.API = base + "/adzuna/{page}"
@@ -305,6 +330,15 @@ class EndToEnd(unittest.TestCase):
         self.assertIn("→ ML-1(CD)", d)
         self.assertNotIn("2026-076", d)
         self.assertNotIn("2026-077", d)
+        # Gaston live permits: spec warehouse upfit in, with parcel owner and building facts;
+        # drone docks, cell sites and residential out.
+        self.assertIn("| Gaston | 1910 KYLE COURT GASTONIA NC 28052 | KYLE COURT LLC | $250,000 |", d)
+        self.assertIn("Distribution Warehouse; 54,000 SF; built 1999", d)
+        self.assertIn("sold 11/2016 $1,495,000", d)
+        for junk in ("BLDC-26-10-05-03160", "MARTIN LUTHER KING", "4920 YORK", "840 MYRTLE"):
+            self.assertNotIn(junk, d)
+        self.assertIn("| Gaston permits (live portal) | 🟢 5 permits, 4 commercial, 1 industrial, 1 new |", d)
+        self.assertNotIn("Gaston permits (portal)", d)
         # Union inspections: commercial jobs only, merged across layers, final flagged.
         self.assertIn("| 🏁 **final** | Union | 9509 Morgan Mill Rd Monroe |", d)
         self.assertIn("| under construction | Union | 100 Industrial Dr Monroe |", d)

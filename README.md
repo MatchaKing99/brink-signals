@@ -11,7 +11,7 @@ Every Monday morning this repo checks seven Charlotte-region counties for signs 
 | 🔥 **Hiring clusters**: 3+ forklift / warehouse / production postings from one employer in one city | 12–18 months | Google Jobs via SerpApi (free) | All 7 |
 | 📐 **Planning filings**: industrial rezonings (requests into industrial zoning or for an industrial use), developments, Planning Board hearings, projects under construction | 6–9 months | County / city GIS | Mecklenburg (Charlotte rezoning petitions), Gaston, Rowan, Iredell |
 | 🔨 **Commercial inspections**: commercial jobs being inspected; a building or fire **final** means someone is about to move in | 0–3 months | County GIS | Union |
-| 🏗️ **Permits**: industrial upfits, additions, racking, dock work | 0–6 months | County GIS, or exports dropped in `inbox/` | Mecklenburg, Rowan, Cabarrus (live) · Gaston, Union, Iredell, York (inbox) |
+| 🏗️ **Permits**: industrial upfits, additions, racking, dock work | 0–6 months | County GIS, or exports dropped in `inbox/` | Mecklenburg, Rowan, Gaston (live portal, with parcel owner and building facts), Cabarrus (stale since Apr 2025) · Union, Iredell, York (inbox) |
 
 ## How a permit gets scored
 

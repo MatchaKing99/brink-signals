@@ -3,6 +3,11 @@ name: Weekly signals
 on:
   schedule:
     - cron: "37 10 * * 1"   # Mondays ~6:37am Eastern
+    # GitHub sometimes drops a scheduled run (it did on 2026-11-02), so two
+    # backups follow, both before the 8:13am Eastern email. A backup does
+    # nothing once that day's digest exists.
+    - cron: "52 11 * * 1"
+    - cron: "22 12 * * 1"
   workflow_dispatch:        # "Run workflow" button in the Actions tab
   push:
     paths: ["inbox/**"]     # dropping a permit export in inbox/ runs it right away
@@ -21,16 +26,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Already ran today?
+        id: done
+        run: |
+          if [ "${{ github.event_name }}" = schedule ] && [ -f "output/$(date -u +%F)/digest.md" ]; then
+            echo "Today's digest already exists; this backup run has nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.done.outputs.skip != 'true'
         with:
           python-version: "3.12"
 
       - name: Install
+        if: steps.done.outputs.skip != 'true'
         run: |
           pip install -r requirements.txt
           sudo apt-get install -y -q poppler-utils >/dev/null   # pdftotext, for town agendas
 
       - name: Pull signals
+        if: steps.done.outputs.skip != 'true'
         env:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
@@ -38,6 +54,7 @@ jobs:
         run: python run_weekly.py
 
       - name: Save results
+        if: steps.done.outputs.skip != 'true'
         run: |
           git config user.name "brink-signals bot"
           git config user.email "actions@users.noreply.github.com"
@@ -47,6 +64,7 @@ jobs:
           for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && break; sleep 5; done
 
       - name: Post digest as an issue (emails you)
+        if: steps.done.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

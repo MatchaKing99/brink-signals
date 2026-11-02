@@ -1,12 +1,14 @@
 # Brink Signals — week of 2026-11-02
 
-**1 new signals.** Earliest-stage first: hiring → planning → permits.
+**2 new signals.** Earliest-stage first: hiring → planning → permits.
 
 ## 🔥 Hiring clusters (12–18 months ahead of a move)
 _None new this week._
 
 ## 📐 Planning & development filings (6–9 months ahead)
-_None new this week._
+- **ZMA #798 (approved): A request to rezone a 16.29-acre parcel from B-G (General Business) to I-G (Industrial General). The property is located at 2585 N. N.C. 16 Business Highway …** — Lincoln · 2585 N. N.C. 16 Business Highway · → I-G · Rezoning · Approved · JBDK Family, LP · 2026-10-19 · _industrial, industrial zoning_
+
+*You:* who's developing it, and is it spec or build-to-suit? *Partner:* future tenants need fit-out.
 
 ## 🏗️ Permits (work is happening now)
 | Score | County | Address | Owner / contractor | Value | What | Signals | Property |
@@ -38,9 +40,9 @@ _None new this week._
 | Cabarrus planning (live portal, rezonings & site plans) | 🟢 16 cases, 16 commercial, 0 industrial, 0 new |
 | Union permits (live portal) | 🟢 511 permits, 9 commercial, 3 industrial, 0 new |
 | York permits (live portal) | 🟢 290 permits, 13 commercial, 2 industrial, 0 new |
-| Lincoln planning (rezoning cases) | 🔴 failed: <urlopen error timed out> |
-| York planning (Fort Mill agendas) | 🔴 failed: <urlopen error timed out> |
-| Union planning (Indian Trail agendas) | 🔴 failed: <urlopen error timed out> |
+| Lincoln planning (rezoning cases) | 🟢 67 cases, 6 industrial, 1 new |
+| York planning (Fort Mill agendas) | 🟢 20 agenda items, 0 industrial, 0 new |
+| Union planning (Indian Trail agendas) | 🟢 31 agenda items, 0 industrial, 0 new |
 | Union planning (Monroe agendas) | 🟢 68 agenda items, 0 industrial, 0 new |
 | Mecklenburg planning (Huntersville agendas) | 🟢 50 agenda items, 0 industrial, 0 new |
 | Mecklenburg planning (Davidson agendas) | 🟢 31 agenda items, 0 industrial, 0 new |

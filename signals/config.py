@@ -53,7 +53,8 @@ ARCGIS_SOURCES = [
     },
     {
         # Rezoning cases; one row per parcel, so a case can repeat by parcel.
-        "county": "Rowan", "kind": "planning", "days": 120, "name": "rezonings",
+        # Since Nov 2026 the layer also returns decades-old cases with no date.
+        "county": "Rowan", "kind": "planning", "days": 120, "name": "rezonings", "require_date": True,
         "url": "https://gis.rowancountync.gov/arcgis/rest/services/Energov/Energov_main_10_4_s077/MapServer/18",
     },
     {

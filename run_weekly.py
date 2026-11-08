@@ -69,6 +69,8 @@ def run_arcgis(state, show_all, status):
             # types this source cares about. Future-dated rows are data-entry typos.
             horizon = (dt.date.today() + dt.timedelta(days=30)).isoformat()
             records = [r for r in records if not r["issue_date"] or r["issue_date"] <= horizon]
+            if src.get("require_date"):   # undated rows here are old cases, not new ones
+                records = [r for r in records if r["issue_date"]]
             pulled = len(records)
             if src.get("type_rx"):
                 types = {}

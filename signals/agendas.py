@@ -115,11 +115,11 @@ def to_record(src, board, date, url, num, body):
                                    re.sub(r"\bfrom [^()]*\([^)]*\)(?:,? (?:and|or) [^()]*\([^)]*\))*", "", body)))[-1]
     where = (re.search(r"Request:\s*([^.]+?)(?:\s{2,}|\s+An\b|\s+A\b|$)", body)
              or re.search(r"located (?:at|along|on) (.+?)(?:,? and (?:further )?identified|,? \(?(?:tax )?parcel|"
-                          r",? (?:PIN|Tax Map)| from |[.;]|$)", body))
+                          r",? (?:PIN|Tax Map)|,? (?:Gaston |Union |\w+ )?County| from |[;]|(?<!\b[NSEW])(?<!Ave|Hwy)(?<!Rd|St|Dr)(?<!Blvd)\.(?!\w)|$)", body))
     acres = re.search(r"([\d.,]+)\s*(?:\+/-\s*)?acres", body)
     rec = {"permit_no": f"{src['town']} {board} {date:%m/%d/%Y} item {num}", "issue_date": date.isoformat(),
            "type": board, "desc": body, "address": where.group(1).strip() if where else "", "value": 0, "sqft": 0,
-           "status": next((name for rx, name in STATUS if rx.search(body)), "On agenda"), "occupancy": None, "zoning": to_zone,
+           "status": next((name for rx, name in STATUS if rx.search(body)), "On agenda"), "occupancy": None, "zoning": to_zone or ([None] + re.findall(r"\bto ([A-Z]{1,3}-[A-Z0-9]{1,3})\b", body))[-1],
            "contractor": "", "owner": "", "acres": acres.group(1) if acres else "",
            "property": f"agenda: {url}"}
     scored = dict(rec, desc=re.sub(r"\bfrom .*? to ", "to ", body))

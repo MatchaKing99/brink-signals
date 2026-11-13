@@ -2,12 +2,13 @@ name: Weekly signals
 
 on:
   schedule:
-    - cron: "37 10 * * 1"   # Mondays ~6:37am Eastern
-    # GitHub sometimes drops a scheduled run (it did on 2026-11-02), so two
-    # backups follow, both before the 8:13am Eastern email. A backup does
-    # nothing once that day's digest exists.
-    - cron: "52 11 * * 1"
-    - cron: "22 12 * * 1"
+    # Sunday evening, so the digest is ready for the 8:13am Monday email even
+    # when GitHub runs schedules late: on 2026-11-02 and 11-09 it ran the 6:37am
+    # Monday job about 10 hours late. Two backups follow; a backup does nothing
+    # once a digest from the last day exists.
+    - cron: "37 22 * * 0"   # Sundays ~5:37pm Eastern
+    - cron: "52 23 * * 0"
+    - cron: "22 1 * * 1"
   workflow_dispatch:        # "Run workflow" button in the Actions tab
   push:
     paths: ["inbox/**"]     # dropping a permit export in inbox/ runs it right away
@@ -31,8 +32,9 @@ jobs:
       - name: Already ran today?
         id: done
         run: |
-          if [ "${{ github.event_name }}" = schedule ] && [ -f "output/$(date -u +%F)/digest.md" ]; then
-            echo "Today's digest already exists; this backup run has nothing to do."
+          if [ "${{ github.event_name }}" = schedule ] && { [ -f "output/$(date -u +%F)/digest.md" ] ||
+             [ -f "output/$(date -u -d yesterday +%F)/digest.md" ]; }; then
+            echo "A digest from the last day already exists; this backup run has nothing to do."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 

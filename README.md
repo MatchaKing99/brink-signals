@@ -1,6 +1,6 @@
 # Brink Signals
 
-Every Monday morning this repo checks eight Charlotte-region counties for signs that an industrial operator is about to need space, and saves a digest of **what's new since last week**. A scheduled Claude task then researches each item (who's behind it, move or expansion, who to call, the material-handling angle) and emails Nate the result, and sweeps the places with no feed (York, Union and Mecklenburg-town rezonings, news, economic-development announcements).
+Every Sunday evening this repo checks eight Charlotte-region counties for signs that an industrial operator is about to need space, and saves a digest of **what's new since last week**. On Monday morning a scheduled Claude task researches each item (who's behind it, move or expansion, who to call, the material-handling angle) and emails Nate the result, and sweeps the places with no feed (York, Union and Mecklenburg-town rezonings, news, economic-development announcements).
 
 **Counties:** Mecklenburg · Gaston · Cabarrus · Union · Iredell · Rowan · Lincoln · York (SC)
 
